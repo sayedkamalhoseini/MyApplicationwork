@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinate_autoTime_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linear_autoTime_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_messageUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_userName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_userNameMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/userNameInfo"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_autoTime_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/linear_autoTime_messageUserName"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_messageKind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_autoTime_separator"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_kind"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_kindMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/kind"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_autoTime_separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/linear_autoTime_messageKind"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray" />
+
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_messageStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_autoTime_separator1"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_status"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_statusMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/status"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/view_autoTime_separator2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/linear_autoTime_messageStatus"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_messageStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_autoTime_separator2"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.example.kamal.saatzanhamrah.CustomTextView
+                            android:id="@+id/textView_autoTime_startTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textSize="16sp" />
+
+                        <com.example.kamal.saatzanhamrah.CustomTextView
+                            android:id="@+id/textView_autoTime_startDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_startMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/start"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/view_autoTime_separator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/linear_autoTime_messageStart"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ProgressBar
+                    android:id="@+id/progressBar_autoTime_loading"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/whiteTransparent"
+                    android:visibility="gone" />
+
+
+                <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/Button_time_startWork"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bluecircle"
+                    android:gravity="center"
+                    android:text="@string/startDate"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInput_time_explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="16dp">
+
+                    <EditText
+                        android:id="@+id/editText_time_explain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end"
+                        android:ems="60"
+                        android:gravity="start"
+                        android:hint="@string/explainTitle"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_titleLastTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="3">
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="مجموع"
+                        android:textSize="16sp" />
+
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="پایان ساعت کاری"
+                        android:textSize="16sp" />
+
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="شروع ساعت کاری"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_autotime_ListVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linear_autoTime_titleLastTime"
+                    android:visibility="gone"></android.support.v7.widget.RecyclerView>
+
+                <com.example.kamal.saatzanhamrah.CustomTextView
+                    android:id="@+id/problemExplain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    android:gravity="start"
+                    android:inputType="textPersonName"
+                    android:textSize="13sp"
+                    android:layout_below="@id/linear_autoTime_titleLastTime"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

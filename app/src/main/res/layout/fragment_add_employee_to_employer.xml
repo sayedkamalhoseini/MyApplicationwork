@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinate_fragmentAddEmployeeToEmployer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kamal.saatzanhamrah.MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:id="@+id/editText_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="نام کاربری کارفرما" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <com.example.kamal.saatzanhamrah.CustumButton
+        android:id="@+id/button_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textInputLayout_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="32dp"
+        android:text="افزودن کارفرما" />
+
+    <com.example.kamal.saatzanhamrah.CustomTextView
+        android:id="@+id/textView_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textInputLayout_fragmentAddEmployeeToEmployer_addEmployeeToEmployer"
+        android:ems="10"
+        android:gravity="center"
+        android:text="@string/addEmployerMessage" />
+
+
+</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

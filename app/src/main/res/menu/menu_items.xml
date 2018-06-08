@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginEmploy.LoginActivity">
+    <item
+        android:id="@+id/item_menuItems_enable"
+        android:orderInCategory="100"
+        android:title="@string/enable"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item_menuItems_registerAutoTime"
+        android:orderInCategory="100"
+        android:title="@string/autoDate"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item_menuItems_registerHandTime"
+        android:orderInCategory="100"
+        android:title="@string/handDate"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item_menuItems_visitDateMyWork"
+        android:orderInCategory="100"
+        android:title="@string/visitDateMyWork"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menuItems_addEmployeeToEmployer"
+        android:orderInCategory="100"
+        android:title="@string/addEmployer"
+        app:showAsAction="never"  />
+  <item
+        android:id="@+id/item_menuItems_visitEmployer"
+        android:orderInCategory="100"
+        android:title="@string/visitEmployer"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_menuItems_visitWorkEmployee"
+        android:orderInCategory="100"
+        android:title="@string/visitWorkEmployee"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menuItems_aboutUs"
+        android:orderInCategory="100"
+        android:title="@string/aboutUs"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_menuItems_exit"
+        android:orderInCategory="100"
+        android:title="@string/exit"
+        app:showAsAction="never" />
+
+
+</menu>

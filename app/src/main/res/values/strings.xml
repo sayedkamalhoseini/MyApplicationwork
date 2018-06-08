@@ -1,0 +1,291 @@
+<resources>
+    <string name="app_name">ساعت زن همراه</string>
+    <string name="version">نسخه 2.7.7 </string>
+    <string name="codeMaiket">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwC9dmfRXNp60+JUoZWhCOSa5EjS/u12kOs6hyuBTOcxQ/XUlTDk7V5uDxGAIxXOHmCwiHRuEsrFxfMR39PPQnu535ShSU1GvYp4B/ECskiaWtu0J8NkG/NDU8FYMgtZJ6ALOfoYfJJ3ptXjb9zPycWoeriyX5tqP29siFtpEz7M1sKnVRUn10O4j8VNQfDcYLSbv3G0x3OVRey9OXbVylkV3pRJ2oQ8d0rhPD6ZvQ0CAwEAAQ==</string>
+    <string name="codeBazar">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCeUibvsFfja0PU0iGrbvlZ3CixYSGBj2qW/kJ/hI6qlWJdfQ4Z2VSUidtEmGJ5iD5lS7zTAeE1cGv8McYkchtatU6+IHRP/r94nEivYeKEwewv9eWTbCLFiV6DjQZ11rU3h57yKPKqtzCOiI9ZfnL5JL+PEeeaV+d/G+yBLZaNdwIDAQAB</string>
+    <string name="producer">تهیه کننده و برنامه نویس : سید کمال حسینی</string>
+    <string name="emailProducer">ایمیل : sayedkamalhoseini@gmail.com</string>
+    <string name="entitlement">کلیه حقوق این اثر متعلق به تهیه کننده آن می باشد.</string>
+    <string name="enable">فعالسازی برنامه</string>
+    <string name="signUp">ثبت نام</string>
+    <string name="name">نام و نام خانوادگی</string>
+    <string name="email">ایمیل</string>
+    <string name="notForceEmail">ایمیل الزامی نیست</string>
+    <string name="forgotMessageSignUp">در صورت فراموشی رمزعبور به ایمیل ارسال می شود</string>
+    <string name="login">ورود</string>
+    <string name="save_password">ذخیره</string>
+    <string name="userName">نام کاربری</string>
+    <string name="userNameEnglish">نام کاربری انگلیسی</string>
+    <string name="userNameInfo">نام کاربری :</string>
+    <string name="passWord">رمز عبور</string>
+    <string name="registerSuccessfully">ثبت نام با موفقیت انجام شد.</string>
+    <string name="addEmployerSuccessfully">کارفرما با موفقیت اضافه شد.</string>
+    <string name="registerHandDate">زمان با موفقیت ثبت شد.</string>
+    <string name="repeatUser">این نام کاربری قبلا ثبت شده است.</string>
+    <string name="fillField">لطفا اطلاعات را تکمیل بفرمایید.</string>
+    <string name="registerNull">در ورود اطلاعات دقت فرمایید.</string>
+    <string name="errorAddEmployeeToEmployer">در ورود نام کاربری کارفرما دقت فرمایید یا این کارفرما قبلا اضافه شده است.</string>
+    <string name="registerError1"> لطفا به اینترنت متصل باشید و دوباره تلاش کنید.</string>
+    <string name="registerError"> لطفا به اینترنت متصل باشید و دوباره تلاش کنید.</string>
+    <string name="timeThereIs">این زمان شروع کار قبلا ثبت شده است.</string>
+    <string name="noInternet">لطفا به اینترنت متصل شوید.</string>
+    <string name="noLastDate">کارکردی در این تاریخ موجود نیست.</string>
+    <string name="errorInternet">دوباره تلاش کنید.اگر سرعت اینترنت پایین است می توانید بعدا از طریق ثبت دستی اقدام نمایید.</string>
+    <string name="error"> لطفا به اینترنت متصل شوید و دوباره تلاش کنید.</string>
+    <string name="startRegister"> زمان شروع با موفقیت ثبت شد.</string>
+    <string name="endRegister"> زمان پایان با موفقیت ثبت شد.</string>
+    <string name="visitDateMyWork">مشاهده کارکرد و حذف</string>
+    <string name="addEmployer">اضافه کردن کارفرما</string>
+    <string name="visitEmployer">مشاهده نام کارفرمای من</string>
+    <string name="visitWorkEmployee">مشاهده کارکرد کارکنان من</string>
+    <string name="deleteTime">زمان مورد نظر پاک شد.</string>
+    <string name="exit">خروج از حساب کاربری</string>
+    <string name="aboutUs">درباره برنامه</string>
+    <string name="autoDate">ثبت زمان جاری</string>
+    <string name="handDate">ثبت زمان دستی</string>
+    <string name="startDate">ثبت زمان شروع کار</string>
+    <string name="endDate">ثبت زمان پایان کار</string>
+    <string name="resting">در حال استراحت</string>
+    <string name="working">در حال انجام کار</string>
+    <string name="userNameEmployer">نام کاربری کارفرما :</string>
+    <string name="forgot">فراموشی رمز عبور</string>
+    <string name="kind">نوع شغل :</string>
+    <string name="status">وضعیت :</string>
+    <string name="start">زمان شروع کار</string>
+    <string name="workTime">"مدت زمان کار</string>
+    <string name="endTime">ساعت و تاریخ پایان کار</string>
+    <string name="startTime">ساعت و تاریخ شروع کار</string>
+    <string name="numberRow">ردیف</string>
+    <string name="deleteMessage">آیا از حذف این زمان مطمئنید؟</string>
+    <string name="deleteYes">بله</string>
+    <string name="deleteNo">خیر</string>
+    <string name="exitFinish">برای خروج دوباره دکمه بازگشت را فشار دهید.</string>
+    <string name="addEmployerMessage">نام کاربری کارفرما خود را وارد کنید تا کارفرمای شما هم ساعات کار شما را مشاهده کند.</string>
+
+    <string-array name="arrayemploy">
+        <item>نوع شغل تان را انتخاب کنید.</item>
+        <item>کارفرما</item>
+        <item>کارگر/ کارمند</item>
+    </string-array>
+
+    <string-array name="arrayStartMinute">
+        <item>دقیقه شروع کار</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+
+    </string-array>
+
+
+    <string-array name="arrayStartHour">
+        <item>ساعت شروع کار</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+
+    </string-array>
+    <string-array name="arrayEndMinute">
+        <item>دقیقه پایان کار</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+
+    </string-array>
+
+
+    <string-array name="arrayEndHour">
+        <item>ساعت پایان کار</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fill_field">لطفا تمام فیلدها را تکمیل نمایید.</string>
+    <string name="endLargerStart">زمان پایان باید بزرگتر از زمان شروع باشد.</string>
+    <string name="tryAgain">دوباره تلاش نمایید.</string>
+    <string name="enterStartEnd">لطفا زمان شروع و پایان را وارد کنید.</string>
+    <string name="sumMessage">ساعت کار انجام شده در این بازه زمانی</string>
+    <string name="explainTitle">توضیحات بعد ثبت زمان پایان در گزارش pdf و اکسل قابل مشاهده است.</string>
+    <string name="explains">توضیحات</string>
+    <string name="messageDelete">با دو ثانیه فشردن هرردیف لیست می توانیدآن را حذف کنید.</string>
+    <string name="clickMessage">کارمند یا کارگر باید نام کاربری شما را در پروفایلش اضافه کند تا بتوانید کارکردش را ببینید.</string>
+    <string name="clickMessage1">برای مشاهده کارکرد هر کارمند / کارگر روی آن کلیک کنید.</string>
+    <string name="enableMessage">برای ثبت زمان های بیشتر لطفا فعالسازی برنامه را انجام دهید.</string>
+    <string name="register">ثبت نام</string>
+    <string name="messageErrorHandDate">لطفا ابتدا کار فعلی را به پایان برسانید بعد ثبت دستی را انجام دهید</string>
+
+
+    <string-array name="nav_drawer_labels">
+
+    <item>@string/enable</item>
+    <item>@string/autoDate</item>
+    <item>@string/handDate</item>
+    <item>@string/visitDateMyWork</item>
+    <item>@string/addEmployer</item>
+    <item>@string/visitEmployer</item>
+    <item>@string/visitWorkEmployee</item>
+    <item>@string/aboutUs</item>
+    <item>@string/exit</item>
+
+</string-array>
+
+    </resources>

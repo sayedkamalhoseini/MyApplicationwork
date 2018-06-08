@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kamal.saatzanhamrah.DeletePackage.DeleteFragment">
+
+    <LinearLayout
+        android:id="@+id/linear_delete_layoutGetDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <EditText
+        android:id="@+id/editText_delete_setDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.25"
+        android:hint="تاریخی که می خواهید حذف کنید را وارد کنید."
+        android:focusableInTouchMode="false"
+        android:ems="10"
+        />
+        <ImageButton
+        android:id="@+id/imageButton_delete_setDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".75"
+        android:src="@mipmap/ic_calender1"
+        android:background="@color/white"/>
+</LinearLayout>
+
+
+        <Button
+            android:id="@+id/button_delete_showListDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="مشاهده زمان های ثبت شده این تاریخ"
+            android:layout_below="@id/linear_delete_layoutGetDate"
+            android:layout_margin="16dp"/>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_delete_listTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button_delete_showListDelete"
+        android:orientation="vertical"/>
+
+
+</RelativeLayout>
