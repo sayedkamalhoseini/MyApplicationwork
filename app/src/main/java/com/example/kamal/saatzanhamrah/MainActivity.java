@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import co.ronash.pushe.Pushe;
 import com.example.kamal.saatzanhamrah.AddEmployeeToEmployer.AddEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.TimeEmploy.AutoDateFragment;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     // SKUs for our products: the premium upgrade (non-consumable)
-    static final String SKU_PREMIUM ="saat2";
+    static final String SKU_PREMIUM ="2018saatzan";
 
     // Does the user have the premium upgrade?
     boolean mIsPremium = true;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Pushe.initialize(this,true);
         Adad.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
