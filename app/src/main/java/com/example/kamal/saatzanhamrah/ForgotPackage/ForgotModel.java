@@ -39,7 +39,8 @@ public class ForgotModel {
             public Map onMapPost() {
                 Map<String, String> serverParams = new HashMap<>();
                 serverParams.put("email",email);
-                serverParams.put("key_text_android", "ktaa");
+                serverParams.put("key_text_android","ktaa");
+
                 return serverParams;
             }
         });
