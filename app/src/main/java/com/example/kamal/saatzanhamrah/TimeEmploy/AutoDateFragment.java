@@ -1,11 +1,20 @@
 package com.example.kamal.saatzanhamrah.TimeEmploy;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -37,7 +46,7 @@ import java.util.List;
 
 import static com.example.kamal.saatzanhamrah.Share.loadPref;
 
-public class AutoDateFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, MainActivity.EnableData {
+public class AutoDateFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, MainActivity.EnableData, LocationListener {
     Activity activity;
     String startTimeEmployeeUrl = "http://www.kamalroid.ir/time_register.php";
     String endTimeEmployeeUrl = "http://www.kamalroid.ir/end_time_register.php";
@@ -63,6 +72,16 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private boolean mIsPremium;
     private TextView problemTextView;
     private TextInputLayout textInputLayoutExplain;
+    public  static final int RequestPermissionCode  = 1 ;
+    Button buttonEnable, buttonGet ;
+    TextView textViewLongitude, textViewLatitude ;
+    Context context;
+    Intent intent1 ;
+    Location location;
+    LocationManager locationManager ;
+    boolean GpsStatus = false ;
+    Criteria criteria ;
+    String Holder;
 
 
     @Override
@@ -102,6 +121,15 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         textInputLayoutExplain= (TextInputLayout) view.findViewById(R.id.textInput_time_explain);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_autoTime_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_autotime_ListVisit);
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        criteria = new Criteria();
+
+        Holder = locationManager.getBestProvider(criteria, false);
+
+        context = getActivity().getApplicationContext();
+
+        CheckGpsStatus();
         textTitle.setText(getString(R.string.autoDate));
         textUserName.setText(user);
         presenter.sendProblem(problemUrl);
@@ -166,6 +194,27 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                             buttonStart.setEnabled(false);
                             buttonStart.setText("درحال ثبت زمان شروع");
                             presenter.startChangeDate(startTimeEmployeeUrl, user, kind, progressBar, buttonStart, textLastStartDate, textLastStartTime);
+                            CheckGpsStatus();
+
+                            if(GpsStatus == true) {
+                                if (Holder != null) {
+                                    if (ActivityCompat.checkSelfPermission(
+                                            getActivity(),
+                                            Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                            &&
+                                            ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                                                    != PackageManager.PERMISSION_GRANTED) {
+                                        return;
+                                    }
+                                    location = locationManager.getLastKnownLocation(Holder);
+                                    locationManager.requestLocationUpdates(Holder, 12000, 7, (LocationListener) getActivity());
+                                }
+                            }else {
+
+                                Toast.makeText(getActivity(), "Please Enable GPS First", Toast.LENGTH_LONG).show();
+
+                            }
+
                             break;
                         } else if (loadPref(getActivity(), "end" + user).equals("true")) {
                             progressBar.setVisibility(View.VISIBLE);
@@ -338,6 +387,75 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         problemTextView.setText(result);
         recyclerView.setVisibility(View.GONE);
     }
+
+    public void CheckGpsStatus(){
+
+        locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+
+        GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+    }
+
+    public void EnableRuntimePermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION))
+        {
+
+            Toast.makeText(getActivity(),"ACCESS_FINE_LOCATION permission allows us to Access GPS in app", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions(getActivity(),new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION}, RequestPermissionCode);
+
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        textViewLongitude.setText("Longitude:" + location.getLongitude());
+        textViewLatitude.setText("Latitude:" + location.getLatitude());
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int RC, String per[], int[] PResult) {
+
+        switch (RC) {
+
+            case RequestPermissionCode:
+
+                if (PResult.length > 0 && PResult[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(getActivity(),"Permission Granted, Now your application can access GPS.", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Toast.makeText(getActivity(),"Permission Canceled, Now your application cannot access GPS.", Toast.LENGTH_LONG).show();
+
+                }
+                break;
+        }
+    }
+
 }
 
 
