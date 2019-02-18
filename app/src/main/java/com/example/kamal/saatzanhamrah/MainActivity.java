@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 import co.ronash.pushe.Pushe;
+
 import com.example.kamal.saatzanhamrah.AddEmployeeToEmployer.AddEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.TimeEmploy.AutoDateFragment;
@@ -28,8 +29,6 @@ import com.example.kamal.saatzanhamrah.util.IabResult;
 import com.example.kamal.saatzanhamrah.util.Inventory;
 import com.example.kamal.saatzanhamrah.util.Purchase;
 
-import ir.adad.client.Adad;
-import ir.adad.client.Banner;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private PassData passData;
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String user, kind;
     private Toolbar toolbar;
     private ImageButton imageButton;
-    private Banner banner;
     private ListView listView;
     private DrawerLayout drawerLayout;
     static final String TAG = "tag";
@@ -77,10 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Pushe.initialize(this,true);
-        Adad.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
-        banner = (Banner) findViewById(R.id.banner_ad_view);
         if (Share.loadPref(this, "count").equals("")) {
             Share.saveSharePref(this, "count", "1");
         }
@@ -204,28 +200,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener, "payload-string");
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitDateMyWork:
-                banner.setVisibility(View.GONE);
                 visitLastDateFragment = new VisitLastDateFragment();
                 passData = (PassData) visitLastDateFragment;
                 passData.sendData(user, kind);
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_addEmployeeToEmployer:
-                banner.setVisibility(View.VISIBLE);
                 addEmployeeToEmployerFragment = new AddEmployeeToEmployerFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, addEmployeeToEmployerFragment).commit();
                 passData = (PassData) addEmployeeToEmployerFragment;
                 passData.sendData(user, kind);
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitWorkEmployee:
-                banner.setVisibility(View.GONE);
                 visitEmployeeToEmployerFragment = new VisitEmployeeToEmployerFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployeeToEmployerFragment).commit();
                 passData = (PassData) visitEmployeeToEmployerFragment;
                 passData.sendData(user, kind);
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_registerAutoTime:
-                banner.setVisibility(View.VISIBLE);
                 autoDateFragment = new AutoDateFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
                 passData = (PassData) autoDateFragment;
@@ -233,7 +225,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_registerHandTime:
                 if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
-                    banner.setVisibility(View.VISIBLE);
                     handDateFragment = new HandDateFragment();
                     getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, handDateFragment).commit();
                     passData = (PassData) handDateFragment;
@@ -247,7 +238,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitEmployer:
-                banner.setVisibility(View.VISIBLE);
                 visitEmployerToEmployee = new VisitEmployerToEmployeeFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployerToEmployee).commit();
                 passData = (PassData) visitEmployerToEmployee;
@@ -262,7 +252,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case com.example.kamal.saatzanhamrah.R.id.item_menuItems_aboutUs:
-                banner.setVisibility(View.VISIBLE);
                 aboutUsFragment = new AboutUsFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, aboutUsFragment).commit();
                 break;

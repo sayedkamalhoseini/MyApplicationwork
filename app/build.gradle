@@ -3,17 +3,17 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     dexOptions {
         jumboMode true
     }
     defaultConfig {
         applicationId "com.example.kamal.saatzanhamrah"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 28
-        versionName "2.7.9"
+        targetSdkVersion 28
+        versionCode 30
+        versionName "2.8.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -29,19 +29,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.volley:volley:1.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'junit:junit:4.12'
-    compile 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'ir.adad.androidsdkv3:AdadSDKv3:3.3.1'
-    compile 'com.itextpdf:itextg:5.5.9'
-    compile 'com.android.support:support-v4:26.0.2'
-    compile 'co.ronash.android:pushe-base:1.4.0'
-    compile 'com.google.android.gms:play-services-gcm:11.8.0'
-    compile 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'junit:junit:4.12'
+    implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.itextpdf:itextg:5.5.9'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'co.ronash.android:pushe-base:1.4.0'
+    implementation 'com.google.android.gms:play-services-gcm:11.8.0'
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/poi-3.7.jar')
+    implementation files('libs/poi-3.7.jar')
+
 
 }

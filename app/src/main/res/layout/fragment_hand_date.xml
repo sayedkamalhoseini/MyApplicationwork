@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:orientation="vertical"
-                android:weightSum="7">
+                android:weightSum="6">
 
 
                 <LinearLayout
@@ -179,16 +179,15 @@
 
                         <EditText
                             android:id="@+id/editText_time_explain"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="end"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:hint="@string/explainTitle"
+                            android:ems="60"
+                            android:hint="@string/explainTitleHand"
                             android:inputType="textPersonName"
-                            android:textSize="20sp" />
+                            android:textSize="12sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -198,7 +197,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="32dp"
                     android:layout_weight="1">
 
                     <com.example.kamal.saatzanhamrah.CustumButton

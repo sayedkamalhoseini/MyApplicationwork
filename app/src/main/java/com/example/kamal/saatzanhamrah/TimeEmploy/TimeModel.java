@@ -153,7 +153,43 @@ public class TimeModel {
 
     public void handDate(String addEmployeeUrl, final Map<String, String> params1, final ProgressBar progressbar, final Button buttonRegisterHandDate) {
         try {
-            if (Integer.parseInt(params1.get("dateEnd").replace("/", "")) >= Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
+            if (Integer.parseInt(params1.get("dateEnd").replace("/", "")) > Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
+                    Share.getStringResponse(activity, Request.Method.POST, addEmployeeUrl, null, new Share.StringVolleyCallBack() {
+                        @Override
+                        public void onSuccessResponse(String result) {
+                            presenter.resultHandDate(result);
+                            progressbar.setVisibility(View.GONE);
+                            buttonRegisterHandDate.setEnabled(true);
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            Toast.makeText(activity, activity.getResources().getString(R.string.registerError), Toast.LENGTH_LONG).show();
+                            progressbar.setVisibility(View.GONE);
+                            buttonRegisterHandDate.setEnabled(true);
+                        }
+
+                        @Override
+                        public Map onMapPost() {
+                            Map<String, String> Params = new HashMap<>();
+                            Params.put("user", params1.get("user"));
+                            Params.put("kind", params1.get("kind"));
+                            Params.put("token", params1.get("dateStart").replace("/", ""));
+                            Params.put("token_delete", params1.get("user")+params1.get("dateStart").replace("/", "")+params1.get("timeStart").replace(":", ""));
+                            Params.put("date_start", params1.get("dateStart"));
+                            Params.put("time_start", params1.get("timeStart"));
+                            Params.put("date_end", params1.get("dateEnd"));
+                            Params.put("time_end", params1.get("timeEnd"));
+                            Params.put("start_date_miladi", params1.get("miladiStart"));
+                            Params.put("end_date_miladi", params1.get("miladiEnd"));
+                            Params.put("explains", params1.get("explains"));
+                            Params.put("key_text_android", "ktaa");
+                            return Params;
+
+                        }
+                    });
+            }
+            else if(Integer.parseInt(params1.get("dateEnd").replace("/", "")) == Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
                 if (Integer.parseInt(params1.get("timeEnd").replace(":", "")) >= Integer.parseInt(params1.get("timeStart").replace(":", ""))) {
                     Share.getStringResponse(activity, Request.Method.POST, addEmployeeUrl, null, new Share.StringVolleyCallBack() {
                         @Override
@@ -189,13 +225,17 @@ public class TimeModel {
 
                         }
                     });
-                } else {
+
+                }
+                else {
                     Toast.makeText(activity, R.string.endLargerStart, Toast.LENGTH_LONG).show();
                     progressbar.setVisibility(View.GONE);
                     buttonRegisterHandDate.setEnabled(true);
                     return;
                 }
-            } else {
+
+            }
+            else {
                 Toast.makeText(activity, R.string.endLargerStart, Toast.LENGTH_LONG).show();
                 progressbar.setVisibility(View.GONE);
                 buttonRegisterHandDate.setEnabled(true);

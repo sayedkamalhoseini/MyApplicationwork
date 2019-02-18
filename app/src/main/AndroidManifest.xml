@@ -44,17 +44,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name="com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity" />
         <activity android:name="com.example.kamal.saatzanhamrah.ForgotPackage.ForgotActivity" />
-        <activity
-            android:name="ir.adad.client.AdadActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <meta-data
-            android:name="AdadToken"
-            android:value="576285f19aa043b39b1f875f2a111308" />
-        <meta-data
-            android:name="AdadTestMode"
-            android:value="false" />
 
 
         <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver" >
