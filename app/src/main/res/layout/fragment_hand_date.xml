@@ -181,13 +181,17 @@
                             android:id="@+id/editText_time_explain"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_gravity="end"
-                            android:ems="60"
+                            android:lines="5"
+                            android:gravity="top|start"
+                            android:ems="200"
                             android:hint="@string/explainTitleHand"
-                            android:inputType="textPersonName"
-                            android:textSize="12sp" />
+                            android:inputType="textMultiLine"
+                            android:background="@drawable/border4"
+                            android:padding="5dp"
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 

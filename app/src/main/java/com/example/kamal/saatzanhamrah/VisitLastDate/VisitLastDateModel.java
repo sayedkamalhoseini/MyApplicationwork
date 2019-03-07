@@ -243,6 +243,8 @@ public class VisitLastDateModel {
                     }
                     try {
                         Share.createandDisplayPdf("", "", "", "", "", doc);
+                        Share.createandDisplayPdf("", "", "ساعت زن همراه", "", "", doc);
+                        Share.createandDisplayPdf("", "", "", "", "", doc);
                         Share.createandDisplayPdf(end, "تا تاریخ", start, "از تاریخ", "کارکرد کاربر" + user, doc);
                         Share.createandDisplayPdf("", "", "", "", "", doc);
                         JSONObject jsonObject = new JSONObject(result);
@@ -284,8 +286,8 @@ public class VisitLastDateModel {
                                     Share.createandDisplayPdf(activity.getResources().getString(R.string.explains), activity.getResources().getString(workTime), activity.getResources().getString(R.string.endTime), activity.getResources().getString(R.string.startTime), activity.getResources().getString(R.string.numberRow), doc);
                                 }
 
-                                Share.createandDisplayPdf(explains, _workTime, endLastDate, startLastDate, (i + 1) + "", doc);
-                                Share.createandDisplayPdf("", "", endLastTime, startLastTime, "", doc);
+                                Share.createandDisplayPdf("", _workTime, endLastDate, startLastDate, (i + 1) + "", doc);
+                                Share.createandDisplayPdf(explains, "", endLastTime, startLastTime, "", doc);
                                 lastTimeList.add(lastTime);
                             }
                             Share.createandDisplayPdf("", "", "", "", "", doc);

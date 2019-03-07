@@ -125,8 +125,14 @@ public class Share {
 
         try {
 
+
             BaseFont farsiFont = BaseFont.createFont("assets/fonts/XB Zar.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Font paraFont = new Font(farsiFont, 15);
+            Font paraFont;
+            if(text2.equals("ساعت زن همراه"))
+                 paraFont = new Font(farsiFont, 18);
+            else
+                 paraFont = new Font(farsiFont, 15);
+
 
             Paragraph p5 = new Paragraph(explains, paraFont);
             Paragraph p1 = new Paragraph(text1, paraFont);
