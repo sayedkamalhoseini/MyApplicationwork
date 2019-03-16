@@ -29,6 +29,7 @@
     <string name="registerError"> لطفا به اینترنت متصل باشید و دوباره تلاش کنید.</string>
     <string name="timeThereIs">این زمان شروع کار قبلا ثبت شده است.</string>
     <string name="noInternet">لطفا به اینترنت متصل شوید.</string>
+    <string name="noDelete">زمان تایید شده است نمی توانید حذف کنید.</string>
     <string name="noLastDate">کارکردی در این تاریخ موجود نیست.</string>
     <string name="errorInternet">دوباره تلاش کنید.اگر سرعت اینترنت پایین است می توانید بعدا از طریق ثبت دستی اقدام نمایید.</string>
     <string name="error"> لطفا به اینترنت متصل شوید و دوباره تلاش کنید.</string>
@@ -39,6 +40,8 @@
     <string name="visitEmployer">مشاهده نام کارفرمای من</string>
     <string name="visitWorkEmployee">مشاهده کارکرد کارکنان من</string>
     <string name="deleteTime">زمان مورد نظر پاک شد.</string>
+    <string name="confirmTime">کارکرد موردنظر تایید شد.</string>
+    <string name="noConfirmTime">کارکرد موردنظر مورد تایید نیست.</string>
     <string name="exit">خروج از حساب کاربری</string>
     <string name="aboutUs">درباره برنامه</string>
     <string name="autoDate">ثبت زمان جاری</string>
@@ -51,10 +54,10 @@
     <string name="forgot">فراموشی رمز عبور</string>
     <string name="kind">نوع شغل :</string>
     <string name="status">وضعیت :</string>
-    <string name="start">زمان شروع کار</string>
+    <string name="start">شروع</string>
     <string name="workTime">"مدت زمان کار</string>
-    <string name="endTime">ساعت و تاریخ پایان کار</string>
-    <string name="startTime">ساعت و تاریخ شروع کار</string>
+    <string name="endTime">پایان</string>
+    <string name="startTime">شروع</string>
     <string name="numberRow">ردیف</string>
     <string name="deleteMessage">آیا از حذف این زمان مطمئنید؟</string>
     <string name="deleteYes">بله</string>
@@ -67,6 +70,7 @@
         <item>کارفرما</item>
         <item>کارگر/ کارمند</item>
     </string-array>
+
 
     <string-array name="arrayStartMinute">
         <item>دقیقه شروع کار</item>
@@ -268,11 +272,14 @@
     <string name="explainTitleHand">توضیحات در گزارش pdf و اکسل قابل مشاهده است.</string>
     <string name="explains">توضیحات</string>
     <string name="messageDelete">با دو ثانیه فشردن هرردیف لیست می توانیدآن را حذف کنید.</string>
+    <string name="messageConfirm">کارکردهایی که موردتایید شماست تایید کنید تا کارمند/کارگر شما مشاهده کند. </string>
     <string name="clickMessage">کارمند یا کارگر باید نام کاربری شما را در پروفایلش اضافه کند تا بتوانید کارکردش را ببینید.</string>
     <string name="clickMessage1">برای مشاهده کارکرد هر کارمند / کارگر روی آن کلیک کنید.</string>
     <string name="enableMessage">برای ثبت زمان های بیشتر لطفا فعالسازی برنامه را انجام دهید.</string>
     <string name="register">ثبت نام</string>
     <string name="messageErrorHandDate">لطفا ابتدا کار فعلی را به پایان برسانید بعد ثبت دستی را انجام دهید</string>
+    <string name="sumTitle">مجموع</string>
+    <string name="confirm">تایید کارفرما</string>
 
 
     <string-array name="nav_drawer_labels">

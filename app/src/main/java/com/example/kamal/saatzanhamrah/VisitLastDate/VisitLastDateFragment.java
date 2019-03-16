@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
@@ -42,12 +46,13 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     AppCompatActivity activity;
     EditText visitStart, visitEnd;
     ImageButton setVisitStart, setVisitEnd;
-    Button buttonShowList, buttonBuildPdf,buttonBuildExcel, buttonSum;
+    Button buttonShowList, buttonBuildPdf, buttonBuildExcel, buttonSum,buttonBuildConfirmListExcel, buttonBuildConfirmListPdf;
     private RecyclerView recyclerView;
     private LastTimeAdapter adapter;
     private String url = "http://kamalroid.ir/visit_last_time.php";
     private String urlDelete = "http://kamalroid.ir/list_delete.php";
     private String urlSum = "http://kamalroid.ir/get_sum.php";
+    private String urlConfirmJust = "http://kamalroid.ir/visit_last_time_confirm.php";
     private String mDay, mMonth, _Date, user, kind, startDateDelete, startTimeDelete;
     List<LastTime> lastTimeList = new ArrayList<>();
     private int position, start_row;
@@ -59,12 +64,13 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     private TextView textSumMessage, textSum;
     private CoordinatorLayout coordinatorLayout;
     private HorizontalScrollView horizontalScrollView;
+    private Toolbar toolbar;
+    private TextView textViewExplain1;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
 
 
     @Override
@@ -85,6 +91,8 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
         buttonShowList = (Button) view.findViewById(R.id.button_visitLastDate_showListVisit);
         buttonBuildPdf = (Button) view.findViewById(R.id.button_visitLastDate_buildPdf);
         buttonBuildExcel = (Button) view.findViewById(R.id.button_visitLastDate_buildExcel);
+        buttonBuildConfirmListExcel = (Button) view.findViewById(R.id.button_visitLastDate_confirm_excel);
+        buttonBuildConfirmListPdf = (Button) view.findViewById(R.id.button_visitLastDate_confirm_pdf);
         buttonSum = (Button) view.findViewById(R.id.button_visitLastDate_sum);
         visitStart = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateStart);
         visitEnd = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateEnd);
@@ -95,15 +103,24 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
         textSum = (TextView) view.findViewById(R.id.textView_visitLastDate_sum);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_visitLast_layout);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        textViewExplain1=view.findViewById(R.id.textView_visitLastDate_delete);
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floating_visitListDate_loading);
-        horizontalScrollView= (HorizontalScrollView) view.findViewById(R.id.scrollView_visitLastDate_horizontal);
+        horizontalScrollView = (HorizontalScrollView) view.findViewById(R.id.scrollView_visitLastDate_horizontal);
+        ColorDrawable colorToolbar = (ColorDrawable) toolbar.getBackground();
+        buttonShowList.setBackgroundColor(colorToolbar.getColor());
+        buttonSum.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildPdf.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildExcel.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildConfirmListExcel.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildConfirmListPdf.setBackgroundColor(colorToolbar.getColor());
         horizontalScrollView.post(new Runnable() {
             @Override
             public void run() {
                 horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
             }
         });
-        textTitle.setText(user+ " " + "مشاهده کارکرد کاربر");
+        textTitle.setText(user + " " + "مشاهده کارکرد کاربر");
         setVisitStart.setOnClickListener(this);
         setVisitEnd.setOnClickListener(this);
         visitStart.setOnClickListener(this);
@@ -112,6 +129,8 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
         buttonBuildPdf.setOnClickListener(this);
         buttonBuildExcel.setOnClickListener(this);
         buttonSum.setOnClickListener(this);
+        buttonBuildConfirmListPdf.setOnClickListener(this);
+        buttonBuildConfirmListExcel.setOnClickListener(this);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -133,11 +152,9 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                         });
 
                     }
-                }
-                else if(dy<0){
+                } else if (dy < 0) {
                     floatingActionButton.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     floatingActionButton.setVisibility(View.GONE);
                 }
 
@@ -168,6 +185,8 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     textSum.setVisibility(View.GONE);
                     textSumMessage.setVisibility(View.GONE);
                     layoutTitle.setVisibility(View.VISIBLE);
+//                    ColorDrawable colorToolbar1 = (ColorDrawable) toolbar.getBackground();
+//                    layoutTitle.setBackgroundColor(colorToolbar1.getColor());
                     progressbar.setVisibility(View.VISIBLE);
                     start_row = 0;
                     presenter.getLastDatePresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
@@ -177,6 +196,38 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     break;
                 }
 
+            case R.id.button_visitLastDate_confirm_pdf:
+                floatingActionButton.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                textSum.setVisibility(View.GONE);
+                textSumMessage.setVisibility(View.GONE);
+                layoutTitle.setVisibility(View.GONE);
+                if (Share.check(getContext())) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    presenter.buildPdfPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
+                    break;
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+            case R.id.button_visitLastDate_confirm_excel:
+                floatingActionButton.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                textSum.setVisibility(View.GONE);
+                textSumMessage.setVisibility(View.GONE);
+                layoutTitle.setVisibility(View.GONE);
+                if (Share.check(getContext())) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    presenter.buildExcelPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
+                    break;
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+
+
             case R.id.button_visitLastDate_buildPdf:
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
@@ -185,7 +236,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar,coordinatorLayout,textSum);
+                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -200,7 +251,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar,coordinatorLayout,textSum);
+                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -242,7 +293,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                                                                                  }
 
                                                                                  setDate.setText(year + "/" + mMonth + "/" + mDay);
-                                                                                       }
+                                                                             }
                                                                          }, now.getPersianYear(),
                 now.getPersianMonth(),
                 now.getPersianDay());
@@ -306,7 +357,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     }
 
     public void resultSumView(String result) {
-        if(!result.equals("")) {
+        if (!result.equals("")) {
             textSumMessage.setVisibility(View.VISIBLE);
             textSum.setVisibility(View.VISIBLE);
             int workTime = Integer.parseInt(result);
@@ -315,8 +366,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
             String _workTimeSecond = workTime % 3600 % 60 + "";
             result = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
             textSum.setText(result);
-        }
-        else {
+        } else {
             Toast.makeText(getContext(), getActivity().getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
             textSum.setText(result);
         }

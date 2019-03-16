@@ -29,7 +29,6 @@ import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
-import com.example.kamal.saatzanhamrah.VisitLastDate.LastTimeAdapter;
 import com.example.kamal.saatzanhamrah.VisitLastDate.VisitLastDateFragment;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     TimePresenter presenter;
     LinearLayout linearLayoutHandDate, linearLayoutTitle;
     RelativeLayout relativeLayoutAutoDate;
-    private LastTimeAdapter adapter;
+    private AutoTimeAdapter adapter;
     private RecyclerView recyclerView;
     private ProgressDialog pd;
     Toolbar toolbar;
@@ -316,7 +315,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
 
     public void passListView(List<LastTime> lastTimeList) {
         VisitLastDateFragment visitLastDateFragment = new VisitLastDateFragment();
-        adapter = new LastTimeAdapter(visitLastDateFragment, lastTimeList, user, kind);
+        adapter = new AutoTimeAdapter(visitLastDateFragment, lastTimeList, user, kind);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 

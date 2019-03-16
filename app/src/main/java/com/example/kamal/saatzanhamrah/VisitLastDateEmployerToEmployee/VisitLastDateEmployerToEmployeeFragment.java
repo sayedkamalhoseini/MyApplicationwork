@@ -3,8 +3,10 @@ package com.example.kamal.saatzanhamrah.VisitLastDateEmployerToEmployee;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -12,11 +14,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -33,32 +38,39 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, VisitEmployeeAdapter.PassDataEmployeeToEmployer, VisitLastDateEmployerToEmployeeAdapter.PassDataDelete {
+public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, VisitEmployeeAdapter.PassDataEmployeeToEmployer, VisitLastDateEmployerToEmployeeAdapter.PassDataCheck {
     VisitLastDateEmployerToEmployeePresenter presenter;
     AppCompatActivity activity;
     EditText visitStart, visitEnd;
     ImageButton setVisitStart, setVisitEnd;
-    Button buttonShowList, buttonBuildPdf, buttonSum;
+    Button buttonShowList, buttonBuildPdf, buttonSum, buttonBuildExcel, buttonBuildConfirmListExcel, buttonBuildConfirmListPdf;
     private RecyclerView recyclerView;
     private VisitLastDateEmployerToEmployeeAdapter adapter;
     private String url = "http://kamalroid.ir/visit_last_time.php";
-    private String urlDelete = "http://kamalroid.ir/list_delete.php";
+    private String urlConfirm = "http://kamalroid.ir/confirm_time.php";
+    private String urlConfirmJust = "http://kamalroid.ir/visit_last_time_confirm.php";
     private String urlSum = "http://kamalroid.ir/get_sum.php";
     private String mDay, mMonth, _Date, user, kind;
-    List<LastTime> lastTimeList = new ArrayList<>();
+    List<LastTimeConfirm> lastTimeList = new ArrayList<>();
+    LastTimeConfirm lastTimeConfirm;
     private int position, start_row;
     private Dialog dialog;
+    private CheckBox checkBox;
     private ProgressBar progressbar;
     private TextView textTitle;
     private FloatingActionButton floatingActionButton;
     private LinearLayout layoutTitle;
+    private CoordinatorLayout coordinatorLayout;
+    private Toolbar toolbar;
+    private int flagConfirm = 0;
     private TextView textSumMessage, textSum;
+    private HorizontalScrollView horizontalScrollView;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
+    private int pos;
 
 
     @Override
@@ -73,11 +85,14 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_visit_last_date, container, false);
+        View view = inflater.inflate(R.layout.fragment_visit_last_date_confirm, container, false);
         setVisitStart = (ImageButton) view.findViewById(R.id.imageButton_visitLastDate_setDateStart);
         setVisitEnd = (ImageButton) view.findViewById(R.id.imageButton_visitLastDate_setDateEnd);
         buttonShowList = (Button) view.findViewById(R.id.button_visitLastDate_showListVisit);
         buttonBuildPdf = (Button) view.findViewById(R.id.button_visitLastDate_buildPdf);
+        buttonBuildExcel = (Button) view.findViewById(R.id.button_visitLastDate_buildExcel);
+        buttonBuildConfirmListExcel = (Button) view.findViewById(R.id.button_visitLastDate_confirm_excel);
+        buttonBuildConfirmListPdf = (Button) view.findViewById(R.id.button_visitLastDate_confirm_pdf);
         buttonSum = (Button) view.findViewById(R.id.button_visitLastDate_sum);
         visitStart = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateStart);
         visitEnd = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateEnd);
@@ -85,9 +100,25 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         progressbar = (ProgressBar) view.findViewById(R.id.progressBar_visitLastDateFragment_loading);
         textSumMessage = (TextView) view.findViewById(R.id.textView_visitLastDate_sumMessage);
         layoutTitle = (LinearLayout) view.findViewById(R.id.linear_visitLastDate_titleListVisit);
+        coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_visitLast_layout);
         textSum = (TextView) view.findViewById(R.id.textView_visitLastDate_sum);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
+        horizontalScrollView = (HorizontalScrollView) view.findViewById(R.id.scrollView_visitLastDate_horizontal);
+        toolbar = getActivity().findViewById(R.id.toolbar);
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floating_visitListDate_loading);
+        ColorDrawable colorToolbar = (ColorDrawable) toolbar.getBackground();
+        buttonShowList.setBackgroundColor(colorToolbar.getColor());
+        buttonSum.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildPdf.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildExcel.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildConfirmListExcel.setBackgroundColor(colorToolbar.getColor());
+        buttonBuildConfirmListPdf.setBackgroundColor(colorToolbar.getColor());
+        horizontalScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
+            }
+        });
         textTitle.setText(user + "مشاهده کارکرد کاربر");
         setVisitStart.setOnClickListener(this);
         setVisitEnd.setOnClickListener(this);
@@ -95,7 +126,10 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         visitEnd.setOnClickListener(this);
         buttonShowList.setOnClickListener(this);
         buttonBuildPdf.setOnClickListener(this);
+        buttonBuildExcel.setOnClickListener(this);
         buttonSum.setOnClickListener(this);
+        buttonBuildConfirmListExcel.setOnClickListener(this);
+        buttonBuildConfirmListPdf.setOnClickListener(this);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -112,6 +146,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                                 progressbar.setVisibility(View.VISIBLE);
                                 start_row += 20;
                                 presenter.getLastDatePresenterMore(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
+
 
                             }
                         });
@@ -153,11 +188,13 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                     progressbar.setVisibility(View.VISIBLE);
                     start_row = 0;
                     presenter.getLastDatePresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
+                    flagConfirm = 0;
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                     break;
                 }
+
 
             case R.id.button_visitLastDate_buildPdf:
                 recyclerView.setVisibility(View.GONE);
@@ -166,12 +203,58 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar,textSum);
+                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, textSum);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                     break;
                 }
+
+            case R.id.button_visitLastDate_confirm_pdf:
+                recyclerView.setVisibility(View.GONE);
+                textSum.setVisibility(View.GONE);
+                textSumMessage.setVisibility(View.GONE);
+                layoutTitle.setVisibility(View.GONE);
+                if (Share.check(getContext())) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    presenter.buildPdfPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, textSum);
+                    break;
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+            case R.id.button_visitLastDate_buildExcel:
+                floatingActionButton.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                textSum.setVisibility(View.GONE);
+                textSumMessage.setVisibility(View.GONE);
+                layoutTitle.setVisibility(View.GONE);
+                if (Share.check(getContext())) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
+                    break;
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+            case R.id.button_visitLastDate_confirm_excel:
+                floatingActionButton.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                textSum.setVisibility(View.GONE);
+                textSumMessage.setVisibility(View.GONE);
+                layoutTitle.setVisibility(View.GONE);
+                if (Share.check(getContext())) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    presenter.buildExcelPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSum);
+                    break;
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+
             case R.id.button_visitLastDate_sum:
                 textSum.setVisibility(View.VISIBLE);
                 textSumMessage.setVisibility(View.VISIBLE);
@@ -216,15 +299,18 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
     }
 
 
-    public void passListView(List<LastTime> lastTimeList) {
+    public void passListView(List<LastTimeConfirm> lastTimeList) {
         this.lastTimeList = lastTimeList;
         adapter = new VisitLastDateEmployerToEmployeeAdapter(VisitLastDateEmployerToEmployeeFragment.this, lastTimeList, user, kind);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
+
     }
 
-    public void passListViewMore(List<LastTime> lastTimeList) {
+    public void passListViewMore(List<LastTimeConfirm> lastTimeList) {
+        this.lastTimeList = lastTimeList;
         adapter.notifyDataSetChanged();
     }
 
@@ -235,28 +321,46 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         this.kind = kind;
     }
 
-    @Override
-    public void sendDataDelete(FragmentActivity activity1, int position, VisitLastDateEmployerToEmployeeAdapter adapter, String startDateDelete, String startTimeDelete) {
-        progressbar.setVisibility(View.VISIBLE);
-        this.position = position;
-        presenter.dataDeletePresenter(urlDelete, adapter, startDateDelete, startTimeDelete, activity1, user, kind, progressbar);
-    }
+//    @Override
+//    public void sendDataDelete(FragmentActivity activity1, int position, VisitLastDateEmployerToEmployeeAdapter adapter, String startDateDelete, String startTimeDelete) {
+//        progressbar.setVisibility(View.VISIBLE);
+//        this.position = position;
+//        presenter.dataDeletePresenter(urlDelete, adapter, startDateDelete, startTimeDelete, activity1, user, kind, progressbar);
+//    }
 
-    public void messageDeleteView(String result) {
+    public void messageConfirm(String result) {
         switch (result) {
-            case "done":
-                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.deleteTime), Toast.LENGTH_SHORT).show();
-                this.lastTimeList.remove(position);
-                adapter.notifyDataSetChanged();
+            case "confirm":
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.confirmTime), Toast.LENGTH_SHORT).show();
+                lastTimeConfirm.setSelected(true);
+                break;
+            case "noConfirm":
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.noConfirmTime), Toast.LENGTH_SHORT).show();
+                lastTimeConfirm.setSelected(false);
                 break;
             case "failer_interesting_database":
                 Toast.makeText(getContext(), getActivity().getResources().getString(R.string.registerNull), Toast.LENGTH_SHORT).show();
+                if (checkBox.isChecked()) {
+                    checkBox.setChecked(false);
+                } else {
+                    checkBox.setChecked(true);
+                }
                 break;
             case "failure_post":
                 Toast.makeText(getContext(), getActivity().getResources().getString(R.string.registerError), Toast.LENGTH_SHORT).show();
+                if (checkBox.isChecked()) {
+                    checkBox.setChecked(false);
+                } else {
+                    checkBox.setChecked(true);
+                }
                 break;
             default:
                 Toast.makeText(getContext(), getActivity().getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                if (checkBox.isChecked()) {
+                    checkBox.setChecked(false);
+                } else {
+                    checkBox.setChecked(true);
+                }
                 break;
         }
 
@@ -294,5 +398,16 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
             );
         }
     }
+
+    @Override
+    public void sendDataCheck(FragmentActivity activity1, VisitLastDateEmployerToEmployeeAdapter adapter, String startDate, String startTime, LastTimeConfirm lastTimeConfirm, int pos, CheckBox checkBox, int check) {
+        this.lastTimeConfirm = lastTimeConfirm;
+        this.checkBox = checkBox;
+        this.pos = pos;
+        progressbar.setVisibility(View.VISIBLE);
+        presenter.dataCheckPresenter(urlConfirm, adapter, startDate, startTime, activity1, user, kind, progressbar, check);
+
+    }
+
 
 }
