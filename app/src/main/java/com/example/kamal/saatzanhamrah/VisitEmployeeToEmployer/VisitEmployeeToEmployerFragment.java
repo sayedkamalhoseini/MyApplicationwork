@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kamal.saatzanhamrah.MainActivity;
@@ -24,6 +25,8 @@ public class VisitEmployeeToEmployerFragment extends Fragment implements MainAct
     private RecyclerView recyclerView;
     private String url="http://kamalroid.ir/get_employee_to_employer1.php";
     private String user;
+    private ProgressBar progressbar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,10 @@ public class VisitEmployeeToEmployerFragment extends Fragment implements MainAct
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_visit_employee_to_employer,container,false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_vistEmployee_listEmployee);
+        progressbar= (ProgressBar) view.findViewById(R.id.progressBar_visitEmployeeToEmployer_loading);
         if(Share.check(getContext())) {
-            presenter.visitEmployeeToEmployer(url, user);
+            progressbar.setVisibility(View.VISIBLE);
+            presenter.visitEmployeeToEmployer(url, user,progressbar);
         }  else{
             Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
         }

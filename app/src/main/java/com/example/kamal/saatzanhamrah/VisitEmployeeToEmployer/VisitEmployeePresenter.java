@@ -1,5 +1,7 @@
 package com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer;
 
+import android.widget.ProgressBar;
+
 import java.util.List;
 
 /**
@@ -17,8 +19,8 @@ public class VisitEmployeePresenter {
     }
 
 
-    public void visitEmployeeToEmployer(String url, String userName) {
-        model.visitEmployeeModel(url,userName);
+    public void visitEmployeeToEmployer(String url, String userName, ProgressBar progressbar) {
+        model.visitEmployeeModel(url,userName,progressbar);
     }
 
     public void passListVisitEmployeePresenter(List<VisitEmployee> list) {

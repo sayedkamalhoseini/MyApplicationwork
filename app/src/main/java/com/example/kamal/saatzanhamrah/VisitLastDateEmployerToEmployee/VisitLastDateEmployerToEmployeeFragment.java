@@ -57,6 +57,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
     private Dialog dialog;
     private CheckBox checkBox;
     private ProgressBar progressbar;
+    private TextView textViewExplain1;
     private TextView textTitle;
     private FloatingActionButton floatingActionButton;
     private LinearLayout layoutTitle;
@@ -106,6 +107,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         horizontalScrollView = (HorizontalScrollView) view.findViewById(R.id.scrollView_visitLastDate_horizontal);
         toolbar = getActivity().findViewById(R.id.toolbar);
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floating_visitListDate_loading);
+        textViewExplain1=view.findViewById(R.id.textView_visitLastDate_confirm);
         ColorDrawable colorToolbar = (ColorDrawable) toolbar.getBackground();
         buttonShowList.setBackgroundColor(colorToolbar.getColor());
         buttonSum.setBackgroundColor(colorToolbar.getColor());
@@ -181,6 +183,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 break;
             case R.id.button_visitLastDate_showListVisit:
                 if (Share.check(getContext())) {
+                    textViewExplain1.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     textSum.setVisibility(View.GONE);
                     textSumMessage.setVisibility(View.GONE);
@@ -197,6 +200,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
 
 
             case R.id.button_visitLastDate_buildPdf:
+                textViewExplain1.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
                 textSumMessage.setVisibility(View.GONE);
@@ -211,6 +215,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 }
 
             case R.id.button_visitLastDate_confirm_pdf:
+                textViewExplain1.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
                 textSumMessage.setVisibility(View.GONE);
@@ -225,6 +230,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 }
 
             case R.id.button_visitLastDate_buildExcel:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -240,6 +246,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 }
 
             case R.id.button_visitLastDate_confirm_excel:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -256,6 +263,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
 
 
             case R.id.button_visitLastDate_sum:
+                textViewExplain1.setVisibility(View.GONE);
                 textSum.setVisibility(View.VISIBLE);
                 textSumMessage.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);

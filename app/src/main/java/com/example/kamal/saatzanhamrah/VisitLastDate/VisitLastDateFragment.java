@@ -185,6 +185,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     textSum.setVisibility(View.GONE);
                     textSumMessage.setVisibility(View.GONE);
                     layoutTitle.setVisibility(View.VISIBLE);
+                    textViewExplain1.setVisibility(View.VISIBLE);
 //                    ColorDrawable colorToolbar1 = (ColorDrawable) toolbar.getBackground();
 //                    layoutTitle.setBackgroundColor(colorToolbar1.getColor());
                     progressbar.setVisibility(View.VISIBLE);
@@ -197,6 +198,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 }
 
             case R.id.button_visitLastDate_confirm_pdf:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -212,6 +214,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 }
 
             case R.id.button_visitLastDate_confirm_excel:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -229,6 +232,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
 
             case R.id.button_visitLastDate_buildPdf:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -244,6 +248,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 }
 
             case R.id.button_visitLastDate_buildExcel:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 textSum.setVisibility(View.GONE);
@@ -258,6 +263,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     break;
                 }
             case R.id.button_visitLastDate_sum:
+                textViewExplain1.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 textSum.setText("");
                 textSum.setVisibility(View.VISIBLE);

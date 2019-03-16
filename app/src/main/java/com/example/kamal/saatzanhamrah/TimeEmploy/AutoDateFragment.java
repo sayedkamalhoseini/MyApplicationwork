@@ -115,6 +115,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
             editText.setVisibility(View.VISIBLE);
             toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
             buttonStart.setText(getString(R.string.endDate));
+            textInputLayoutExplain.setVisibility(View.VISIBLE);
             buttonStart.setBackgroundResource(R.drawable.yellowcircle);
             textUserName.setText(user);
             if (kind.equals("employee"))

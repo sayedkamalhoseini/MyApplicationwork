@@ -158,20 +158,13 @@
             android:layout_centerHorizontal="true"
             android:text="@string/messageConfirm" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/textView_visitLastDate_confirm"
-            android:layout_margin="16dp"
-            android:background="@color/black" />
 
 
         <LinearLayout
             android:id="@+id/linear_visitLastDate_titleListVisit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/line"
+            android:layout_below="@id/textView_visitLastDate_confirm"
             android:orientation="horizontal"
             android:visibility="gone"
             android:weightSum="4.5">

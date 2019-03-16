@@ -246,7 +246,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                         if (!dir.exists())
                             dir.mkdirs();
 
-                        File file = new File(dir, user+"_time"+".pdf");
+                        File file = new File(dir, user+keyStart+"_"+keyEnd+"_time"+".pdf");
                         fOut = new FileOutputStream(file);
                         PdfWriter.getInstance(doc, fOut);
                         doc.open();
@@ -308,7 +308,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                         doc.close();
                         progressbar.setVisibility(View.GONE);
                         textSum.setVisibility(View.VISIBLE);
-                        textSum.setText("فایل" + " " + user + "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                        textSum.setText("فایل" + " " + user +keyStart+"_"+keyEnd+ "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -637,7 +637,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                                 root.setWritable(true);
                                 root.mkdirs();
                             }
-                            File file = new File(root, user + "_time" + ".xls");
+                            File file = new File(root, user+keyStart+"_"+keyEnd + "_time" + ".xls");
                             FileOutputStream os = null;
 
                             try {
@@ -655,7 +655,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                             }
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل" + " " + user + "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + user + keyStart+"_"+keyEnd+"_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);

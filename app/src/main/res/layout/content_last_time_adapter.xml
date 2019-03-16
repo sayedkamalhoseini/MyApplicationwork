@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="4.5">
+        android:weightSum="4.6">
 
         <com.example.kamal.saatzanhamrah.CustomTextView
             android:id="@+id/textView_contentLastTimeAdapter_sumDate"

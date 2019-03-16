@@ -2,6 +2,8 @@ package com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,7 +35,7 @@ public class VisitEmployeeModel {
     }
 
 
-    public void visitEmployeeModel(String url, final String user) {
+    public void visitEmployeeModel(String url, final String user, final ProgressBar progressbar) {
         this.user =user;
         Share.getStringResponse(activity, Request.Method.POST, url, null, new Share.StringVolleyCallBack() {
             @Override
@@ -51,16 +53,19 @@ public class VisitEmployeeModel {
                         list.add(visitEmployee);
                     }
                     presenter.passListVisitEmployeePresenter(list);
+                    progressbar.setVisibility(View.GONE);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressbar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onError(String error) {
                 Toast.makeText(activity, activity.getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
-
+                progressbar.setVisibility(View.GONE);
             }
 
             @Override
