@@ -10,6 +10,10 @@ public class LastTime {
     private String endWorkDate;
     private String endWorkTime;
     private String workTime;
+    private String confirm_employer;
+    private boolean isSelected;
+
+
 
     public String getStartWorkTime() {
         return startWorkTime;
@@ -49,5 +53,21 @@ public class LastTime {
 
     public void setWorkTime(String workTime) {
         this.workTime = workTime;
+    }
+
+    public String getConfirm_employer() {
+        return confirm_employer;
+    }
+
+    public void setConfirm_employer(String confirm_employer) {
+        this.confirm_employer = confirm_employer;
+    }
+
+    public boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

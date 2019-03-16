@@ -4,12 +4,14 @@ package com.example.kamal.saatzanhamrah.VisitLastDateEmployerToEmployee;
  * Created by kamal on 12/19/2017.
  */
 
-public class LastTime {
+public class LastTimeConfirm {
+    private boolean isSelected;
     private String startWorkDate;
     private String startWorkTime;
     private String endWorkDate;
     private String endWorkTime;
     private String workTime;
+    private String confirm_employer;
 
     public String getStartWorkTime() {
         return startWorkTime;
@@ -49,5 +51,14 @@ public class LastTime {
 
     public void setWorkTime(String workTime) {
         this.workTime = workTime;
+    }
+
+
+    public boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

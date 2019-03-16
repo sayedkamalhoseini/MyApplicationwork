@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <LinearLayout
             android:id="@+id/linear_visitLastDate_buttonListVisit"
@@ -78,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:orientation="horizontal"
-                android:weightSum="5">
+                android:weightSum="6">
 
                 <com.example.kamal.saatzanhamrah.CustumButton
                     android:id="@+id/button_visitLastDate_confirm_pdf"
@@ -101,7 +103,6 @@
                     android:textColor="@color/white" />
 
 
-
                 <com.example.kamal.saatzanhamrah.CustumButton
                     android:id="@+id/button_visitLastDate_buildPdf"
                     android:layout_width="wrap_content"
@@ -121,6 +122,7 @@
                     android:layout_weight="1"
                     android:text=" گزارش اکسل"
                     android:textColor="@color/white" />
+
 
                 <com.example.kamal.saatzanhamrah.CustumButton
                     android:id="@+id/button_visitLastDate_sum"
@@ -149,20 +151,20 @@
 
 
         <com.example.kamal.saatzanhamrah.CustomTextView
-            android:id="@+id/textView_visitLastDate_delete"
+            android:id="@+id/textView_visitLastDate_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/scrollView_visitLastDate_horizontal"
-            android:text="@string/messageDelete" />
+            android:layout_centerHorizontal="true"
+            android:text="@string/messageConfirm" />
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
-            android:id="@+id/line"
+            android:layout_below="@id/textView_visitLastDate_confirm"
             android:layout_margin="16dp"
-            android:layout_below="@id/textView_visitLastDate_delete"/>
+            android:background="@color/black" />
 
 
         <LinearLayout
@@ -174,13 +176,12 @@
             android:visibility="gone"
             android:weightSum="4.5">
 
-
             <com.example.kamal.saatzanhamrah.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/sumTitle"
+                android:text="مجموع"
                 android:textSize="16sp" />
 
 
@@ -206,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/confirm"
+                android:text="تایید کارفرما"
                 android:textSize="16sp" />
 
 

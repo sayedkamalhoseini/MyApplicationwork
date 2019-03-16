@@ -1,5 +1,6 @@
 package com.example.kamal.saatzanhamrah.VisitLastDateEmployerToEmployee;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ProgressBar;
@@ -25,19 +26,19 @@ public class VisitLastDateEmployerToEmployeePresenter {
         model.getLastDateModel(url,start,end,user,kind,row_start,progressbar,floatingActionButton);
     }
 
-    public void passListPresenter(List<LastTime> lastTimeList) {
+    public void passListPresenter(List<LastTimeConfirm> lastTimeList) {
         view.passListView(lastTimeList);
     }
-  public void passListPresenterMore(List<LastTime> lastTimeList) {
+  public void passListPresenterMore(List<LastTimeConfirm> lastTimeList) {
         view.passListViewMore(lastTimeList);
     }
 
-    public void dataDeletePresenter(String url, VisitLastDateEmployerToEmployeeAdapter adapter, String startDateDelete, String startTimeDelete, FragmentActivity visitLastDateFragment, String user, String kind, ProgressBar progressbar) {
-        model.dataDeleteModel(url,adapter,startDateDelete,startTimeDelete,visitLastDateFragment,progressbar);
+    public void dataCheckPresenter(String url, VisitLastDateEmployerToEmployeeAdapter adapter, String startDateDelete, String startTimeDelete, FragmentActivity visitLastDateFragment, String user, String kind, ProgressBar progressbar, int check) {
+        model.dataCheckModel(url,adapter,startDateDelete,startTimeDelete,visitLastDateFragment,progressbar,check);
     }
 
-    public void deleteMessagePresenter(String result) {
-        view.messageDeleteView(result);
+    public void MessageConfirmPresenter(String result) {
+        view.messageConfirm(result);
     }
 
 
@@ -46,6 +47,7 @@ public class VisitLastDateEmployerToEmployeePresenter {
 
     }
 
+
     public void buildPdfPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, TextView textSum) {
         model.buildPdf(url,start,end,user,kind,progressbar,textSum);
     }
@@ -53,8 +55,14 @@ public class VisitLastDateEmployerToEmployeePresenter {
     public void sumPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar) {
         model.sumModel(url,start,end,user,kind,progressbar);
     }
+    public void buildExcelPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, CoordinatorLayout coordinatorLayout, TextView textSum) {
+        model.buildExcel(url,start,end,user,kind,progressbar,coordinatorLayout,textSum);
+
+    }
+
 
     public void resulSumPresenter(String result) {
         view.resultSumView(result);
     }
-}
+
+   }

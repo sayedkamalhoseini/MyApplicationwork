@@ -92,6 +92,8 @@ public class VisitLastDateModel {
                             String endLastDate = jsonObject1.getString("end_date");
                             String endLastTime = jsonObject1.getString("end_time");
                             String _workTime = jsonObject1.getString("worktime");
+                            String confirm_employer = jsonObject1.getString("confirm_employer");
+
                             if (!_workTime.equals("null")) {
                                 int workTime = Integer.parseInt(_workTime);
                                 _workTimeHour = workTime / 3600 + "";
@@ -104,6 +106,15 @@ public class VisitLastDateModel {
                             lastTime.setEndWorkDate(endLastDate);
                             lastTime.setEndWorkTime(endLastTime);
                             lastTime.setWorkTime(_workTime);
+                            lastTime.setConfirm_employer(confirm_employer);
+                            if(confirm_employer.equals("1")){
+                                lastTime.setSelected(true);
+                            }else if(confirm_employer.equals("0")){
+                                lastTime.setSelected(false);
+                            }else{
+                                lastTime.setSelected(false);
+                            }
+
                             lastTimeList.add(lastTime);
                         }
                         presenter.passListPresenter(lastTimeList);
@@ -295,7 +306,7 @@ public class VisitLastDateModel {
                             doc.close();
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل" +" " + user + "_time" + ".pdf" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + user + "_time" + ".pdf" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);
@@ -620,7 +631,7 @@ public class VisitLastDateModel {
                                 c = row.createCell(6);
                                 c.setCellValue(explains);
                                 c.setCellStyle(cs);
-                              }
+                            }
 
                             File root = new File(Environment.getExternalStorageDirectory(), "");
                             if (!root.exists()) {
@@ -646,7 +657,7 @@ public class VisitLastDateModel {
                             }
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل"+" " + user + "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + user + "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);
