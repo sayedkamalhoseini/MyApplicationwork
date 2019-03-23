@@ -81,6 +81,27 @@
                 android:weightSum="5">
 
                 <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/button_visitLastDate_buildPdf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text=" گزارش pdf"
+                    android:textColor="@color/white" />
+
+                <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/button_visitLastDate_buildExcel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text=" گزارش اکسل"
+                    android:textColor="@color/white" />
+
+
+                <com.example.kamal.saatzanhamrah.CustumButton
                     android:id="@+id/button_visitLastDate_confirm_pdf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,27 +121,6 @@
                     android:text="'گزارش اکسل تایید شده ها"
                     android:textColor="@color/white" />
 
-
-
-                <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_buildPdf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:text=" گزارش pdf"
-                    android:textColor="@color/white" />
-
-                <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_buildExcel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:text=" گزارش اکسل"
-                    android:textColor="@color/white" />
 
                 <com.example.kamal.saatzanhamrah.CustumButton
                     android:id="@+id/button_visitLastDate_sum"
@@ -195,6 +195,7 @@
                 android:textSize="16sp" />
 
             <com.example.kamal.saatzanhamrah.CustomTextView
+                android:id="@+id/confirm_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

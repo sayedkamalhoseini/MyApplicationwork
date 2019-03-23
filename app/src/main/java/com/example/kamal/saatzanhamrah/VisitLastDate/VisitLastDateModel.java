@@ -172,6 +172,8 @@ public class VisitLastDateModel {
                         String endLastDate = jsonObject1.getString("end_date");
                         String endLastTime = jsonObject1.getString("end_time");
                         String _workTime = jsonObject1.getString("worktime");
+                        String confirm_employer = jsonObject1.getString("confirm_employer");
+
                         if (!_workTime.equals("null")) {
                             int workTime = Integer.parseInt(_workTime);
                             _workTimeHour = workTime / 3600 + "";
@@ -184,6 +186,14 @@ public class VisitLastDateModel {
                         lastTime.setEndWorkDate(endLastDate);
                         lastTime.setEndWorkTime(endLastTime);
                         lastTime.setWorkTime(_workTime);
+                        if(confirm_employer.equals("1")){
+                            lastTime.setSelected(true);
+                        }else if(confirm_employer.equals("0")){
+                            lastTime.setSelected(false);
+                        }else{
+                            lastTime.setSelected(false);
+                        }
+
                         lastTimeList.add(lastTime);
                     }
                     presenter.passListPresenterMore(lastTimeList);

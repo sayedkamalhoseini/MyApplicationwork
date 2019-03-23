@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,8 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
     String user, kind;
     LastTimeAdapter lastTimeAdapter;
     VisitLastDateFragment visitLastDateFragment;
-    int flag = 0;
+    LinearLayout linearLayout;
+    TextView view_confirm;
 
 
     public LastTimeAdapter(VisitLastDateFragment visitLastDateFragment, List<LastTime> list, String user, String kind) {
@@ -43,7 +45,7 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
         this.user = user;
         this.kind = kind;
         this.visitLastDateFragment = visitLastDateFragment;
-    }
+          }
 
     @Override
     public LastTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,6 +69,17 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
         holder.checkBox.setChecked(lastTime.getSelected());
         holder.checkBox.setTag(position);
         holder.checkBox.setClickable(false);
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.checkBox.isChecked()){
+                    holder.checkBox.setChecked(false);
+                }else if(!holder.checkBox.isChecked()){
+                    holder.checkBox.setChecked(true);
+                }
+                Toast.makeText(activity, "توسط کارفرمای شما تایید کارکرد تغییر می کند", Toast.LENGTH_LONG).show();
+               }
+        });
 //        holder.checkBox.setEnabled(false);
 //        if (flag == 0) {
 //            holder.visitStartDateWork.setText(R.string.startTime);
@@ -124,6 +137,9 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
             TextView visitStartDateWork, visitStartTimeWork, visitEndDateWork, visitEndTimeWork, sumDate;
             CardView cardView;
             CheckBox checkBox;
+            View view_confirm;
+            LinearLayout linearLayoutAdapter;
+
 
             public LastTimeViewHolder(View itemView) {
                 super(itemView);
@@ -134,6 +150,15 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
                 sumDate = (TextView) itemView.findViewById(R.id.textView_contentLastTimeAdapter_sumDate);
                 checkBox = itemView.findViewById(R.id.confirm_employer);
                 cardView = (CardView) itemView.findViewById(R.id.cardView_visitLastDate_layoutRow);
+                view_confirm=itemView.findViewById(R.id.confirm_view);
+                linearLayoutAdapter =  itemView.findViewById(R.id.linear_visitLastDate_layout);
+                                if (kind.equals("employer")){
+                    checkBox.setVisibility(View.GONE);
+                    view_confirm.setVisibility(View.GONE);
+                    linearLayoutAdapter.setWeightSum((float) 3.5);
+
+                }
+
             }
         }
 

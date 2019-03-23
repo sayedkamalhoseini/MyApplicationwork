@@ -61,11 +61,13 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     private TextView textTitle;
     private FloatingActionButton floatingActionButton;
     private LinearLayout layoutTitle;
-    private TextView textSumMessage, textSum;
+    private TextView textSumMessage, textSum,title_confirm;
     private CoordinatorLayout coordinatorLayout;
     private HorizontalScrollView horizontalScrollView;
     private Toolbar toolbar;
+    private TextView view_confirm;
     private TextView textViewExplain1;
+    private LinearLayout linearLayoutAdapter;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -97,12 +99,15 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
         visitStart = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateStart);
         visitEnd = (EditText) view.findViewById(R.id.editText_visitLastDate_setDateEnd);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_visitLastDate_ListVisit);
+        view_confirm =  view.findViewById(R.id.confirm_view);
+        linearLayoutAdapter =  view.findViewById(R.id.linear_visitLastDate_layout);
         progressbar = (ProgressBar) view.findViewById(R.id.progressBar_visitLastDateFragment_loading);
         textSumMessage = (TextView) view.findViewById(R.id.textView_visitLastDate_sumMessage);
         layoutTitle = (LinearLayout) view.findViewById(R.id.linear_visitLastDate_titleListVisit);
         textSum = (TextView) view.findViewById(R.id.textView_visitLastDate_sum);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_visitLast_layout);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
+        title_confirm=view.findViewById(R.id.confirm_text);
         toolbar = getActivity().findViewById(R.id.toolbar);
         textViewExplain1=view.findViewById(R.id.textView_visitLastDate_delete);
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floating_visitListDate_loading);
@@ -114,6 +119,12 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
         buttonBuildExcel.setBackgroundColor(colorToolbar.getColor());
         buttonBuildConfirmListExcel.setBackgroundColor(colorToolbar.getColor());
         buttonBuildConfirmListPdf.setBackgroundColor(colorToolbar.getColor());
+        if(kind.equals("employer")){
+            title_confirm.setVisibility(View.GONE);
+            layoutTitle.setWeightSum((float) 3.5);
+            buttonBuildConfirmListPdf.setVisibility(View.GONE);
+            buttonBuildConfirmListExcel.setVisibility(View.GONE);
+        }
         horizontalScrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -318,6 +329,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     }
 
     public void passListViewMore(List<LastTime> lastTimeList) {
+        this.lastTimeList = lastTimeList;
         adapter.notifyDataSetChanged();
     }
 
@@ -360,6 +372,9 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     public void sendData(String user, String kind) {
         this.user = user;
         this.kind = kind;
+        if(this.kind.equals("employer")){
+
+        }
     }
 
     public void resultSumView(String result) {
