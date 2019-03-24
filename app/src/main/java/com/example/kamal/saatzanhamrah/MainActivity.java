@@ -2,13 +2,17 @@ package com.example.kamal.saatzanhamrah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +34,7 @@ import com.example.kamal.saatzanhamrah.util.Inventory;
 import com.example.kamal.saatzanhamrah.util.Purchase;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private PassData passData;
     private EnableData enableData;
     private Fragment autoDateFragment, visitLastDateFragment, addEmployeeToEmployerFragment,
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton imageButton;
     private ListView listView;
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     static final String TAG = "tag";
 
 
@@ -75,8 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Pushe.initialize(this,true);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.navigation_drawer);
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         if (Share.loadPref(this, "count").equals("")) {
             Share.saveSharePref(this, "count", "1");
         }
@@ -93,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(TAG, "Query inventory was successful.");
                         mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
                         if (mIsPremium) {
-                            toolbar.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                            navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
                             Share.saveSharePref(MainActivity.this, "count", "1");
                             Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
                             enableData = (EnableData) autoDateFragment;
@@ -101,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         else{
                             if (Share.loadPref(MainActivity.this, "count").equals("1")) {
-                                toolbar.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
+                                navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
                                 Share.saveSharePref(MainActivity.this, "count", "1");
                                 Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
                                 enableData = (EnableData) autoDateFragment;
@@ -154,9 +162,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mHelper.queryInventoryAsync(mGotInventoryListener);
             }
         });
-        setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         Intent intent = getIntent();
         user = intent.getStringExtra("user");
         kind = intent.getStringExtra("kind");
@@ -170,60 +179,132 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         passData = (PassData) autoDateFragment;
         passData.sendData(user, kind);
         getSupportFragmentManager().beginTransaction().replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
+        setupNavigationDrawer();
     }
 
    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(com.example.kamal.saatzanhamrah.R.menu.menu_items, menu);
-        if (Share.loadPref(MainActivity.this, "mIsPremium").equals("true")) {
-            MenuItem item = menu.findItem(R.id.item_menuItems_enable);
-            item.setVisible(false);
-        }
-
-        if (kind.equals("employee")) {
-            MenuItem item = menu.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitWorkEmployee);
-            item.setVisible(false);
-        } else if (kind.equals("employer")) {
-            MenuItem item1 = menu.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_addEmployeeToEmployer);
-            item1.setVisible(false);
-            MenuItem item2 = menu.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitEmployer);
-            item2.setVisible(false);
-        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+
+        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+           }
+
+//        int id = item.getItemId();
+//        switch (id) {
+//            case R.id.item_menuItems_enable:
+//                mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener, "payload-string");
+//                break;
+//            case R.id.item_menuItems_visitDateMyWork:
+//                visitLastDateFragment = new VisitLastDateFragment();
+//                passData = (PassData) visitLastDateFragment;
+//                passData.sendData(user, kind);
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
+//                break;
+//            case R.id.item_menuItems_addEmployeeToEmployer:
+//                addEmployeeToEmployerFragment = new AddEmployeeToEmployerFragment();
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, addEmployeeToEmployerFragment).commit();
+//                passData = (PassData) addEmployeeToEmployerFragment;
+//                passData.sendData(user, kind);
+//                break;
+//            case R.id.item_menuItems_visitWorkEmployee:
+//                visitEmployeeToEmployerFragment = new VisitEmployeeToEmployerFragment();
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployeeToEmployerFragment).commit();
+//                passData = (PassData) visitEmployeeToEmployerFragment;
+//                passData.sendData(user, kind);
+//                break;
+//            case R.id.item_menuItems_registerAutoTime:
+//                autoDateFragment = new AutoDateFragment();
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
+//                passData = (PassData) autoDateFragment;
+//                passData.sendData(user, kind);
+//                break;
+//            case R.id.item_menuItems_registerHandTime:
+//                if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
+//                    handDateFragment = new HandDateFragment();
+//                    getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, handDateFragment).commit();
+//                    passData = (PassData) handDateFragment;
+//                    passData.sendData(user, kind);
+//                    enableData = (EnableData) handDateFragment;
+//                    enableData.sendEnable(mIsPremium);
+//                    break;
+//                } else {
+//                    Toast.makeText(this,getString(R.string.messageErrorHandDate), Toast.LENGTH_LONG).show();
+//                    break;
+//                }
+//
+//            case R.id.item_menuItems_visitEmployer:
+//                visitEmployerToEmployee = new VisitEmployerToEmployeeFragment();
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployerToEmployee).commit();
+//                passData = (PassData) visitEmployerToEmployee;
+//                passData.sendData(user, kind);
+//                break;
+//            case R.id.item_menuItems_exit:
+//                Share.saveSharePref(this, "userKey", "");
+//                Share.saveSharePref(this, "passKey", "");
+//                Share.saveSharePref(this, "kindKey", "");
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
+//                break;
+//            case R.id.item_menuItems_aboutUs:
+//                aboutUsFragment = new AboutUsFragment();
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, aboutUsFragment).commit();
+//                break;
+//        }
+//
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener, "payload-string");
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Fragment fragment=null;
+
+
+        int id = menuItem.getItemId();
         switch (id) {
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable:
+            case R.id.item_menuItems_enable:
                 mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener, "payload-string");
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitDateMyWork:
+            case R.id.item_menuItems_visitDateMyWork:
                 visitLastDateFragment = new VisitLastDateFragment();
                 passData = (PassData) visitLastDateFragment;
                 passData.sendData(user, kind);
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_addEmployeeToEmployer:
+            case R.id.item_menuItems_addEmployeeToEmployer:
                 addEmployeeToEmployerFragment = new AddEmployeeToEmployerFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, addEmployeeToEmployerFragment).commit();
                 passData = (PassData) addEmployeeToEmployerFragment;
                 passData.sendData(user, kind);
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitWorkEmployee:
+            case R.id.item_menuItems_visitWorkEmployee:
                 visitEmployeeToEmployerFragment = new VisitEmployeeToEmployerFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployeeToEmployerFragment).commit();
                 passData = (PassData) visitEmployeeToEmployerFragment;
                 passData.sendData(user, kind);
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_registerAutoTime:
+            case R.id.item_menuItems_registerAutoTime:
                 autoDateFragment = new AutoDateFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
                 passData = (PassData) autoDateFragment;
                 passData.sendData(user, kind);
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_registerHandTime:
+            case R.id.item_menuItems_registerHandTime:
+                drawerLayout.closeDrawer(Gravity.START);
+
+
                 if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
                     handDateFragment = new HandDateFragment();
                     getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, handDateFragment).commit();
@@ -237,13 +318,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
 
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitEmployer:
+            case R.id.item_menuItems_visitEmployer:
                 visitEmployerToEmployee = new VisitEmployerToEmployeeFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, visitEmployerToEmployee).commit();
                 passData = (PassData) visitEmployerToEmployee;
                 passData.sendData(user, kind);
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_exit:
+            case R.id.item_menuItems_exit:
                 Share.saveSharePref(this, "userKey", "");
                 Share.saveSharePref(this, "passKey", "");
                 Share.saveSharePref(this, "kindKey", "");
@@ -251,19 +332,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 finish();
                 break;
-            case com.example.kamal.saatzanhamrah.R.id.item_menuItems_aboutUs:
+            case R.id.item_menuItems_aboutUs:
                 aboutUsFragment = new AboutUsFragment();
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, aboutUsFragment).commit();
                 break;
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener, "payload-string");
+        return false;
     }
 
     public interface PassData {
@@ -292,6 +366,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
         if (mHelper != null) mHelper.dispose();
         mHelper = null;
+    }
+
+    private void setupNavigationDrawer(){
+        navigationView=findViewById(R.id.navigation_view);
+        drawerLayout=findViewById(R.id.navigation_layout);
+        navigationView.setNavigationItemSelectedListener(this);
+        actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        Menu menuNav = navigationView.getMenu();
+        if (Share.loadPref(MainActivity.this, "mIsPremium").equals("true")) {
+            MenuItem item = menuNav.findItem(R.id.item_menuItems_enable);
+            item.setVisible(false);
+        }
+
+
+        if (kind.equals("employee")) {
+            MenuItem item = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitWorkEmployee);
+            item.setVisible(false);
+        } else if (kind.equals("employer")) {
+            MenuItem item1 = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_addEmployeeToEmployer);
+            item1.setVisible(false);
+            MenuItem item2 = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitEmployer);
+            item2.setVisible(false);
+        }
+
     }
 
     public interface EnableData {

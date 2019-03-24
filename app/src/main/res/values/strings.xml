@@ -280,6 +280,9 @@
     <string name="messageErrorHandDate">لطفا ابتدا کار فعلی را به پایان برسانید بعد ثبت دستی را انجام دهید</string>
     <string name="sumTitle">مجموع</string>
     <string name="confirm">تایید کارفرما</string>
+    <string name="settings">ویرایش حساب کاربری</string>
+    <string name="open_drawer">openDrawer</string>
+    <string name="close_drawer">closeDrawer</string>
 
 
     <string-array name="nav_drawer_labels">

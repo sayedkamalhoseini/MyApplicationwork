@@ -40,6 +40,8 @@ dependencies {
     implementation 'co.ronash.android:pushe-base:1.4.0'
     implementation 'com.google.android.gms:play-services-gcm:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
     testImplementation 'junit:junit:4.12'
     implementation files('libs/poi-3.7.jar')
 
