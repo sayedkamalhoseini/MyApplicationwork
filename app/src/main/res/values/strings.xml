@@ -271,7 +271,7 @@
     <string name="explainTitle">توضیحات در گزارش pdf و اکسل قابل مشاهده است.</string>
     <string name="explainTitleHand">توضیحات در گزارش pdf و اکسل قابل مشاهده است.</string>
     <string name="explains">توضیحات</string>
-    <string name="messageDelete">با دو ثانیه فشردن هرردیف لیست می توانیدآن را حذف کنید.</string>
+    <string name="messageDelete">با دو ثانیه فشردن هر ردیف می توانیدآن را حذف کنید.</string>
     <string name="messageConfirm">کارکردهایی که موردتایید شماست تایید کنید تا کارمند/کارگر شما مشاهده کند. </string>
     <string name="clickMessage">کارمند یا کارگر باید نام کاربری شما را در پروفایلش اضافه کند تا بتوانید کارکردش را ببینید.</string>
     <string name="clickMessage1">برای مشاهده کارکرد هر کارمند / کارگر روی آن کلیک کنید.</string>

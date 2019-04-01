@@ -5,6 +5,7 @@
     android:id="@+id/navigation_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:openDrawer="start">
 
     <include layout="@layout/activity_main"/>
@@ -15,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/menu_items"
+        app:menu="@menu/navigation_menu"
        />
 
 </android.support.v4.widget.DrawerLayout>

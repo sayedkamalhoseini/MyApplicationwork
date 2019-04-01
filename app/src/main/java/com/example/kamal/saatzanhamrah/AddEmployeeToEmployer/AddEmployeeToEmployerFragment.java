@@ -70,7 +70,7 @@ public class AddEmployeeToEmployerFragment extends Fragment implements View.OnCl
     }
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user = user;
     }
 }

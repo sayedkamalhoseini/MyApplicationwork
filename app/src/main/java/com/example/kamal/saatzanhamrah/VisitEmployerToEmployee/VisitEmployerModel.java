@@ -26,10 +26,12 @@ public class VisitEmployerModel {
     FragmentActivity activity;
     private String user;
     VisitEmployerPresenter presenter;
+    String userUpdate;
 
     public VisitEmployerModel(VisitEmployerPresenter presenter, FragmentActivity activity) {
         this.activity=activity;
         this.presenter=presenter;
+        userUpdate=Share.loadPref(activity,"userKeyUpdate");
     }
 
 
@@ -46,7 +48,7 @@ public class VisitEmployerModel {
                     for(int i=0;i<jsonArray.length();i++){
                         visitEmployer=new VisitEmployer();
                         JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                        String userNameEmployer=jsonObject1.getString("username_employer");
+                        String userNameEmployer=jsonObject1.getString("update_employer");
                         visitEmployer.setUserNameEmployer(userNameEmployer);
                         list.add(visitEmployer);
                     }
@@ -69,7 +71,7 @@ public class VisitEmployerModel {
             @Override
             public Map onMapPost() {
                 Map<String, String> Params = new HashMap<>();
-                Params.put("userEmployee", user);
+                Params.put("userEmployee", userUpdate);
                 Params.put("key_text_android", "ktaa");
                 return Params;
 

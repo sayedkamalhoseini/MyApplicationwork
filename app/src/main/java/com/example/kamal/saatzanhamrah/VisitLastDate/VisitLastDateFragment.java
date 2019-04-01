@@ -3,8 +3,6 @@ package com.example.kamal.saatzanhamrah.VisitLastDate;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -39,9 +37,8 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
-public class VisitLastDateFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, VisitEmployeeAdapter.PassDataEmployeeToEmployer, LastTimeAdapter.PassDataDelete {
+public class VisitLastDateFragment extends Fragment implements View.OnClickListener, MainActivity.PassData, LastTimeAdapter.PassDataDelete {
     VisitLastDatePresenter presenter;
     AppCompatActivity activity;
     EditText visitStart, visitEnd;
@@ -67,6 +64,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     private Toolbar toolbar;
     private TextView view_confirm;
     private TextView textViewExplain1;
+    private String userUpdate;
     private LinearLayout linearLayoutAdapter;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -131,7 +129,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
             }
         });
-        textTitle.setText(user + " " + "مشاهده کارکرد کاربر");
+        textTitle.setText(userUpdate + " " + "مشاهده کارکرد کاربر");
         setVisitStart.setOnClickListener(this);
         setVisitEnd.setOnClickListener(this);
         visitStart.setOnClickListener(this);
@@ -335,12 +333,6 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
 
     @Override
-    public void sendDataEmployeeToEmployer(String user, String kind) {
-        this.user = user;
-        this.kind = kind;
-    }
-
-    @Override
     public void sendDataDelete(FragmentActivity activity1, int position, LastTimeAdapter adapter, String startDateDelete, String startTimeDelete) {
         progressbar.setVisibility(View.VISIBLE);
         this.position = position;
@@ -369,9 +361,10 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user = user;
         this.kind = kind;
+        this.userUpdate=userUpdate;
         if(this.kind.equals("employer")){
 
         }

@@ -3,6 +3,7 @@ package com.example.kamal.saatzanhamrah.AddEmployeeToEmployer;
 import android.support.v4.app.FragmentActivity;
 
 import com.android.volley.Request;
+import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.HashMap;
@@ -15,10 +16,13 @@ import java.util.Map;
 public class AddEmployeeToEmployerModel {
     AddEmployeeToEmployerPresenter presenter;
     FragmentActivity activity;
+    String userUpdate;
 
     public AddEmployeeToEmployerModel(AddEmployeeToEmployerPresenter presenter, FragmentActivity activity) {
-        this.presenter=presenter;
-        this.activity =activity;
+        this.presenter = presenter;
+        this.activity = activity;
+        userUpdate = Share.loadPref(activity, "userKeyUpdate");
+
     }
 
     public void addEmployee(final String s, String addEmployeeUrl, final String user) {

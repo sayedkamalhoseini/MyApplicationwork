@@ -12,8 +12,15 @@ import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity;
 import com.example.kamal.saatzanhamrah.Share;
+import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +30,7 @@ import java.util.Map;
 public class LoginModel {
     LoginActivity activity;
     LoginPresenter presenter;
+    String userNameMain,success;
 
     public LoginModel(LoginActivity loginActivity) {
 
@@ -48,34 +56,47 @@ public class LoginModel {
         Share.getStringResponse(activity, Request.Method.POST, url, null, new Share.StringVolleyCallBack() {
             @Override
             public void onSuccessResponse(String result) {
-                if (result.equals("find")) {
-                   Share.saveSharePref(activity, "userKey", user);
-                   Share.saveSharePref(activity, "passKey", pass);
-                   Share.saveSharePref(activity, "kindKey", kind);
-                    Intent intent = new Intent(activity, MainActivity.class);
-                    intent.putExtra("user",user);
-                    intent.putExtra("kind",kind);
-                    activity.startActivity(intent);
-                    activity.finish();
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray jsonArray = jsonObject.getJSONArray("result1");
+                    List<VisitEmployee> list = new ArrayList<VisitEmployee>();
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(0);
+                        userNameMain = jsonObject1.getString("username");
+                        success = jsonObject1.getString("success");
+
+                        if (success.equals("find")) {
+                            Share.saveSharePref(activity, "userKey", userNameMain);
+                            Share.saveSharePref(activity, "userKeyUpdate", user);
+                            Share.saveSharePref(activity, "passKey", pass);
+                            Share.saveSharePref(activity, "kindKey", kind);
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.putExtra("user", userNameMain);
+                            intent.putExtra("kind", kind);
+                            activity.startActivity(intent);
+                            activity.finish();
+                            progressBar.setVisibility(View.GONE);
+                            btnLogin.setEnabled(true);
+                        }else if(success.equals("noFind")){
+                            Toast.makeText(activity, "لطفا ثبت نام نمایید و نوع شغل هم درست انتخاب کرده باشید.", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                            btnLogin.setEnabled(true);
+                        }else if (result.equals("noConnect")) {
+                            Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                            btnLogin.setEnabled(true);
+
+                        } else {
+                            Toast.makeText(activity, "خطا", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                            btnLogin.setEnabled(true);
+                        }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
-                    btnLogin.setEnabled(true);
-                } else if (result.equals("nofind")) {
-                    Toast.makeText(activity, "لطفا ثبت نام نمایید و نوع شغل هم درست انتخاب کرده باشید.", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
-                    btnLogin.setEnabled(true);
-
-                } else if (result.equals("noconnect")) {
-                    Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
-                    btnLogin.setEnabled(true);
-
-                } else {
-
-                    Toast.makeText(activity, "خطا", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
-                    btnLogin.setEnabled(true);
-
-
                 }
 
             }
@@ -91,7 +112,7 @@ public class LoginModel {
             @Override
             public Map onMapPost() {
                 Map<String, String> loginparams = new HashMap<>();
-                loginparams.put("email", user);
+                loginparams.put("user", user);
                 loginparams.put("pass", pass);
                 loginparams.put("kind", kind);
                 loginparams.put("key_text_android", "ktaa");

@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group1"
+
+        android:checkableBehavior="single">
         <item
             android:id="@+id/item_menuItems_enable"
             android:title="@string/enable" />
         <item
             android:id="@+id/item_menuItems_registerAutoTime"
-            android:title="@string/autoDate" />
+            android:title="@string/autoDate"
+            android:icon="@drawable/ic_access_time"/>
         <item
             android:id="@+id/item_menuItems_registerHandTime"
-            android:title="@string/handDate" />
-
-        <item
-            android:id="@+id/subHeader"
-            android:title="">
-
-            <menu>
-
-                <item
-                    android:id="@+id/item_menuItems_visitDateMyWork"
-                    android:title="@string/visitDateMyWork" />
-                <item
-                    android:id="@+id/item_menuItems_addEmployeeToEmployer"
-                    android:title="@string/addEmployer" />
-                <item
-                    android:id="@+id/item_menuItems_visitEmployer"
-                    android:title="@string/visitEmployer" />
-
-                <item
-                    android:id="@+id/item_menuItems_visitWorkEmployee"
-                    android:title="@string/visitWorkEmployee" />
-            </menu>
-
-        </item>
-
-        <item
-            android:id="@+id/subHeader1"
-            android:title="">
-
-            <menu>
-                <item
-                    android:id="@+id/settings"
-                    android:title="@string/settings"/>
-                <item
-                    android:id="@+id/item_menuItems_aboutUs"
-                    android:title="@string/aboutUs" />
-
-                <item
-                    android:id="@+id/item_menuItems_exit"
-                    android:title="@string/exit" />
-
-            </menu>
-
-        </item>
+            android:title="@string/handDate"
+            android:icon="@drawable/ic_restore_hand"/>
+    </group>
 
 
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+    <item
+        android:id="@+id/item_menuItems_visitDateMyWork"
+        android:title="@string/visitDateMyWork"
+        android:icon="@drawable/ic_visibility_time"/>
+    <item
+        android:id="@+id/item_menuItems_addEmployeeToEmployer"
+        android:title="@string/addEmployer"
+        android:icon="@drawable/ic_person_add_employer"/>
+    <item
+        android:id="@+id/item_menuItems_visitEmployer"
+        android:title="@string/visitEmployer"
+        android:icon="@drawable/ic_perm_identity_employer"/>
+
+    <item
+        android:id="@+id/item_menuItems_visitWorkEmployee"
+        android:title="@string/visitWorkEmployee"
+        />
+    </group>
+
+    <group
+        android:id="@+id/group3"
+
+        android:checkableBehavior="single">
+    <item
+        android:id="@+id/item_menuItems_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+    <item
+        android:id="@+id/item_menuItems_aboutUs"
+        android:title="@string/aboutUs" />
+
+    <item
+        android:id="@+id/item_menuItems_exit"
+        android:title="@string/exit"
+        android:icon="@drawable/ic_exit"/>
     </group>
 
 </menu>
+

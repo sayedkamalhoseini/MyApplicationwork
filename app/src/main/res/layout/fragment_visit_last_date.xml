@@ -154,6 +154,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/colorAccent"
             android:layout_below="@id/scrollView_visitLastDate_horizontal"
             android:text="@string/messageDelete" />
 

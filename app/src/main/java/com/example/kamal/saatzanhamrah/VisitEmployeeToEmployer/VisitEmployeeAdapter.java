@@ -23,11 +23,12 @@ public class VisitEmployeeAdapter extends RecyclerView.Adapter<VisitEmployeeAdap
     List<VisitEmployee> list = new ArrayList<>();
     PassDataEmployeeToEmployer passDataEmployeeToEmployer;
     VisitLastDateEmployerToEmployeeFragment visitLastDateFragment;
+    String userUpdate,userMain;
 
     public VisitEmployeeAdapter(FragmentActivity activity, List<VisitEmployee> list) {
         this.activity = activity;
         this.list = list;
-    }
+           }
 
     @Override
     public RecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +40,7 @@ public class VisitEmployeeAdapter extends RecyclerView.Adapter<VisitEmployeeAdap
     }
 
     @Override
-    public void onBindViewHolder(final RecycleViewHolder holder, int position) {
+    public void onBindViewHolder(final RecycleViewHolder holder, final int position) {
         VisitEmployee visitEmployee = new VisitEmployee();
         visitEmployee = list.get(position);
         holder.textViewUserNameEmployee.setText(visitEmployee.getUserNameEmployee());
@@ -48,7 +49,7 @@ public class VisitEmployeeAdapter extends RecyclerView.Adapter<VisitEmployeeAdap
             public void onClick(View v) {
                 visitLastDateFragment = new VisitLastDateEmployerToEmployeeFragment();
                 passDataEmployeeToEmployer = (PassDataEmployeeToEmployer) visitLastDateFragment;
-                passDataEmployeeToEmployer.sendDataEmployeeToEmployer(holder.textViewUserNameEmployee.getText().toString(), "employee");
+                passDataEmployeeToEmployer.sendDataEmployeeToEmployer(list.get(position).getUserNameEmployeeMain(),list.get(position).getUserNameEmployee(), "employee");
                 activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
             }
         });
@@ -72,6 +73,6 @@ public class VisitEmployeeAdapter extends RecyclerView.Adapter<VisitEmployeeAdap
     }
 
     public interface PassDataEmployeeToEmployer {
-        public void sendDataEmployeeToEmployer(String user, String kind);
+        public void sendDataEmployeeToEmployer(String userMain, String userUpdate, String kind);
     }
 }

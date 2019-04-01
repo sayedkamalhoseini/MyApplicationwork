@@ -34,15 +34,15 @@ public class VisitLastDateEmployerToEmployeeAdapter extends RecyclerView.Adapter
 
     PassDataCheck passDataCheck;
     String user, kind;
-    VisitLastDateEmployerToEmployeeFragment visitLastDateFragment;
+    VisitLastDateEmployerToEmployeeFragment visitLastDateEmployerToEmployeeFragment;
 
 
-    public VisitLastDateEmployerToEmployeeAdapter(VisitLastDateEmployerToEmployeeFragment visitLastDateFragment, List<LastTimeConfirm> list, String user, String kind) {
-        this.activity = visitLastDateFragment.getActivity();
+    public VisitLastDateEmployerToEmployeeAdapter(VisitLastDateEmployerToEmployeeFragment visitLastDateEmployerToEmployeeFragment, List<LastTimeConfirm> list, String user, String kind) {
+        this.activity = visitLastDateEmployerToEmployeeFragment.getActivity();
         this.list = list;
         this.user = user;
         this.kind = kind;
-        this.visitLastDateFragment = visitLastDateFragment;
+        this.visitLastDateEmployerToEmployeeFragment = visitLastDateEmployerToEmployeeFragment;
     }
 
     @Override
@@ -75,11 +75,11 @@ public class VisitLastDateEmployerToEmployeeAdapter extends RecyclerView.Adapter
                 if (Share.check(activity)) {
                     Integer pos=(Integer)holder.checkBox.getTag();
                     if (!list.get(pos).getSelected()) {
-                        passDataCheck = (PassDataCheck) visitLastDateFragment;
+                        passDataCheck = (PassDataCheck) visitLastDateEmployerToEmployeeFragment;
                         passDataCheck.sendDataCheck(activity, VisitLastDateEmployerToEmployeeAdapter.this, holder.visitStartDateWork.getText().toString(), holder.visitStartTimeWork.getText().toString(), list.get(pos),pos,holder.checkBox, 1);
 
                     } else {
-                        passDataCheck = (PassDataCheck) visitLastDateFragment;
+                        passDataCheck = (PassDataCheck) visitLastDateEmployerToEmployeeFragment;
                         passDataCheck.sendDataCheck(activity, VisitLastDateEmployerToEmployeeAdapter.this, holder.visitStartDateWork.getText().toString(), holder.visitStartTimeWork.getText().toString(), list.get(pos), pos,holder.checkBox,0);
                     }
                 } else {
