@@ -123,12 +123,12 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
             buttonBuildConfirmListPdf.setVisibility(View.GONE);
             buttonBuildConfirmListExcel.setVisibility(View.GONE);
         }
-        horizontalScrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
-            }
-        });
+//        horizontalScrollView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
+//            }
+//        });
         textTitle.setText(userUpdate + " " + "مشاهده کارکرد کاربر");
         setVisitStart.setOnClickListener(this);
         setVisitEnd.setOnClickListener(this);

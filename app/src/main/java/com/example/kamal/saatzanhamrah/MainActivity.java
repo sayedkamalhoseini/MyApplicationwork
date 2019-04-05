@@ -2,6 +2,7 @@ package com.example.kamal.saatzanhamrah;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String urlGetEmail = "http://kamalroid.ir/get_email.php";
     private String urlGetUpdate = "http://kamalroid.ir/update_user_name.php";
     private ProgressBar progressBar;
-    private Button buttonSettings,buttonExitUpdate;
+    private Button buttonSettings, buttonExitUpdate;
     private String userUpdate;
 
     static final String TAG = "tag";
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
         relativeLayout = findViewById(R.id.main_layout);
-        userUpdate=Share.loadPref(MainActivity.this, "userKeyUpdate");
+        userUpdate = Share.loadPref(MainActivity.this, "userKeyUpdate");
         setSupportActionBar(toolbar);
 
         if (Share.loadPref(this, "count").equals("")) {
@@ -217,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         autoDateFragment = new AutoDateFragment();
         passData = (PassData) autoDateFragment;
-        passData.sendData(user, kind,userUpdate);
+        passData.sendData(user, kind, userUpdate);
         getSupportFragmentManager().beginTransaction().replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
         setupNavigationDrawer();
     }
@@ -244,22 +246,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.item_menuItems_visitDateMyWork:
                         fragment = new VisitLastDateFragment();
                         passData = (PassData) fragment;
-                        passData.sendData(user, kind,userUpdate);
+                        passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_addEmployeeToEmployer:
                         fragment = new AddEmployeeToEmployerFragment();
                         passData = (PassData) fragment;
-                        passData.sendData(user, kind,userUpdate);
+                        passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_visitWorkEmployee:
                         fragment = new VisitEmployeeToEmployerFragment();
                         passData = (PassData) fragment;
-                        passData.sendData(user, kind,userUpdate);
+                        passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_registerAutoTime:
                         fragment = new AutoDateFragment();
                         passData = (PassData) fragment;
-                        passData.sendData(user, kind,userUpdate);
+                        passData.sendData(user, kind, userUpdate);
                         break;
 
                     case R.id.item_menuItems_settings:
@@ -275,22 +277,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         alert.show();
 
 
-
                         user_update = custumView.findViewById(R.id.editText_update_user);
                         email_update = custumView.findViewById(R.id.editText_update_email);
                         progressBar = custumView.findViewById(R.id.progressBar_settings);
                         buttonSettings = custumView.findViewById(R.id.Button_settings);
                         buttonExitUpdate = custumView.findViewById(R.id.button_exit_update);
 
-                        getInfo(user_update, email_update, progressBar, buttonSettings,alert);
+                        getInfo(user_update, email_update, progressBar, buttonSettings, alert);
 
-                         break;
+                        break;
                     case R.id.item_menuItems_registerHandTime:
 
                         if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
                             fragment = new HandDateFragment();
                             passData = (PassData) fragment;
-                            passData.sendData(user, kind,userUpdate);
+                            passData.sendData(user, kind, userUpdate);
                             enableData = (EnableData) fragment;
                             enableData.sendEnable(mIsPremium);
                             break;
@@ -302,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.item_menuItems_visitEmployer:
                         fragment = new VisitEmployerToEmployeeFragment();
                         passData = (PassData) fragment;
-                        passData.sendData(user, kind,userUpdate);
+                        passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_exit:
                         Share.saveSharePref(MainActivity.this, "userKeyUpdate", "");
@@ -332,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public interface PassData {
-        public void sendData(String user, String kind,String userUpdate);
+        public void sendData(String user, String kind, String userUpdate);
     }
 
 
@@ -389,6 +390,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                super.onDrawerStateChanged(newState);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
             }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -447,7 +455,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressBar.setVisibility(View.GONE);
 
 
-
                     }
 
 
@@ -479,8 +486,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onClick(View v) {
-                final String user_update1 = user_update.getText().toString();
-                final String email_update1 = email_update.getText().toString();
+                final String user_update1 = user_update.getText().toString().trim();
+                final String email_update1 = email_update.getText().toString().trim();
                 if (email_update1.equals("")) {
                     Toast.makeText(MainActivity.this, "ایمیل را وارد کنید.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -495,12 +502,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this, "ویرایش شد.", Toast.LENGTH_LONG).show();
 
                                 progressBar.setVisibility(View.GONE);
-                            }
-                            else if(result.equals("this user there is")){
-                                Toast.makeText(MainActivity.this,getResources().getString(R.string.repeatUser), Toast.LENGTH_LONG).show();
+                            } else if (result.equals("this user there is")) {
+                                Toast.makeText(MainActivity.this, getResources().getString(R.string.repeatUser), Toast.LENGTH_LONG).show();
 
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(MainActivity.this, "تغییری ایجاد نشد.", Toast.LENGTH_LONG).show();
                             }
                             alert.cancel();
@@ -536,8 +541,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 alert.cancel();
             }
         });
-
-
 
 
     }

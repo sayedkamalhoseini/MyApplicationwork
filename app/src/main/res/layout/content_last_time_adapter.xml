@@ -9,6 +9,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginRight="8dp"
+    android:layoutDirection="rtl"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp">
 
@@ -20,13 +21,48 @@
         android:orientation="horizontal"
         android:weightSum="4.6">
 
-        <com.example.kamal.saatzanhamrah.CustomTextView
-            android:id="@+id/textView_contentLastTimeAdapter_sumDate"
+
+        <CheckBox
+            android:id="@+id/confirm_employer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.55"
+            android:checked="false"
+            android:gravity="center" />
+
+
+        <View
+            android:id="@+id/confirm_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.55"/>
+
+
+
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16sp" />
+            android:layout_weight="1.25"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <com.example.kamal.saatzanhamrah.CustomTextView
+                android:id="@+id/textView_contentLastTimeAdapter_startWorkDate"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp" />
+
+            <com.example.kamal.saatzanhamrah.CustomTextView
+                android:id="@+id/textView_contentLastTimeAdapter_startWorkTime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -54,44 +90,14 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <com.example.kamal.saatzanhamrah.CustomTextView
+            android:id="@+id/textView_contentLastTimeAdapter_sumDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.25"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp" />
 
-            <com.example.kamal.saatzanhamrah.CustomTextView
-                android:id="@+id/textView_contentLastTimeAdapter_startWorkDate"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="16sp" />
-
-            <com.example.kamal.saatzanhamrah.CustomTextView
-                android:id="@+id/textView_contentLastTimeAdapter_startWorkTime"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/confirm_view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.55"/>
-
-
-        <CheckBox
-            android:id="@+id/confirm_employer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.55"
-            android:checked="false"
-            android:gravity="center" />
 
 
     </LinearLayout>

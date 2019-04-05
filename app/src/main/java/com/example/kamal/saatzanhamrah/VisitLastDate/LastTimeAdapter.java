@@ -77,7 +77,7 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
                 }else if(!holder.checkBox.isChecked()){
                     holder.checkBox.setChecked(true);
                 }
-                Toast.makeText(activity, "توسط کارفرمای شما تایید کارکرد تغییر می کند", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "تایید کارکرد توسط کارفرمای شما تغییر می کند", Toast.LENGTH_LONG).show();
                }
         });
 //        holder.checkBox.setEnabled(false);

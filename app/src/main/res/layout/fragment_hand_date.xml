@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
                 android:weightSum="6">
 
 
@@ -39,7 +40,18 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
+                    android:layoutDirection="rtl"
+                    android:layout_gravity="start"
                     android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imageButton_time_setDateStart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="@color/white"
+                        android:src="@mipmap/ic_calender1" />
+
 
                     <EditText
                         android:id="@+id/editText_time_setDateStart"
@@ -50,13 +62,6 @@
                         android:focusableInTouchMode="false"
                         android:hint="تاریخ شروع کار" />
 
-                    <ImageButton
-                        android:id="@+id/imageButton_time_setDateStart"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="@color/white"
-                        android:src="@mipmap/ic_calender1" />
 
                 </LinearLayout>
 
@@ -70,13 +75,15 @@
                     android:orientation="horizontal"
                     android:weightSum="5">
 
-
                     <Spinner
-                        android:id="@+id/spinner_time_handTimeHourStart"
+                        android:id="@+id/spinner_time_handTimeMinuteStart"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.25"
                         android:focusableInTouchMode="false" />
+
+
+
 
                     <TextView
                         android:layout_width="0dp"
@@ -87,13 +94,15 @@
                         android:textColor="@color/black"
                         android:textSize="24sp" />
 
-
                     <Spinner
-                        android:id="@+id/spinner_time_handTimeMinuteStart"
+                        android:id="@+id/spinner_time_handTimeHourStart"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.25"
                         android:focusableInTouchMode="false" />
+
+
+
 
 
                 </LinearLayout>
@@ -106,7 +115,16 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
+                    android:layout_gravity="start"
                     android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imageButton_time_setDateEnd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="@color/white"
+                        android:src="@mipmap/ic_calender1" />
 
                     <EditText
                         android:id="@+id/editText_time_setDateEnd"
@@ -117,13 +135,7 @@
                         android:focusableInTouchMode="false"
                         android:hint="تاریخ پایان کار" />
 
-                    <ImageButton
-                        android:id="@+id/imageButton_time_setDateEnd"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="@color/white"
-                        android:src="@mipmap/ic_calender1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -136,13 +148,14 @@
                     android:orientation="horizontal"
                     android:weightSum="5">
 
-
                     <Spinner
-                        android:id="@+id/spinner_time_handTimeHourEnd"
+                        android:id="@+id/spinner_time_handTimeMinuteEnd"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.25"
+                        android:ems="10"
                         android:focusableInTouchMode="false" />
+
 
                     <TextView
                         android:layout_width="0dp"
@@ -153,14 +166,15 @@
                         android:textColor="@color/black"
                         android:textSize="24sp" />
 
-
                     <Spinner
-                        android:id="@+id/spinner_time_handTimeMinuteEnd"
+                        android:id="@+id/spinner_time_handTimeHourEnd"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.25"
-                        android:ems="10"
                         android:focusableInTouchMode="false" />
+
+
+
 
 
                 </LinearLayout>
@@ -207,6 +221,8 @@
                         android:id="@+id/button_time_registerHandDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:textColor="@color/white"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="1dp"
                         android:text="ثبت زمان" />
