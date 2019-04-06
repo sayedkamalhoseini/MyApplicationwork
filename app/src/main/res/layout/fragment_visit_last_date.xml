@@ -146,11 +146,6 @@
 
 
 
-
-
-
-
-
             </LinearLayout>
 
         </HorizontalScrollView>
@@ -158,10 +153,10 @@
 
         <com.example.kamal.saatzanhamrah.CustomTextView
             android:id="@+id/textView_visitLastDate_delete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:visibility="gone"
-            android:layout_centerHorizontal="true"
             android:textColor="@color/colorAccent"
             android:layout_below="@id/scrollView_visitLastDate_horizontal"
             android:text="@string/messageDelete" />

@@ -122,12 +122,13 @@
                     <Spinner
                         android:id="@+id/spinner_register_employ"
                         style="@style/spinner_style"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginRight="25dp"
                         android:gravity="start"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/textInput_register_emailEditText"
 
@@ -163,6 +164,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:layout_marginBottom="32dp"
+                        android:layout_marginRight="25dp"
                         android:gravity="center"
                         android:text="@string/forgotMessageSignUp"
                         android:textColor="@color/colorAccent"

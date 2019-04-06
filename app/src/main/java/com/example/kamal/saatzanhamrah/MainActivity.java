@@ -64,8 +64,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private PassData passData;
     private EnableData enableData;
-    private Fragment autoDateFragment, visitLastDateFragment, addEmployeeToEmployerFragment,
-            visitEmployeeToEmployerFragment, handDateFragment, visitEmployerToEmployee, aboutUsFragment;
+    private Fragment autoDateFragment;
+    private EditText explain;
     private String user, kind;
     private Toolbar toolbar;
     private ImageButton imageButton;
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.navigation_drawer);
 
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
+        explain = findViewById(R.id.editText_time_explain);
         relativeLayout = findViewById(R.id.main_layout);
         userUpdate = Share.loadPref(MainActivity.this, "userKeyUpdate");
         setSupportActionBar(toolbar);
@@ -384,6 +385,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     new Handler().post(runnable);
                     runnable = null;
                 }
+
             }
 
             @Override
@@ -505,8 +507,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } else if (result.equals("this user there is")) {
                                 Toast.makeText(MainActivity.this, getResources().getString(R.string.repeatUser), Toast.LENGTH_LONG).show();
 
-                            } else {
+                            } else if (result.equals("noDone")) {
                                 Toast.makeText(MainActivity.this, "تغییری ایجاد نشد.", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(MainActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                             }
                             alert.cancel();
                         }

@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR"/>
   <!--  <uses-permission android:name="ir.mservices.market.BILLING" />-->
 
@@ -32,7 +34,10 @@
         android:icon="@mipmap/ic_launcher_logo3"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+
         <activity android:name="com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
