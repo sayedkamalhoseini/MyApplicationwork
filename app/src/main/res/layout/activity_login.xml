@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     android:background="@color/white"
     tools:context=".LoginEmploy.LoginActivity">
 
@@ -176,6 +177,7 @@
                                 android:layout_weight="1"
                                 android:checked="true"
                                 android:gravity="end|center"
+                                android:textDirection="ltr"
                                 android:text="@string/save_password" />
 
 
@@ -184,9 +186,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:textDirection="ltr"
                                 android:background="@color/whiteTransparent"
                                 android:gravity="start|center"
                                 android:text="@string/forgot" />
+
+
+
+
 
                         </LinearLayout>
 

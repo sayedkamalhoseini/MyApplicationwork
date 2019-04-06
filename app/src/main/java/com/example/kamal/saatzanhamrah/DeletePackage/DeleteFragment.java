@@ -91,7 +91,7 @@ public class DeleteFragment extends Fragment implements View.OnClickListener , M
     }
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user=user;
         this.kind=kind;
     }

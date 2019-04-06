@@ -62,7 +62,7 @@ public class VisitEmployerToEmployeeFragment extends Fragment implements MainAct
     }
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user=user;
     }
 }

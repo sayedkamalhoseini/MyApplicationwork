@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
+import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 
@@ -43,7 +44,16 @@ public class RegisterModel {
                 switch (result) {
                     case "done":
                         Toast.makeText(activity, activity.getResources().getString(R.string.registerSuccessfully), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(activity, LoginActivity.class);
+                        Share.saveSharePref(activity, "userKey", username);
+                        Share.saveSharePref(activity, "userKeyUpdate", username);
+                        Share.saveSharePref(activity, "passKey", password);
+                        Share.saveSharePref(activity, "kindKey", kind);
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        intent.putExtra("user", username);
+                        intent.putExtra("kind", kind);
+                        activity.startActivity(intent);
+                        activity.finish();
+                        progressBar.setVisibility(View.GONE);
                         activity.startActivity(intent);
                         activity.finish();
                         break;

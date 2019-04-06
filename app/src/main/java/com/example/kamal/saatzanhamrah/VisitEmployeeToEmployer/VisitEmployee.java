@@ -6,6 +6,8 @@ package com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer;
 
 public class VisitEmployee {
     private String userNameEmployee;
+    private String userNameEmployeeMain;
+
 
     public String getUserNameEmployee() {
         return userNameEmployee;
@@ -13,5 +15,13 @@ public class VisitEmployee {
 
     public void setUserNameEmployee(String userNameEmployee) {
         this.userNameEmployee = userNameEmployee;
+    }
+
+    public String getUserNameEmployeeMain() {
+        return userNameEmployeeMain;
+    }
+
+    public void setUserNameEmployeeMain(String userNameEmployeeMain) {
+        this.userNameEmployeeMain = userNameEmployeeMain;
     }
 }

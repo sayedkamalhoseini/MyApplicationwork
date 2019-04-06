@@ -34,7 +34,7 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
     CheckBox checkBox;
     Spinner spinner;
     private ProgressBar progressBar;
-    String url = "http://www.kamalroid.ir/login.php";
+    String url = "http://www.kamalroid.ir/login_20190329.php";
     int selectionSpinner = 0;
     String kind="";
     private Toolbar toolbar;
@@ -58,6 +58,9 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
         if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
+            if(Share.loadPref(activity,"userKeyUpdate")==""){
+                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
+            }
             Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtra("user", Share.loadPref(activity, "userKey"));
             intent.putExtra("kind", Share.loadPref(activity, "kindKey"));

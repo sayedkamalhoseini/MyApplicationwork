@@ -48,8 +48,10 @@ public class VisitEmployeeModel {
                     for(int i=0;i<jsonArray.length();i++){
                         visitEmployee=new VisitEmployee();
                         JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                        String userNameEmployee=jsonObject1.getString("username_employee");
+                        String userNameEmployee=jsonObject1.getString("update_employee");
+                        String userNameEmployeeMain=jsonObject1.getString("username_employee");
                         visitEmployee.setUserNameEmployee(userNameEmployee);
+                        visitEmployee.setUserNameEmployeeMain(userNameEmployeeMain);
                         list.add(visitEmployee);
                     }
                     presenter.passListVisitEmployeePresenter(list);

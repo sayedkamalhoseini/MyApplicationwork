@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private Button buttonStart;
     private String user, kind, getUser, getKind;
     TimePresenter presenter;
-    LinearLayout linearLayoutHandDate, linearLayoutTitle;
+    LinearLayout linearLayoutHandDate, linearLayoutTitle,linearLayoutMessageStart;
     RelativeLayout relativeLayoutAutoDate;
     private AutoTimeAdapter adapter;
     private RecyclerView recyclerView;
@@ -53,7 +54,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     Toolbar toolbar;
     Animation slide_left_in;
     Animation slide_right_out;
-    private TextView textUserName, textKind, textStatus, textLastStartDate, textLastStartTime, textTitle;
+    private TextView textLastStartDate, textLastStartTime, textTitle;
     private ProgressBar progressBar;
     private CoordinatorLayout coordinatorLayout;
     private List<LastTime> lastTimeList = new ArrayList<>();
@@ -62,6 +63,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private boolean mIsPremium;
     private TextView problemTextView;
     private TextInputLayout textInputLayoutExplain;
+    private NavigationView navigationView;
 
 
     @Override
@@ -88,9 +90,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         buttonStart = (Button) view.findViewById(R.id.Button_time_startWork);
         linearLayoutHandDate = (LinearLayout) view.findViewById(R.id.linear_time_handDate);
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        textUserName = (TextView) view.findViewById(R.id.textView_autoTime_userName);
-        textKind = (TextView) view.findViewById(R.id.textView_autoTime_kind);
-        textStatus = (TextView) view.findViewById(R.id.textView_autoTime_status);
         textLastStartDate = (TextView) view.findViewById(R.id.textView_autoTime_startDate);
         textLastStartTime = (TextView) view.findViewById(R.id.textView_autoTime_startTime);
         linearLayoutTitle = (LinearLayout) view.findViewById(R.id.linear_autoTime_titleLastTime);
@@ -98,33 +97,26 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         editText = (EditText) view.findViewById(R.id.editText_time_explain);
         problemTextView = (TextView) view.findViewById(R.id.problemExplain);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
+        navigationView=getActivity().findViewById(R.id.navigation_view);
         textInputLayoutExplain= (TextInputLayout) view.findViewById(R.id.textInput_time_explain);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_autoTime_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_autotime_ListVisit);
+        linearLayoutMessageStart=view.findViewById(R.id.linear_autoTime_messageStart);
         textTitle.setText(getString(R.string.autoDate));
-        textUserName.setText(user);
         presenter.sendProblem(problemUrl);
-        if (kind.equals("employee"))
-            textKind.setText("کارگر/کارمند");
-        else if (kind.equals("employer"))
-            textKind.setText("کارفرما");
 
         if (loadPref(getActivity(), "start" + user).equals("false")) {
             recyclerView.setVisibility(View.GONE);
             linearLayoutTitle.setVisibility(View.GONE);
             editText.setVisibility(View.VISIBLE);
             toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
+            navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
             buttonStart.setText(getString(R.string.endDate));
             textInputLayoutExplain.setVisibility(View.VISIBLE);
             buttonStart.setBackgroundResource(R.drawable.yellowcircle);
-            textUserName.setText(user);
-            if (kind.equals("employee"))
-                textKind.setText("کارگر/کارمند");
-            else if (kind.equals("employer"))
-                textKind.setText("کارفرما");
-            textStatus.setText(getString(R.string.working));
             lastTime = new LastTime();
             lastTimeList = new ArrayList<>();
+            linearLayoutMessageStart.setVisibility(View.VISIBLE);
             textLastStartDate.setText(Share.loadPref(getActivity(), "startLastDate" + user));
             textLastStartTime.setText(Share.loadPref(getActivity(), "startLastTime" + user));
 
@@ -133,18 +125,14 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
             linearLayoutTitle.setVisibility(View.GONE);
             editText.setVisibility(View.GONE);
             toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
+            navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
             buttonStart.setText(getString(R.string.startDate));
             buttonStart.setBackgroundResource(R.drawable.bluecircle);
-            textUserName.setText(user);
-            if (kind.equals("employee"))
-                textKind.setText("کارگر/کارمند");
-            else if (kind.equals("employer"))
-                textKind.setText("کارفرما");
-            textStatus.setText(getString(R.string.resting));
             lastTime = new LastTime();
             lastTimeList = new ArrayList<>();
             textLastStartDate.setText("");
             textLastStartTime.setText("");
+            linearLayoutMessageStart.setVisibility(View.INVISIBLE);
             lastTime.setStartWorkDate(Share.loadPref(getActivity(), "startLastDate" + user));
             lastTime.setStartWorkTime(Share.loadPref(getActivity(), "startLastTime" + user));
         } else {
@@ -188,6 +176,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void startRegisterTime(String result) {
         switch (result) {
             case "done":
+                linearLayoutMessageStart.setVisibility(View.VISIBLE);
                 Share.saveSharePref(getContext(), "start" + user, "false");
                 Share.saveSharePref(getContext(), "end" + user, "true");
                 recyclerView.setVisibility(View.GONE);
@@ -203,8 +192,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                         buttonStart.setText(getString(R.string.endDate));
                         buttonStart.setEnabled(true);
                         buttonStart.setBackgroundResource(R.drawable.yellowcircle);
-                        textStatus.setText(getString(R.string.working));
                         toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.yellow));
+                        navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.yellow));
 
                     }
                 }, 300);
@@ -247,6 +236,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void endRegisterTime(String result) {
         switch (result) {
             case "done":
+                linearLayoutMessageStart.setVisibility(View.INVISIBLE);
                 Share.saveSharePref(getContext(), "end" + user, "false");
                 Share.saveSharePref(getContext(), "start" + user, "true");
                 Share.showSnackBar(getActivity(), coordinatorLayout, getString(R.string.endRegister));
@@ -271,8 +261,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                         buttonStart.setBackgroundResource(R.drawable.bluecircle);
                         buttonStart.setEnabled(true);
                         buttonStart.setText(getString(R.string.startDate));
-                        textStatus.setText(getString(R.string.resting));
                         toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_500));
+                        navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_500));
                         Share.saveSharePref(getActivity(), "startLastDate", "");
                         Share.saveSharePref(getActivity(), "startLastTime", "");
                     }
@@ -324,7 +314,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
 
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user = user;
         this.kind = kind;
     }

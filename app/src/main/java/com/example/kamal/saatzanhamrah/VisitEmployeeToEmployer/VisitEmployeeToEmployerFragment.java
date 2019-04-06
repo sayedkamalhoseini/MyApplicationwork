@@ -26,6 +26,7 @@ public class VisitEmployeeToEmployerFragment extends Fragment implements MainAct
     private String url="http://kamalroid.ir/get_employee_to_employer1.php";
     private String user;
     private ProgressBar progressbar;
+    private String userUpdate;
 
 
     @Override
@@ -59,7 +60,8 @@ public class VisitEmployeeToEmployerFragment extends Fragment implements MainAct
     }
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user=user;
+        this.userUpdate=userUpdate;
     }
 }

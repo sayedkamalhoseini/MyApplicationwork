@@ -1,5 +1,6 @@
 package com.example.kamal.saatzanhamrah.RegisterEmploy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
+import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 
@@ -31,10 +33,10 @@ import java.util.Map;
 public class RegisterView extends FrameLayout implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     RegisterPresenter presenter;
     Spinner spinnerEmploy;
-    EditText  editusername, editpassword, editEmail;
-    Button registerButton;
+    EditText editusername, editpassword, editEmail;
+    Button registerButton, loginPage;
     Map<String, String> params;
-    Context activity;
+    Activity activity;
     String employeeUrl = "http://kamalroid.ir/register.php";
     private String selectKind, kind = "";
     private Toolbar toolbar;
@@ -49,6 +51,7 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
         editEmail = (EditText) view.findViewById(R.id.emailEditText);
         spinnerEmploy = (Spinner) view.findViewById(R.id.spinner_register_employ);
         registerButton = (Button) view.findViewById(R.id.registerButton);
+        loginPage = (Button) view.findViewById(R.id.button_login_page);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar_register_loading);
         editusername.requestFocus();
@@ -57,8 +60,19 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
         Share.spinnerAdapter(activity, spinnerEmploy, R.array.arrayemploy);
+        if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
+            if(Share.loadPref(activity,"userKeyUpdate")==""){
+                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
+            }
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.putExtra("user", Share.loadPref(activity, "userKey"));
+            intent.putExtra("kind", Share.loadPref(activity, "kindKey"));
+            activity.startActivity(intent);
+            activity.finish();
+        }
         spinnerEmploy.setOnItemSelectedListener(this);
         registerButton.setOnClickListener(this);
+        loginPage.setOnClickListener(this);
     }
 
     private void createParams() {
@@ -74,37 +88,47 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
 
     @Override
     public void onClick(View v) {
-        switch (kind) {
-            case "":
-                Toast.makeText(activity, "لطفا نوع شغل تان را انتخاب کنید.", Toast.LENGTH_LONG).show();
-                break;
-            case "employer":
-                if (Share.check(getContext())) {
-                    registerButton.setEnabled(false);
-                    progressBar.setVisibility(View.VISIBLE);
-                    createParams();
-                    params.put("kind", kind);
-                    presenter.passParams(params, employeeUrl, progressBar,registerButton);
-                    break;
-                } else {
-                    Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
-                    break;
-                }
-            case "employee":
-                if (Share.check(getContext())) {
-                    registerButton.setEnabled(false);
-                    progressBar.setVisibility(View.VISIBLE);
-                    createParams();
-                    params.put("kind", kind);
-                    presenter.passParams(params, employeeUrl, progressBar, registerButton);
-                    break;
-                }
-                else {
-                    Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
-                    break;
-                }
+        switch (v.getId()) {
 
+            case R.id.registerButton:
+
+                switch (kind) {
+                    case "":
+                        Toast.makeText(activity, "لطفا نوع شغل تان را انتخاب کنید.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "employer":
+                        if (Share.check(getContext())) {
+                            registerButton.setEnabled(false);
+                            progressBar.setVisibility(View.VISIBLE);
+                            createParams();
+                            params.put("kind", kind);
+                            presenter.passParams(params, employeeUrl, progressBar, registerButton);
+                            break;
+                        } else {
+                            Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                    case "employee":
+                        if (Share.check(getContext())) {
+                            registerButton.setEnabled(false);
+                            progressBar.setVisibility(View.VISIBLE);
+                            createParams();
+                            params.put("kind", kind);
+                            presenter.passParams(params, employeeUrl, progressBar, registerButton);
+                            break;
+                        } else {
+                            Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                }
+                break;
+            case R.id.button_login_page:
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
+                break;
         }
+
     }
 
     @Override
@@ -134,7 +158,7 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
             case "done":
                 registerButton.setEnabled(true);
                 Toast.makeText(activity, activity.getResources().getString(R.string.registerSuccessfully), Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(activity, LoginActivity.class);
+                Intent intent = new Intent(activity, LoginActivity.class);
                 activity.startActivity(intent);
                 break;
             case "fillfield":

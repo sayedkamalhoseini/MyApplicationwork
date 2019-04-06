@@ -236,7 +236,7 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendData(String user, String kind) {
+    public void sendData(String user, String kind,String userUpdate) {
         this.user = user;
         this.kind = kind;
 

@@ -10,15 +10,18 @@
         android:id="@+id/linear_visitEmployee_titleListVisit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="1">
 
 
-        <com.example.kamal.saatzanhamrah.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+      <com.example.kamal.saatzanhamrah.CustomTextView
+            android:id="@+id/message2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:text="نام کاربری کارفرما که می تواند کارکرد شما را ببیند."
+            android:textColor="@color/colorAccent"
+            android:text="می توانید از قسمت اضافه کردن کارفرما نام کاربری کارفرما را اضافه کنید تا کارکرد شما را ببیند."
             android:textSize="16sp" />
 
     </LinearLayout>
