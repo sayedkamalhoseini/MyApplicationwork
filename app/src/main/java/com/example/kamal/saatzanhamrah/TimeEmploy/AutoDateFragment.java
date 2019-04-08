@@ -66,6 +66,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private NavigationView navigationView;
 
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -104,6 +105,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         linearLayoutMessageStart=view.findViewById(R.id.linear_autoTime_messageStart);
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
+
+
 
         if (loadPref(getActivity(), "start" + user).equals("false")) {
             recyclerView.setVisibility(View.GONE);
@@ -327,6 +330,10 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void resultProblem(String result) {
         problemTextView.setText(result);
         recyclerView.setVisibility(View.GONE);
+    }
+
+    public interface PassDataToActivity {
+        public void sendDataToActivity(EditText editText);
     }
 }
 

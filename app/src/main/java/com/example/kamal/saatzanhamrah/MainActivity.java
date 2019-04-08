@@ -397,9 +397,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            }
+                          }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
