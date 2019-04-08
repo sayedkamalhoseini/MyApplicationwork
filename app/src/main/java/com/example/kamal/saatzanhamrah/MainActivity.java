@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     private Button buttonSettings, buttonExitUpdate;
     private String userUpdate;
+    private FrameLayout frameLayout;
 
     static final String TAG = "tag";
 
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.navigation_drawer);
 
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
+        frameLayout=findViewById(R.id.frameLayout_main_containerFragment);
         explain = findViewById(R.id.editText_time_explain);
         relativeLayout = findViewById(R.id.main_layout);
         userUpdate = Share.loadPref(MainActivity.this, "userKeyUpdate");
@@ -392,12 +395,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(autoDateFragment!=null){
+                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(frameLayout.getWindowToken(), 0);}
+
+                    }
+                },100);
+
             }
 
             @Override
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
-                          }
+                 }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 

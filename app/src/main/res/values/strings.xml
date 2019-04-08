@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ساعت زن همراه</string>
-    <string name="version">نسخه 2.8.7 </string>
+    <string name="version">نسخه 2.8.8 </string>
     <string name="codeMaiket">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwC9dmfRXNp60+JUoZWhCOSa5EjS/u12kOs6hyuBTOcxQ/XUlTDk7V5uDxGAIxXOHmCwiHRuEsrFxfMR39PPQnu535ShSU1GvYp4B/ECskiaWtu0J8NkG/NDU8FYMgtZJ6ALOfoYfJJ3ptXjb9zPycWoeriyX5tqP29siFtpEz7M1sKnVRUn10O4j8VNQfDcYLSbv3G0x3OVRey9OXbVylkV3pRJ2oQ8d0rhPD6ZvQ0CAwEAAQ==</string>
     <string name="codeBazar">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCeUibvsFfja0PU0iGrbvlZ3CixYSGBj2qW/kJ/hI6qlWJdfQ4Z2VSUidtEmGJ5iD5lS7zTAeE1cGv8McYkchtatU6+IHRP/r94nEivYeKEwewv9eWTbCLFiV6DjQZ11rU3h57yKPKqtzCOiI9ZfnL5JL+PEeeaV+d/G+yBLZaNdwIDAQAB</string>
     <string name="producer">تهیه کننده و برنامه نویس : سید کمال حسینی</string>
