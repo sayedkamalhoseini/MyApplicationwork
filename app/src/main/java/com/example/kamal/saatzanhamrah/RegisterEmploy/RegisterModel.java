@@ -1,6 +1,9 @@
 package com.example.kamal.saatzanhamrah.RegisterEmploy;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -10,9 +13,12 @@ import com.android.volley.Request;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
+import com.example.kamal.saatzanhamrah.RoomPackage.Employee;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -105,4 +111,47 @@ public class RegisterModel {
     public void setPresenter(RegisterPresenter registerPresenter) {
         this.presenter = registerPresenter;
     }
+
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+
+        private final AppDatabase mDb;
+
+        PopulateDbAsync(AppDatabase db) {
+            mDb = db;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            populateWithTestData(mDb);
+            return null;
+        }
+
+    }
+
+    public static void populateAsync(@NonNull final AppDatabase db) {
+        PopulateDbAsync task = new PopulateDbAsync(db);
+        task.execute();
+    }
+
+//    public static void populateSync(@NonNull final AppDatabase db) {
+//        populateWithTestData(db);
+//    }
+
+    private static Employee addUser(final AppDatabase db, Employee employee) {
+        db.userDao().insertAll(employee);
+        return employee;
+    }
+
+    private static void populateWithTestData(AppDatabase db,String username,String password,String update_username,String email) {
+        Employee employee = new Employee();
+        employee.setUsername(username);
+        employee.setUpdate_username(update_username);
+        employee.setPassword(password);
+        employee.setEmail(email);
+        addUser(db, employee);
+
+        List<Employee> userList = db.userDao().getAll();
+        Log.d(DatabaseInitializer.TAG, "Rows Count: " + userList.size());
+    }
+
 }
