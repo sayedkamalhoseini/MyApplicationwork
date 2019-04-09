@@ -55,12 +55,12 @@ public class RegisterModel {
                         Share.saveSharePref(activity, "userKeyUpdate", username);
                         Share.saveSharePref(activity, "passKey", password);
                         Share.saveSharePref(activity, "kindKey", kind);
-                        DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(activity),username,password,username,email);
                         Intent intent = new Intent(activity, MainActivity.class);
                         intent.putExtra("user", username);
                         intent.putExtra("kind", kind);
                         activity.startActivity(intent);
                         activity.finish();
+                        DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(activity),username,password,username,email);
                         progressBar.setVisibility(View.GONE);
                         activity.startActivity(intent);
                         activity.finish();

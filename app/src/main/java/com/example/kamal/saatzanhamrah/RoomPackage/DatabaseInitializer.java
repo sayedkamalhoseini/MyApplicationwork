@@ -25,7 +25,7 @@ import java.util.List;
     }
 
         private static Employee addUser(final AppDatabase db, Employee employee) {
-            db.employeeDao().insertAll(employee);
+            db.employeeDao().insert(employee);
             return employee;
         }
 

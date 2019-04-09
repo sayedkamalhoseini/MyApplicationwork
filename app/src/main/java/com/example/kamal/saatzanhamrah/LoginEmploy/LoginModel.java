@@ -72,7 +72,6 @@ public class LoginModel {
                             Share.saveSharePref(activity, "userKeyUpdate", user);
                             Share.saveSharePref(activity, "passKey", pass);
                             Share.saveSharePref(activity, "kindKey", kind);
-                            DatabaseInitializer1.populateAsync(AppDatabase.getAppDatabase(activity),userNameMain,pass);
                             Intent intent = new Intent(activity, MainActivity.class);
                             intent.putExtra("user", userNameMain);
                             intent.putExtra("kind", kind);

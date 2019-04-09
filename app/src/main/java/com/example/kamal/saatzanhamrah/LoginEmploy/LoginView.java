@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
+import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer1;
 import com.example.kamal.saatzanhamrah.Share;
 
 /**
@@ -95,6 +97,8 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
                     presenter.loginPresenter(txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), kind, url, progressBar, btnLogin);
                     break;
                 } else {
+                    DatabaseInitializer1.populateAsync(AppDatabase.getAppDatabase(activity),txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(),activity,progressBar,btnLogin);
+
                     Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
                     break;
                 }

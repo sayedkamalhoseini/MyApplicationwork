@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
+import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.HashMap;
@@ -34,6 +36,7 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
     RegisterPresenter presenter;
     Spinner spinnerEmploy;
     EditText editusername, editpassword, editEmail;
+    String username,password,email;
     Button registerButton, loginPage;
     Map<String, String> params;
     Activity activity;
@@ -76,10 +79,13 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
     }
 
     private void createParams() {
+        username=editusername.getText().toString().trim();
+        password=editpassword.getText().toString().trim();
+        email=editEmail.getText().toString().trim();
         params = new HashMap<>();
-        params.put("username", editusername.getText().toString().trim());
-        params.put("password", editpassword.getText().toString().trim());
-        params.put("email", editEmail.getText().toString().trim());
+        params.put("username", username);
+        params.put("password", password);
+        params.put("email", email);
     }
 
     public void setPresenter(RegisterPresenter presenter) {
