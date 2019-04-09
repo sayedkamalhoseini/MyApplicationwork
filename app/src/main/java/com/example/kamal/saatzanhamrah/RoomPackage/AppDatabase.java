@@ -1,5 +1,6 @@
 package com.example.kamal.saatzanhamrah.RoomPackage;
 
+import android.app.Activity;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
@@ -13,9 +14,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
-    public abstract EmployeeDao userDao();
+    public abstract EmployeeDao employeeDao();
 
-    public static AppDatabase getAppDatabase(Context context) {
+    public static AppDatabase getAppDatabase(Activity context) {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "user-database")

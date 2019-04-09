@@ -11,6 +11,9 @@ import com.example.kamal.saatzanhamrah.ForgotPackage.ForgotActivity;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity;
+import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
+import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer;
+import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer1;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 
@@ -69,6 +72,7 @@ public class LoginModel {
                             Share.saveSharePref(activity, "userKeyUpdate", user);
                             Share.saveSharePref(activity, "passKey", pass);
                             Share.saveSharePref(activity, "kindKey", kind);
+                            DatabaseInitializer1.populateAsync(AppDatabase.getAppDatabase(activity),userNameMain,pass);
                             Intent intent = new Intent(activity, MainActivity.class);
                             intent.putExtra("user", userNameMain);
                             intent.putExtra("kind", kind);
