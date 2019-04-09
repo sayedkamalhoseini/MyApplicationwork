@@ -502,7 +502,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 final String user_update1 = user_update.getText().toString().trim();
                 final String email_update1 = email_update.getText().toString().trim();
-                if (email_update1.equals("")) {
+                if (user_update1.equals("")) {
+                    Toast.makeText(MainActivity.this, "نام کاربری را وارد کنید.", Toast.LENGTH_SHORT).show();
+                }else if (email_update1.equals("")) {
                     Toast.makeText(MainActivity.this, "ایمیل را وارد کنید.", Toast.LENGTH_SHORT).show();
                 } else {
 
