@@ -1,11 +1,11 @@
-package com.example.kamal.saatzanhamrah.RoomPackage;
+package com.example.kamal.saatzanhamrah.RoomPackage_Employe;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "employee")
-public class Employee {
+public class Employe {
     public int getId() {
         return id;
     }
@@ -58,7 +58,17 @@ public class Employee {
     @ColumnInfo(name = "pass")
     private String password;
 
-  @ColumnInfo(name = "email")
+    @ColumnInfo(name = "email")
     private String email;
 
+    @ColumnInfo(name = "kind")
+    private String kind;
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
 }

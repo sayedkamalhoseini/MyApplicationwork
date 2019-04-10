@@ -1,7 +1,6 @@
 package com.example.kamal.saatzanhamrah.RegisterEmploy;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -14,15 +13,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
-import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.HashMap;

@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.content.Context;
 
-import com.example.kamal.saatzanhamrah.RoomPackage.Employee;
-import com.example.kamal.saatzanhamrah.RoomPackage.EmployeeDao;
+import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Employe;
+import com.example.kamal.saatzanhamrah.RoomPackage_Employe.EmployeeDao;
+import com.example.kamal.saatzanhamrah.RoomPackage_Employe.TimeDao;
 
-@Database(entities = {Employee.class}, version = 1)
+
+@Database(entities = {Employe.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract EmployeeDao employeeDao();
+  public abstract TimeDao timeDao();
+
 
     public static AppDatabase getAppDatabase(Activity context) {
         if (INSTANCE == null) {

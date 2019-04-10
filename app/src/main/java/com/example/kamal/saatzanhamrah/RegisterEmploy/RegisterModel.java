@@ -1,25 +1,18 @@
 package com.example.kamal.saatzanhamrah.RegisterEmploy;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer;
-import com.example.kamal.saatzanhamrah.RoomPackage.Employee;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,7 +53,7 @@ public class RegisterModel {
                         intent.putExtra("kind", kind);
                         activity.startActivity(intent);
                         activity.finish();
-                        DatabaseInitializer.populateAsync(AppDatabase.getAppDatabase(activity),username,password,username,email);
+                        DatabaseInitializer_Register.populateAsync(AppDatabase.getAppDatabase(activity),username,password,username,email,kind);
                         progressBar.setVisibility(View.GONE);
                         activity.startActivity(intent);
                         activity.finish();

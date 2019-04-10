@@ -12,8 +12,6 @@ import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity;
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer;
-import com.example.kamal.saatzanhamrah.RoomPackage.DatabaseInitializer1;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 
@@ -106,6 +104,7 @@ public class LoginModel {
 
             @Override
             public void onError(String error) {
+                DatabaseInitializer_Login.populateAsync(AppDatabase.getAppDatabase(activity),user, pass,activity,progressBar,btnLogin,kind);
                 Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
                 btnLogin.setEnabled(true);

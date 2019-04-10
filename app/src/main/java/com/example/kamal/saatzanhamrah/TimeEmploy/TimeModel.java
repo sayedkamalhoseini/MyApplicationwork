@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
 
@@ -49,12 +50,17 @@ public class TimeModel {
                         lastTimeList = new ArrayList<>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            int token = jsonObject1.getInt("token");
+                            String token_delete = jsonObject1.getString("token_delete");
                             String startDate = jsonObject1.getString("start_date");
                             String startTime = jsonObject1.getString("start_time");
+                            String start_date_miladi = jsonObject1.getString("start_date_miladi");
                             textLastStartDate.setText(startDate);
                             textLastStartTime.setText(startTime);
                             Share.saveSharePref(activity, "startLastDate" + user, startDate);
                             Share.saveSharePref(activity, "startLastTime" + user, startTime);
+                            Share.saveSharePref(activity, "tokenDelete" + user, token_delete);
+                            DatabaseInitializer_Time_Start.populateAsync(AppDatabase.getAppDatabase(activity),user,token,token_delete,startDate,startTime,start_date_miladi,kind);
                         }
                         presenter.messageStart(success);
                         progressBar.setVisibility(View.GONE);
@@ -104,6 +110,7 @@ public class TimeModel {
                             String endLastDate = jsonObject1.getString("end_date");
                             String endLastTime = jsonObject1.getString("end_time");
                             String _workTime = jsonObject1.getString("work_time");
+                            String explains = jsonObject1.getString("explains");
                             if (!_workTime.equals("null")) {
                                 int workTime = Integer.parseInt(_workTime);
                                 String _workTimeHour = workTime / 3600 + "";
@@ -117,11 +124,12 @@ public class TimeModel {
                             lastTime.setEndWorkTime(endLastTime);
                             lastTime.setWorkTime(_workTime);
                             lastTimeList.add(lastTime);
+                            String token_delete=Share.loadPref(activity, "tokenDelete" + user);
+                            DatabaseInitializer_Time_End.populateAsync(AppDatabase.getAppDatabase(activity),user,endLastDate,endLastTime,_workTime,explains,token_delete);
                         }
                         presenter.messageEnd(success);
                         presenter.passListPresenter(lastTimeList);
                         progressBar.setVisibility(View.GONE);
-
 
                     }
                 } catch (JSONException e) {
