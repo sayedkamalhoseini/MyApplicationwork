@@ -36,7 +36,7 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
     private ProgressBar progressBar;
     String url = "http://www.kamalroid.ir/login_20190329.php";
     int selectionSpinner = 0;
-    String kind="";
+    String kind = "";
     private Toolbar toolbar;
 
 
@@ -58,8 +58,8 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
         if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
-            if(Share.loadPref(activity,"userKeyUpdate")==""){
-                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
+            if (Share.loadPref(activity, "userKeyUpdate") == "") {
+                Share.saveSharePref(activity, "userKeyUpdate", Share.loadPref(activity, "userKey"));
             }
             Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtra("user", Share.loadPref(activity, "userKey"));
@@ -86,16 +86,22 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
                 break;
             case R.id.button_login_signIn:
                 if (Share.check(getContext())) {
-                    if(kind.equals("")){
+                    String user = txtEdituser.getText().toString().trim();
+                    String pass = txtEditpassword.getText().toString().trim();
+                    if (user.equals("") || pass.equals("")) {
+                        Toast.makeText(activity, "لطفا نام کاربری و رمز عبور را وارد کنید.", Toast.LENGTH_LONG).show();
+                        break;
+                    } else if (kind.equals("")) {
                         Toast.makeText(activity, "لطفا نوع شغل تان را انتخاب کنید.", Toast.LENGTH_LONG).show();
-                        return;
+                        break;
+                    } else {
+                        btnLogin.setEnabled(false);
+                        progressBar.setVisibility(View.VISIBLE);
+                        presenter.loginPresenter(txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), kind, url, progressBar, btnLogin);
+                        break;
                     }
-                    btnLogin.setEnabled(false);
-                    progressBar.setVisibility(View.VISIBLE);
-                    presenter.loginPresenter(txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), kind, url, progressBar, btnLogin);
-                    break;
                 } else {
-                    DatabaseInitializer_Login.populateAsync(AppDatabase.getAppDatabase(activity),txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(),activity,progressBar,btnLogin,kind);
+                    DatabaseInitializer_Login.populateAsync(AppDatabase.getAppDatabase(activity), txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), activity, progressBar, btnLogin, kind);
 
                     Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
                     break;

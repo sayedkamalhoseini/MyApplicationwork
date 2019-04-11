@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
@@ -27,11 +28,11 @@ public class DatabaseInitializer_Login {
     }
 
 
-    private static Employe populateWithTestData(AppDatabase db, String update_username, String password) {
+    private static Employe populateWithTestData(AppDatabase db, String update_username, String password,String kind) {
         Employe employe = new Employe();
 
 
-        employe = db.employeeDao().findEmployee(update_username, password);
+        employe = db.employeeDao().findEmployee(update_username, password,kind);
 
         if (employe != null)
             return employe;
@@ -60,7 +61,7 @@ public class DatabaseInitializer_Login {
 
         @Override
         protected Employe doInBackground(String... strings) {
-            return  populateWithTestData(mDb,update_username,password);
+            return  populateWithTestData(mDb,update_username,password,kind);
         }
 
 
@@ -81,6 +82,10 @@ public class DatabaseInitializer_Login {
                 activity.finish();
                 progressBar.setVisibility(View.GONE);
                 btnLogin.setEnabled(true);
+            }
+            else {
+                Toast.makeText(activity, "لطفا با متصل شدن به اینترنت ابتدا ثبت نام کنید.", Toast.LENGTH_LONG).show();
+
             }
         }
 

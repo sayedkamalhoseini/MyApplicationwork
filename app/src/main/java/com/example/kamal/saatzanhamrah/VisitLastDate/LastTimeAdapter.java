@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
 
     FragmentActivity activity;
     List<LastTime> list = new ArrayList<>();
+    List<Time> listRoom = new ArrayList<>();
     public PassDataDelete passDataDelete;
     LastTime lastTime = new LastTime();
     String user, kind;
@@ -45,6 +47,14 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
         this.user = user;
         this.kind = kind;
         this.visitLastDateFragment = visitLastDateFragment;
+          }
+
+    public LastTimeAdapter(VisitLastDateFragment visitLastDateFragment1, List<Time> list1, String user1, String kind1) {
+        this.activity = visitLastDateFragment.getActivity();
+        this.listRoom = list1;
+        this.user = user1;
+        this.kind = kind1;
+        this.visitLastDateFragment = visitLastDateFragment1;
           }
 
     @Override

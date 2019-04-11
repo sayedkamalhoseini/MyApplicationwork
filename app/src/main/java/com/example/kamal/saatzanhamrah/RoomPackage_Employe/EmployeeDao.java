@@ -15,8 +15,8 @@ public interface EmployeeDao {
     @Query("SELECT * FROM Employee")
     List<Employe> getAll();
 
-    @Query("SELECT * FROM Employee where update_username LIKE  :update_username AND pass LIKE :password")
-    Employe findEmployee(String update_username, String password);
+    @Query("SELECT * FROM Employee where update_username LIKE  :update_username AND pass LIKE :password AND kind LIKE :kind")
+    Employe findEmployee(String update_username, String password,String kind);
 
     @Query("SELECT username FROM Employee where update_username LIKE  :update_username AND pass LIKE :password")
     String findUsername(String update_username, String password);

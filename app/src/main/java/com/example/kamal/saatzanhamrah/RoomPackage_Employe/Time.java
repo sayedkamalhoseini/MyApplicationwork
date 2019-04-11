@@ -3,6 +3,7 @@ package com.example.kamal.saatzanhamrah.RoomPackage_Employe;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.Nullable;
 
 @Entity(tableName = "time")
 public class Time {
@@ -23,24 +24,31 @@ public class Time {
     private String start_date;
 
     @ColumnInfo(name = "start_time")
+    @Nullable
     private String start_time;
 
     @ColumnInfo(name = "start_date_miladi")
+    @Nullable
     private String start_date_miladi;
 
     @ColumnInfo(name = "end_date")
+    @Nullable
     private String end_date;
 
     @ColumnInfo(name = "end_time")
+    @Nullable
     private String end_time;
 
     @ColumnInfo(name = "worktime")
+    @Nullable
     private String worktime;
 
     @ColumnInfo(name = "explains")
+    @Nullable
     private String explains;
 
     @ColumnInfo(name = "confirm_employer")
+    @Nullable
     private int confirm_employer;
 
     public int getId() {

@@ -18,9 +18,9 @@ public class DatabaseInitializer_Time_Start {
     }
 
 
-    private static Time addUser(final AppDatabase db,Time time) {
+    private static void addUser(final AppDatabase db,Time time) {
         db.timeDao().insert(time);
-        return time;
+
     }
 
     private static void populateWithTestData(AppDatabase db, String username,int token, String token_delete, String start_date, String start_time, String start_date_miladi, String kind) {
