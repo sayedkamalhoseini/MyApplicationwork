@@ -18,8 +18,8 @@ public class DatabaseInitializer_Visit_Last_Time {
 
     private static final String TAG = DatabaseInitializer_Visit_Last_Time.class.getName();
 
-    public static void populateAsync(@NonNull final AppDatabase db, String username, String start_date, String end_date, int start_row, ProgressBar progressBar, FloatingActionButton floatingActionButton, String paging,VisitLastDateFragment visitLastDateFragment) {
-        PopulateDbAsync task = new PopulateDbAsync(db, username, start_date, end_date, start_row, progressBar, floatingActionButton, paging,visitLastDateFragment);
+    public static void populateAsync(@NonNull final AppDatabase db, String username, String start_date, String end_date, int start_row, ProgressBar progressBar, FloatingActionButton floatingActionButton, String paging, VisitLastDateFragment visitLastDateFragment) {
+        PopulateDbAsync task = new PopulateDbAsync(db, username, start_date, end_date, start_row, progressBar, floatingActionButton, paging, visitLastDateFragment);
         task.execute();
     }
 
@@ -39,8 +39,8 @@ public class DatabaseInitializer_Visit_Last_Time {
 
         if (paging.equals("paging"))
             return db.timeDao().getAllPaging(start, end, start_row);
-        else if (paging.equals("noPaging"))
-            return db.timeDao().getAll(start, end);
+//        else if (paging.equals("noPaging"))
+//            return db.timeDao().getAll(start, end);
         else return null;
 
 
@@ -67,7 +67,7 @@ public class DatabaseInitializer_Visit_Last_Time {
             this.progressBar = progressBar;
             this.floatingActionButton = floatingActionButton;
             this.paging = paging;
-            this.visitLastDateFragment=visitLastDateFragment;
+            this.visitLastDateFragment = visitLastDateFragment;
 
         }
 
@@ -79,8 +79,11 @@ public class DatabaseInitializer_Visit_Last_Time {
         @Override
         protected void onPostExecute(List<Time> times) {
             super.onPostExecute(times);
-            if(paging.equals("paging"))
-            visitLastDateFragment.passListViewMore(times);
+            if (paging.equals("paging"))
+                visitLastDateFragment.passListViewRoom(times);
+//            else if(paging.equals("paging")){
+//                visitLastDateFragment.passListViewMoreRoom(times);
+
 
         }
 

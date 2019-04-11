@@ -173,7 +173,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     }
                 }else {
                     String paging="paging";
-                    DatabaseInitializer_Visit_Last_Time.populateAsync(AppDatabase.getAppDatabase(activity), user, visitStart.getText().toString(), visitEnd.getText().toString(), start_row, progressbar, floatingActionButton,paging);
+                    DatabaseInitializer_Visit_Last_Time.populateAsync(AppDatabase.getAppDatabase(activity), user, visitStart.getText().toString(), visitEnd.getText().toString(), start_row, progressbar, floatingActionButton,paging,VisitLastDateFragment.this);
                 }
 
             }
@@ -210,8 +210,8 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                     presenter.getLastDatePresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
                     break;
                 } else {
-                    String paging="noPaging";
-                    DatabaseInitializer_Visit_Last_Time.populateAsync(AppDatabase.getAppDatabase(activity),user,visitStart.getText().toString(),visitEnd.getText().toString(),start_row,progressbar,floatingActionButton,paging,this);
+                    String paging="paging";
+                    DatabaseInitializer_Visit_Last_Time.populateAsync(AppDatabase.getAppDatabase(getActivity()),user,visitStart.getText().toString(),visitEnd.getText().toString(),start_row,progressbar,floatingActionButton,paging,this);
 
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                     break;
@@ -339,7 +339,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
     public void passListViewRoom(List<Time> lastTimeList) {
         this.lastTimeListRoom = lastTimeList;
-        adapter = new LastTimeAdapter(VisitLastDateFragment.this, lastTimeList, user, kind);
+        adapter = new LastTimeAdapter(lastTimeList, user, kind,VisitLastDateFragment.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
@@ -347,6 +347,11 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
     public void passListViewMore(List<LastTime> lastTimeList) {
         this.lastTimeList = lastTimeList;
+        adapter.notifyDataSetChanged();
+    }
+
+    public void passListViewMoreRoom(List<Time> lastTimeList) {
+        this.lastTimeListRoom = lastTimeList;
         adapter.notifyDataSetChanged();
     }
 

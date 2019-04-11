@@ -49,12 +49,12 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
         this.visitLastDateFragment = visitLastDateFragment;
           }
 
-    public LastTimeAdapter(VisitLastDateFragment visitLastDateFragment1, List<Time> list1, String user1, String kind1) {
+    public LastTimeAdapter( List<Time> list, String user, String kind,VisitLastDateFragment visitLastDateFragment) {
         this.activity = visitLastDateFragment.getActivity();
-        this.listRoom = list1;
-        this.user = user1;
-        this.kind = kind1;
-        this.visitLastDateFragment = visitLastDateFragment1;
+        this.listRoom = list;
+        this.user = user;
+        this.kind = kind;
+        this.visitLastDateFragment = visitLastDateFragment;
           }
 
     @Override
@@ -140,7 +140,7 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
 
         @Override
         public int getItemCount () {
-            return list.size();
+            return listRoom.size();
         }
 
         class LastTimeViewHolder extends RecyclerView.ViewHolder {
