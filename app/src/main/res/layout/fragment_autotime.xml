@@ -198,6 +198,7 @@
                     android:layout_below="@id/linear_autoTime_titleLastTime"
                     android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
+              
                 <com.example.kamal.saatzanhamrah.CustomTextView
                     android:id="@+id/problemExplain"
                     android:layout_width="match_parent"
