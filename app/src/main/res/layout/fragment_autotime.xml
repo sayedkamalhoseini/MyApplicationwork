@@ -216,6 +216,5 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-    <!--</RelativeLayout>-->
 
 </android.support.design.widget.CoordinatorLayout>

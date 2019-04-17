@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.kamal.saatzanhamrah.ForgotPackage.ForgotActivity;
-import com.example.kamal.saatzanhamrah.MainActivity;
+import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity;
 import com.example.kamal.saatzanhamrah.Share;

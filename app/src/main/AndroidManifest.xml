@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.kamal.saatzanhamrah.MainActivity"
+            android:name="com.example.kamal.saatzanhamrah.MainPackage.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name="com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity" />
         <activity android:name="com.example.kamal.saatzanhamrah.ForgotPackage.ForgotActivity" />

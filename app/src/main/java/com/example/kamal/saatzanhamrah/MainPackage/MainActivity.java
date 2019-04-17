@@ -1,13 +1,11 @@
-package com.example.kamal.saatzanhamrah;
+package com.example.kamal.saatzanhamrah.MainPackage;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -37,15 +35,17 @@ import android.widget.Toast;
 import co.ronash.pushe.Pushe;
 
 import com.android.volley.Request;
+import com.example.kamal.saatzanhamrah.AboutUsFragment;
 import com.example.kamal.saatzanhamrah.AddEmployeeToEmployer.AddEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
+import com.example.kamal.saatzanhamrah.MySingleton;
+import com.example.kamal.saatzanhamrah.R;
+import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.TimeEmploy.AutoDateFragment;
 import com.example.kamal.saatzanhamrah.TimeEmploy.HandDateFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployerToEmployee.VisitEmployerToEmployeeFragment;
-import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
-import com.example.kamal.saatzanhamrah.VisitLastDate.LastTimeAdapter;
 import com.example.kamal.saatzanhamrah.VisitLastDate.VisitLastDateFragment;
 import com.example.kamal.saatzanhamrah.util.IabHelper;
 import com.example.kamal.saatzanhamrah.util.IabResult;
@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText user_update, email_update;
     private String urlGetEmail = "http://kamalroid.ir/get_email.php";
     private String urlGetUpdate = "http://kamalroid.ir/update_user_name.php";
+    private String urlConfirm = "http://kamalroid.ir/get_key.php";
     private ProgressBar progressBar;
     private Button buttonSettings, buttonExitUpdate;
     private String userUpdate;
     private FrameLayout frameLayout;
+    private MainPresenter presenter;
 
     static final String TAG = "tag";
 
@@ -123,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Pushe.initialize(this, true);
         setContentView(R.layout.navigation_drawer);
-
+        presenter = new MainPresenter();
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
-        frameLayout=findViewById(R.id.frameLayout_main_containerFragment);
+        frameLayout = findViewById(R.id.frameLayout_main_containerFragment);
         explain = findViewById(R.id.editText_time_explain);
         relativeLayout = findViewById(R.id.main_layout);
         userUpdate = Share.loadPref(MainActivity.this, "userKeyUpdate");
@@ -134,79 +136,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Share.loadPref(this, "count").equals("")) {
             Share.saveSharePref(this, "count", "1");
         }
-        String base64EncodedPublicKey = getResources().getString(R.string.codeMaiket);
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
-        try {
-            mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-                public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-                    Log.d(TAG, "Query inventory finished.");
-                    if (result.isFailure()) {
-                        Log.d(TAG, "Failed to query inventory: " + result);
-                        return;
-                    } else {
-                        Log.d(TAG, "Query inventory was successful.");
-                        mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
-                        if (mIsPremium) {
-                            navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
-                            Share.saveSharePref(MainActivity.this, "count", "1");
-                            Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                            enableData = (EnableData) autoDateFragment;
-                            enableData.sendEnable(mIsPremium);
-                        } else {
-                            if (Share.loadPref(MainActivity.this, "count").equals("1")) {
-                                navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
-                                Share.saveSharePref(MainActivity.this, "count", "1");
-                                Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
-                                enableData = (EnableData) autoDateFragment;
-                                enableData.sendEnable(mIsPremium);
-                            }
-                        }
-
-                        Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
-                    }
-
-                    Log.d(TAG, "Initial inventory query finished; enabling main UI.");
-                }
 
 
-            };
-        } catch (Exception e) {
-            Toast.makeText(this, "خارج شدید.", Toast.LENGTH_SHORT).show();
+        if(Share.loadPref(this, "my_key").equals("")){
+            if (Share.check(this)) {
+                presenter.BuyPresenter(this,urlConfirm);
+            }
+        }else{
+            confirm(Share.loadPref(this, "my_key"));
         }
-
-        mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-            public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-                if (result.isFailure()) {
-                    Log.d(TAG, "Error purchasing: " + result);
-                    return;
-                } else if (purchase.getSku().equals(SKU_PREMIUM)) {
-                    // give user access to premium content and update the UI
-                    Toast.makeText(MainActivity.this, "خرید موفق", Toast.LENGTH_LONG).show();
-                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                    mIsPremium = true;
-                    enableData = (EnableData) autoDateFragment;
-                    enableData.sendEnable(mIsPremium);
-                    toolbar.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
-                    Share.saveSharePref(MainActivity.this, "count", "1");
-                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                }
-            }
-        };
-
-
-        Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
-
-                if (!result.isSuccess()) {
-                    // Oh noes, there was a problem.
-                    Log.d(TAG, "Problem setting up In-app Billing: " + result);
-                }
-                // Hooray, IAB is fully set up!
-                mHelper.queryInventoryAsync(mGotInventoryListener);
-            }
-        });
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -336,6 +274,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    public void confirm(String my_buy) {
+        mHelper = new IabHelper(MainActivity.this, my_buy);
+        try {
+            mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+                public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                    Log.d(TAG, "Query inventory finished.");
+                    if (result.isFailure()) {
+                        Log.d(TAG, "Failed to query inventory: " + result);
+                        return;
+                    } else {
+                        Log.d(TAG, "Query inventory was successful.");
+                        mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
+                        if (mIsPremium) {
+                            navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                            Share.saveSharePref(MainActivity.this, "count", "1");
+                            Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                            enableData = (EnableData) autoDateFragment;
+                            enableData.sendEnable(mIsPremium);
+                        } else {
+                            if (Share.loadPref(MainActivity.this, "count").equals("1")) {
+                                navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
+                                Share.saveSharePref(MainActivity.this, "count", "1");
+                                Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
+                                enableData = (EnableData) autoDateFragment;
+                                enableData.sendEnable(mIsPremium);
+                            }
+                        }
+
+                        Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
+                    }
+
+                    Log.d(TAG, "Initial inventory query finished; enabling main UI.");
+                }
+
+
+            };
+        } catch (Exception e) {            progressBar.setVisibility(View.VISIBLE);
+
+            Toast.makeText(this, "خارج شدید.", Toast.LENGTH_SHORT).show();
+        }
+
+        mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+            public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
+                if (result.isFailure()) {
+                    Log.d(TAG, "Error purchasing: " + result);
+                    return;
+                } else if (purchase.getSku().equals(SKU_PREMIUM)) {
+                    // give user access to premium content and update the UI
+                    Toast.makeText(MainActivity.this, "خرید موفق", Toast.LENGTH_LONG).show();
+                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                    mIsPremium = true;
+                    enableData = (EnableData) autoDateFragment;
+                    enableData.sendEnable(mIsPremium);
+                    toolbar.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                    Share.saveSharePref(MainActivity.this, "count", "1");
+                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                }
+            }
+        };
+
+
+        Log.d(TAG, "Starting setup.");
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result) {
+                Log.d(TAG, "Setup finished.");
+
+                if (!result.isSuccess()) {
+                    // Oh noes, there was a problem.
+                    Log.d(TAG, "Problem setting up In-app Billing: " + result);
+                }
+                // Hooray, IAB is fully set up!
+                mHelper.queryInventoryAsync(mGotInventoryListener);
+            }
+        });
+
+    }
+
     public interface PassData {
         public void sendData(String user, String kind, String userUpdate);
     }
@@ -399,19 +414,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(autoDateFragment!=null){
+                        if (autoDateFragment != null) {
                             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            inputMethodManager.hideSoftInputFromWindow(frameLayout.getWindowToken(), 0);}
+                            inputMethodManager.hideSoftInputFromWindow(frameLayout.getWindowToken(), 0);
+                        }
 
                     }
-                },100);
+                }, 100);
 
             }
 
             @Override
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
-                 }
+            }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
@@ -504,7 +520,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final String email_update1 = email_update.getText().toString().trim();
                 if (user_update1.equals("")) {
                     Toast.makeText(MainActivity.this, "نام کاربری را وارد کنید.", Toast.LENGTH_SHORT).show();
-                }else if (email_update1.equals("")) {
+                } else if (email_update1.equals("")) {
                     Toast.makeText(MainActivity.this, "ایمیل را وارد کنید.", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -523,7 +539,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             } else if (result.equals("noDone")) {
                                 Toast.makeText(MainActivity.this, "تغییری ایجاد نشد.", Toast.LENGTH_LONG).show();
-                            }else{
+                            } else {
                                 Toast.makeText(MainActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                             }
                             alert.cancel();
