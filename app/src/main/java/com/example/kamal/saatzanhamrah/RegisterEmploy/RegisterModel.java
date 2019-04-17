@@ -53,7 +53,6 @@ public class RegisterModel {
                         intent.putExtra("kind", kind);
                         activity.startActivity(intent);
                         activity.finish();
-                        DatabaseInitializer_Register.populateAsync(AppDatabase.getAppDatabase(activity),username,password,username,email,kind);
                         progressBar.setVisibility(View.GONE);
                         activity.startActivity(intent);
                         activity.finish();

@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
+import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
 
 
 public class DatabaseInitializer_Time_Start {
@@ -18,18 +18,18 @@ public class DatabaseInitializer_Time_Start {
     }
 
 
-    private static void addUser(final AppDatabase db,Time time) {
+    private static void addUser(final AppDatabase db, LastTime time) {
         db.timeDao().insert(time);
 
     }
 
     private static void populateWithTestData(AppDatabase db, String username,int token, String token_delete, String start_date, String start_time, String start_date_miladi, String kind) {
-        Time  time= new Time();
+        LastTime time= new LastTime();
         time.setUsername(username);
         time.setToken(token);
         time.setToken_delete(token_delete);
-        time.setStart_date(start_date);
-        time.setStart_time(start_time);
+        time.setStartWorkDate(start_date);
+        time.setStartWorkTime(start_time);
         time.setStart_date_miladi(start_date_miladi);
 
         addUser(db,time);

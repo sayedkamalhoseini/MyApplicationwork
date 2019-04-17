@@ -2,7 +2,6 @@ package com.example.kamal.saatzanhamrah.VisitLastDate;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
@@ -12,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kamal.saatzanhamrah.R;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
 import com.example.kamal.saatzanhamrah.Share;
 
 import java.util.ArrayList;
@@ -31,7 +28,6 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
 
     FragmentActivity activity;
     List<LastTime> list = new ArrayList<>();
-    List<Time> listRoom = new ArrayList<>();
     public PassDataDelete passDataDelete;
     LastTime lastTime = new LastTime();
     String user, kind;
@@ -49,13 +45,6 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
         this.visitLastDateFragment = visitLastDateFragment;
           }
 
-    public LastTimeAdapter( List<Time> list, String user, String kind,VisitLastDateFragment visitLastDateFragment) {
-        this.activity = visitLastDateFragment.getActivity();
-        this.listRoom = list;
-        this.user = user;
-        this.kind = kind;
-        this.visitLastDateFragment = visitLastDateFragment;
-          }
 
     @Override
     public LastTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -140,7 +129,7 @@ public class LastTimeAdapter extends RecyclerView.Adapter<LastTimeAdapter.LastTi
 
         @Override
         public int getItemCount () {
-            return listRoom.size();
+            return list.size();
         }
 
         class LastTimeViewHolder extends RecyclerView.ViewHolder {

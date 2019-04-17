@@ -31,10 +31,7 @@ import android.widget.Toast;
 import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
 import com.example.kamal.saatzanhamrah.Share;
-import com.example.kamal.saatzanhamrah.TimeEmploy.DatabaseInitializer_Time_End;
-import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployeeAdapter;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
@@ -55,7 +52,6 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
     private String urlConfirmJust = "http://kamalroid.ir/visit_last_time_confirm.php";
     private String mDay, mMonth, _Date, user, kind, startDateDelete, startTimeDelete;
     List<LastTime> lastTimeList = new ArrayList<>();
-    List<Time> lastTimeListRoom = new ArrayList<>();
     private int position, start_row;
     private Dialog dialog;
     private ProgressBar progressbar;
@@ -212,7 +208,6 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
                 } else {
                     String paging="paging";
                     DatabaseInitializer_Visit_Last_Time.populateAsync(AppDatabase.getAppDatabase(getActivity()),user,visitStart.getText().toString(),visitEnd.getText().toString(),start_row,progressbar,floatingActionButton,paging,this);
-
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -337,21 +332,9 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
 
     }
 
-    public void passListViewRoom(List<Time> lastTimeList) {
-        this.lastTimeListRoom = lastTimeList;
-        adapter = new LastTimeAdapter(lastTimeList, user, kind,VisitLastDateFragment.this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
 
-    }
-
-    public void passListViewMore(List<LastTime> lastTimeList) {
+    public void passListViewMore(List<com.example.kamal.saatzanhamrah.VisitLastDate.LastTime> lastTimeList) {
         this.lastTimeList = lastTimeList;
-        adapter.notifyDataSetChanged();
-    }
-
-    public void passListViewMoreRoom(List<Time> lastTimeList) {
-        this.lastTimeListRoom = lastTimeList;
         adapter.notifyDataSetChanged();
     }
 

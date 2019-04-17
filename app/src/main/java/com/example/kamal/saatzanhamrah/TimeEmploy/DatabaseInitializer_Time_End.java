@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
+import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
 
 
 public class DatabaseInitializer_Time_End {
@@ -18,7 +18,7 @@ public class DatabaseInitializer_Time_End {
     }
 
 
-    private static Time addUser(final AppDatabase db,Time time) {
+    private static LastTime addUser(final AppDatabase db, LastTime time) {
         db.timeDao().insert(time);
         return time;
     }

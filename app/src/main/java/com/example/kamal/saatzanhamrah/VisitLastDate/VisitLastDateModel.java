@@ -94,6 +94,7 @@ public class VisitLastDateModel {
                             String _workTime = jsonObject1.getString("worktime");
                             String confirm_employer = jsonObject1.getString("confirm_employer");
 
+
                             if (!_workTime.equals("null")) {
                                 int workTime = Integer.parseInt(_workTime);
                                 _workTimeHour = workTime / 3600 + "";

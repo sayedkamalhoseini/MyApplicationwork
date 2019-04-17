@@ -104,7 +104,6 @@ public class LoginModel {
 
             @Override
             public void onError(String error) {
-                DatabaseInitializer_Login.populateAsync(AppDatabase.getAppDatabase(activity),user, pass,activity,progressBar,btnLogin,kind);
                 Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
                 btnLogin.setEnabled(true);

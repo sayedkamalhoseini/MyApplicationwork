@@ -101,7 +101,6 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
                         break;
                     }
                 } else {
-                    DatabaseInitializer_Login.populateAsync(AppDatabase.getAppDatabase(activity), txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), activity, progressBar, btnLogin, kind);
 
                     Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();
                     break;

@@ -6,9 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.widget.ProgressBar;
 
 import com.example.kamal.saatzanhamrah.RoomPackage.AppDatabase;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -24,12 +21,12 @@ public class DatabaseInitializer_Visit_Last_Time {
     }
 
 
-    private static Time addUser(final AppDatabase db, Time time) {
+    private static LastTime addUser(final AppDatabase db, LastTime time) {
         db.timeDao().insert(time);
         return time;
     }
 
-    private static List<Time> populateWithTestData(AppDatabase db, String username, String start_date, String end_date, int start_row, ProgressBar progressBar, FloatingActionButton floatingActionButton, String paging) {
+    private static List<LastTime> populateWithTestData(AppDatabase db, String username, String start_date, String end_date, int start_row, ProgressBar progressBar, FloatingActionButton floatingActionButton, String paging) {
 
 
         String keyStart = start_date.replace("/", "");
@@ -38,7 +35,7 @@ public class DatabaseInitializer_Visit_Last_Time {
         int end = Integer.parseInt(keyEnd);
 
         if (paging.equals("paging"))
-            return db.timeDao().getAllPaging(start, end, start_row);
+            return db.timeDao().getAllPaging(start, end, start_row,username);
 //        else if (paging.equals("noPaging"))
 //            return db.timeDao().getAll(start, end);
         else return null;
@@ -46,7 +43,7 @@ public class DatabaseInitializer_Visit_Last_Time {
 
     }
 
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, List<Time>> {
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, List<LastTime>> {
 
         private final AppDatabase mDb;
 
@@ -72,15 +69,15 @@ public class DatabaseInitializer_Visit_Last_Time {
         }
 
         @Override
-        protected List<Time> doInBackground(final Void... params) {
+        protected List<LastTime> doInBackground(final Void... params) {
             return populateWithTestData(mDb, username, start_date, end_date, start_row, progressBar, floatingActionButton, paging);
         }
 
         @Override
-        protected void onPostExecute(List<Time> times) {
+        protected void onPostExecute(List<LastTime> times) {
             super.onPostExecute(times);
             if (paging.equals("paging"))
-                visitLastDateFragment.passListViewRoom(times);
+               visitLastDateFragment.passListView(times);
 //            else if(paging.equals("paging")){
 //                visitLastDateFragment.passListViewMoreRoom(times);
 

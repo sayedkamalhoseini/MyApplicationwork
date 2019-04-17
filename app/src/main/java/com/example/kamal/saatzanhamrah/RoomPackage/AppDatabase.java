@@ -1,25 +1,22 @@
 package com.example.kamal.saatzanhamrah.RoomPackage;
 
 import android.app.Activity;
-import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
-import android.support.annotation.NonNull;
 
 import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Employe;
 import com.example.kamal.saatzanhamrah.RoomPackage_Employe.EmployeeDao;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.Time;
-import com.example.kamal.saatzanhamrah.RoomPackage_Employe.TimeDao;
+import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
+import com.example.kamal.saatzanhamrah.VisitLastDate.TimeDao;
 
 
-@Database(entities = {Employe.class, Time.class}, version = 2)
+@Database(entities = {LastTime.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
-    public abstract EmployeeDao employeeDao();
+
     public abstract TimeDao timeDao();
 
 //    static final Migration Migration_1_2=
@@ -35,7 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "user-database")
+                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "/storage/emulated/0/you/saatZan_database")
                             .allowMainThreadQueries()
                             .build();
         }
