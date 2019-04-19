@@ -80,7 +80,16 @@
 
             </LinearLayout>
 
-           
+
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_gravity="center"/>
+
+
+
             <View
                 android:id="@+id/view_autoTime_separator3"
                 android:layout_width="match_parent"

@@ -2,7 +2,11 @@ package com.example.kamal.saatzanhamrah.TimeEmploy;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -19,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,6 +37,7 @@ import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
 import com.example.kamal.saatzanhamrah.VisitLastDate.VisitLastDateFragment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +70,10 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private TextView problemTextView;
     private TextInputLayout textInputLayoutExplain;
     private NavigationView navigationView;
+    private Chronometer chronometer;
+    private boolean ruuning=false;
+    private PassDataToTimeService passDataToTimeService;
+    private TimeService timeService;
 
 
 
@@ -103,6 +113,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_autoTime_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_autotime_ListVisit);
         linearLayoutMessageStart=view.findViewById(R.id.linear_autoTime_messageStart);
+        chronometer=view.findViewById(R.id.chronometer);
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
 
@@ -179,6 +190,9 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void startRegisterTime(String result) {
         switch (result) {
             case "done":
+
+                PopulateDbAsync populateDbAsync=new PopulateDbAsync(chronometer,getActivity());
+                populateDbAsync.execute();
                 linearLayoutMessageStart.setVisibility(View.VISIBLE);
                 Share.saveSharePref(getContext(), "start" + user, "false");
                 Share.saveSharePref(getContext(), "end" + user, "true");
@@ -332,8 +346,41 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         recyclerView.setVisibility(View.GONE);
     }
 
-    public interface PassDataToActivity {
-        public void sendDataToActivity(EditText editText);
+    public interface PassDataToTimeService {
+        public void sendDataToService(Chronometer chronometer);
+    }
+
+
+  private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+        private TimeService timeService;
+        private Chronometer chronometer;
+
+      @Override
+      protected void onPostExecute(Void aVoid) {
+          super.onPostExecute(aVoid);
+
+      }
+
+        private Activity activity;
+
+        public PopulateDbAsync(Chronometer chronometer,Activity activity){
+            this.activity=activity;
+            this.chronometer=chronometer;
+        }
+
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Intent intent=new Intent(activity,TimeService.class);
+                activity.startService(intent);
+                return null;
+            }
+        }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        
+        super.onSaveInstanceState(outState);
     }
 }
 
