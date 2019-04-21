@@ -21,6 +21,8 @@ import com.example.kamal.saatzanhamrah.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 
+import java.util.logging.Handler;
+
 /**
  * Created by kamal on 12/9/2017.
  */
@@ -57,6 +59,7 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
         if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
             if(Share.loadPref(activity,"userKeyUpdate")==""){
                 Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));

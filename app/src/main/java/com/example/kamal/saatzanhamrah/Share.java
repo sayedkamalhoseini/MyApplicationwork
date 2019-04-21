@@ -50,10 +50,15 @@ public class Share {
 
     public static final String TAG = "MyTag";
 
-    public static String loadPref(Activity context, String key) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("total",
-                Context.MODE_PRIVATE);
+    public static String loadPref(Context context, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("total", Context.MODE_PRIVATE);
         String value = sharedPreferences.getString(key, "");
+        return value;
+    }
+
+    public static Long loadPrefLong(Context context, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("total1", Context.MODE_PRIVATE);
+        Long value = sharedPreferences.getLong(key,0);
         return value;
     }
 
@@ -61,7 +66,14 @@ public class Share {
         SharedPreferences sharedPreferences = context.getSharedPreferences("total", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
+    }
+
+    public static void saveSharePrefLong(Context context, String key, Long value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("total1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
+        editor.apply();
     }
 
     public static boolean check(Context context) {

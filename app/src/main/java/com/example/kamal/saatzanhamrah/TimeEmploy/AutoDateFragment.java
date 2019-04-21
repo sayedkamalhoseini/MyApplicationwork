@@ -2,10 +2,13 @@ package com.example.kamal.saatzanhamrah.TimeEmploy;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +43,8 @@ import com.example.kamal.saatzanhamrah.VisitLastDate.VisitLastDateFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.kamal.saatzanhamrah.Share.loadPref;
@@ -52,7 +58,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private Button buttonStart;
     private String user, kind, getUser, getKind;
     TimePresenter presenter;
-    LinearLayout linearLayoutHandDate, linearLayoutTitle,linearLayoutMessageStart;
+    LinearLayout linearLayoutHandDate, linearLayoutTitle, linearLayoutMessageStart;
     RelativeLayout relativeLayoutAutoDate;
     private AutoTimeAdapter adapter;
     private RecyclerView recyclerView;
@@ -71,10 +77,15 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private TextInputLayout textInputLayoutExplain;
     private NavigationView navigationView;
     private Chronometer chronometer;
-    private boolean ruuning=false;
+    private boolean ruuning = false;
     private PassDataToTimeService passDataToTimeService;
     private TimeService timeService;
+    public static Calendar calendarStart;
+    public static Date dateStart;
 
+    private Calendar calendar1;
+    private Calendar calendar2;
+    Date date2;
 
 
     @Override
@@ -108,51 +119,56 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         editText = (EditText) view.findViewById(R.id.editText_time_explain);
         problemTextView = (TextView) view.findViewById(R.id.problemExplain);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
-        navigationView=getActivity().findViewById(R.id.navigation_view);
-        textInputLayoutExplain= (TextInputLayout) view.findViewById(R.id.textInput_time_explain);
+        navigationView = getActivity().findViewById(R.id.navigation_view);
+        textInputLayoutExplain = (TextInputLayout) view.findViewById(R.id.textInput_time_explain);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_autoTime_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_autotime_ListVisit);
-        linearLayoutMessageStart=view.findViewById(R.id.linear_autoTime_messageStart);
-        chronometer=view.findViewById(R.id.chronometer);
+        linearLayoutMessageStart = view.findViewById(R.id.linear_autoTime_messageStart);
+        chronometer = view.findViewById(R.id.chronometer);
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (loadPref(getActivity(), "start" + user).equals("false")) {
+                    recyclerView.setVisibility(View.GONE);
+                    linearLayoutTitle.setVisibility(View.GONE);
+                    editText.setVisibility(View.VISIBLE);
+                    toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
+                    navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
+                    buttonStart.setText(getString(R.string.endDate));
+                    textInputLayoutExplain.setVisibility(View.VISIBLE);
+                    buttonStart.setBackgroundResource(R.drawable.yellowcircle);
+                    lastTime = new LastTime();
+                    lastTimeList = new ArrayList<>();
+                    linearLayoutMessageStart.setVisibility(View.VISIBLE);
+                    textLastStartDate.setText(Share.loadPref(getActivity(), "startLastDate" + user));
+                    textLastStartTime.setText(Share.loadPref(getActivity(), "startLastTime" + user));
+
+                } else if (loadPref(getActivity(), "end" + user).equals("false")) {
+                    recyclerView.setVisibility(View.GONE);
+                    linearLayoutTitle.setVisibility(View.GONE);
+                    editText.setVisibility(View.GONE);
+                    toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
+                    navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
+                    buttonStart.setText(getString(R.string.startDate));
+                    buttonStart.setBackgroundResource(R.drawable.bluecircle);
+                    lastTime = new LastTime();
+                    lastTimeList = new ArrayList<>();
+                    textLastStartDate.setText("");
+                    textLastStartTime.setText("");
+                    linearLayoutMessageStart.setVisibility(View.INVISIBLE);
+                    lastTime.setStartWorkDate(Share.loadPref(getActivity(), "startLastDate" + user));
+                    lastTime.setStartWorkTime(Share.loadPref(getActivity(), "startLastTime" + user));
+                } else {
+                    Share.saveSharePref(getContext(), "end" + user, "false");
+                    Share.saveSharePref(getContext(), "start" + user, "true");
+                }
+            }
+        },0);
 
 
-        if (loadPref(getActivity(), "start" + user).equals("false")) {
-            recyclerView.setVisibility(View.GONE);
-            linearLayoutTitle.setVisibility(View.GONE);
-            editText.setVisibility(View.VISIBLE);
-            toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-            navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-            buttonStart.setText(getString(R.string.endDate));
-            textInputLayoutExplain.setVisibility(View.VISIBLE);
-            buttonStart.setBackgroundResource(R.drawable.yellowcircle);
-            lastTime = new LastTime();
-            lastTimeList = new ArrayList<>();
-            linearLayoutMessageStart.setVisibility(View.VISIBLE);
-            textLastStartDate.setText(Share.loadPref(getActivity(), "startLastDate" + user));
-            textLastStartTime.setText(Share.loadPref(getActivity(), "startLastTime" + user));
-
-        } else if (loadPref(getActivity(), "end" + user).equals("false")) {
-            recyclerView.setVisibility(View.GONE);
-            linearLayoutTitle.setVisibility(View.GONE);
-            editText.setVisibility(View.GONE);
-            toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
-            navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green_500));
-            buttonStart.setText(getString(R.string.startDate));
-            buttonStart.setBackgroundResource(R.drawable.bluecircle);
-            lastTime = new LastTime();
-            lastTimeList = new ArrayList<>();
-            textLastStartDate.setText("");
-            textLastStartTime.setText("");
-            linearLayoutMessageStart.setVisibility(View.INVISIBLE);
-            lastTime.setStartWorkDate(Share.loadPref(getActivity(), "startLastDate" + user));
-            lastTime.setStartWorkTime(Share.loadPref(getActivity(), "startLastTime" + user));
-        } else {
-            Share.saveSharePref(getContext(), "end" + user, "false");
-            Share.saveSharePref(getContext(), "start" + user, "true");
-        }
         buttonStart.setOnClickListener(this);
         return view;
     }
@@ -190,8 +206,33 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void startRegisterTime(String result) {
         switch (result) {
             case "done":
+//                calendar1=Calendar.getInstance();
+//                final Date date1=calendar1.getTime();
+//
+//                Log.i("date1",date1.toString());
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        calendar2=Calendar.getInstance();
+//                        date2=calendar2.getTime();
+//                        Log.i("date2",date2.toString());
+//                       Long x1=date2.getTime()-date1.getTime();
+//                        int x2=date1.getSeconds();
+//
+//                        Log.i("date2",String.valueOf(x));
+//
+//
+//
+//                    }
+//                },360000);
 
-                PopulateDbAsync populateDbAsync=new PopulateDbAsync(chronometer,getActivity());
+
+//                long t = 36000;
+//                chronometer.setBase(SystemClock.elapsedRealtime() - t);
+//                chronometer.start();
+
+
+                PopulateDbAsync populateDbAsync = new PopulateDbAsync(chronometer, getActivity());
                 populateDbAsync.execute();
                 linearLayoutMessageStart.setVisibility(View.VISIBLE);
                 Share.saveSharePref(getContext(), "start" + user, "false");
@@ -253,6 +294,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void endRegisterTime(String result) {
         switch (result) {
             case "done":
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.stop();
                 linearLayoutMessageStart.setVisibility(View.INVISIBLE);
                 Share.saveSharePref(getContext(), "end" + user, "false");
                 Share.saveSharePref(getContext(), "start" + user, "true");
@@ -331,7 +374,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
 
 
     @Override
-    public void sendData(String user, String kind,String userUpdate) {
+    public void sendData(String user, String kind, String userUpdate) {
         this.user = user;
         this.kind = kind;
     }
@@ -351,36 +394,80 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     }
 
 
-  private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
         private TimeService timeService;
         private Chronometer chronometer;
 
-      @Override
-      protected void onPostExecute(Void aVoid) {
-          super.onPostExecute(aVoid);
 
-      }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.start();
+
+        }
 
         private Activity activity;
 
-        public PopulateDbAsync(Chronometer chronometer,Activity activity){
-            this.activity=activity;
-            this.chronometer=chronometer;
+        public PopulateDbAsync(Chronometer chronometer, Activity activity) {
+            this.activity = activity;
+            this.chronometer = chronometer;
         }
 
 
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Intent intent=new Intent(activity,TimeService.class);
-                activity.startService(intent);
-                return null;
-            }
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+
+//
+
+//                Intent intent=new Intent(activity,TimeService.class);
+//                activity.startService(intent);
+            return null;
         }
+    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        
+
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Long baseCh = SystemClock.elapsedRealtime() - chronometer.getBase();// time chronometer
+        calendarStart = Calendar.getInstance();
+        dateStart = calendarStart.getTime();
+        Long pause = dateStart.getTime();//time system
+        Share.saveSharePrefLong(getContext(), "pauseChronometer", pause);
+        Share.saveSharePrefLong(getContext(), "baseChronometer", baseCh);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (loadPref(getActivity(), "end" + user).equals("false")) {
+                    chronometer.stop();
+                } else {
+                    Long startCh = Share.loadPrefLong(getContext(), "pauseChronometer");
+                    Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer");
+                    calendarStart = Calendar.getInstance();
+                    Long y = calendarStart.getTime().getTime() - startCh + baseCh;
+                    chronometer.setBase(SystemClock.elapsedRealtime() - y);
+                    chronometer.start();
+                }
+            }
+        }, 0);
+
     }
 }
 

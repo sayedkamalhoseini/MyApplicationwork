@@ -1,11 +1,11 @@
 package com.example.kamal.saatzanhamrah.TimeEmploy;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.widget.Chronometer;
 import android.widget.Toast;
@@ -50,8 +50,8 @@ public class TimeService extends Service  {
 
     private final Handler toastHandler = new Handler()
     {
-
-        public void handleMessage(Notification.MessagingStyle.Message msg)
+        @Override
+        public void handleMessage(Message msg)
         {
             Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
         }

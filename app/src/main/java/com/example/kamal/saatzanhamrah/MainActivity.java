@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // The helper object
     IabHelper mHelper;
     ProgressDialog pd;
+    Long offset;
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener;
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener;
 
@@ -117,12 +118,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Pushe.initialize(this, true);
         setContentView(R.layout.navigation_drawer);
+
 
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
         frameLayout=findViewById(R.id.frameLayout_main_containerFragment);
