@@ -105,7 +105,14 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
                             JalaliCalendar.gDate miladiEnd = JalaliCalendar.jalaliToMiladi(shamsiEnd);
                             _miladiEnd = miladiEnd.getYear() + "/" + (miladiEnd.getMonth() + 1) + "/" + miladiEnd.getDay();
                             createParams();
-                            presenter.presenterHandDate(handDateUrl, params, progressbar, buttonRegisterHandDate);
+                            if(hourStart.equals("ساعت شروع کار")|| hourEnd.equals("ساعت پایان کار") || minuteStart.equals("دقیقه شروع کار")|| minuteEnd.equals("دقیقه پایان کار")){
+                                Toast.makeText(getContext(), R.string.fill_field, Toast.LENGTH_LONG).show();
+                                buttonRegisterHandDate.setEnabled(true);
+                                progressbar.setVisibility(View.GONE);
+
+                            }else {
+                                presenter.presenterHandDate(handDateUrl, params, progressbar, buttonRegisterHandDate);
+                            }
                             break;
                         } else {
                             Share.showSnackBar(getContext(), coordinatorLayout, getResources().getString(R.string.enableMessage));

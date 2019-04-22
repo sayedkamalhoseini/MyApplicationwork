@@ -51,7 +51,8 @@
         </activity>
         <activity
             android:name="com.example.kamal.saatzanhamrah.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity" />
         <activity android:name="com.example.kamal.saatzanhamrah.ForgotPackage.ForgotActivity" />
 

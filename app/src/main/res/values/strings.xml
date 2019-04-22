@@ -31,7 +31,7 @@
     <string name="noInternet">لطفا به اینترنت متصل شوید.</string>
     <string name="noDelete">زمان تایید شده است نمی توانید حذف کنید.</string>
     <string name="noLastDate">کارکردی در این تاریخ موجود نیست.</string>
-    <string name="errorInternet">فیلترشکن را قطع کنید و دوباره تلاش کنید.اگر سرعت اینترنت پایین است می توانید بعدا از طریق ثبت دستی اقدام نمایید.</string>
+    <string name="errorInternet">فیلترشکن را قطع کنید. اگر سرعت اینترنت پایین است می توانید بعدا از طریق ثبت دستی اقدام نمایید.</string>
     <string name="error"> لطفا به اینترنت متصل شوید و دوباره تلاش کنید.</string>
     <string name="startRegister"> زمان شروع با موفقیت ثبت شد.</string>
     <string name="endRegister"> زمان پایان با موفقیت ثبت شد.</string>
@@ -54,7 +54,7 @@
     <string name="forgot">فراموشی رمز عبور</string>
     <string name="kind">نوع شغل :</string>
     <string name="status">وضعیت :</string>
-    <string name="start">شروع کار</string>
+    <string name="start">شروع کار :</string>
     <string name="workTime">"مدت زمان کار</string>
     <string name="endTime">پایان</string>
     <string name="startTime">شروع</string>
