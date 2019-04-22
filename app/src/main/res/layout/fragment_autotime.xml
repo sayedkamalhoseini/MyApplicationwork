@@ -126,6 +126,7 @@
                         android:gravity="top|start"
                         android:hint="@string/explainTitleHand"
                         android:inputType="textMultiLine"
+                        android:focusableInTouchMode="true"
                         android:lines="5"
                         android:padding="5dp"
                         android:textSize="16sp" />
@@ -176,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linear_autoTime_titleLastTime"
-                    android:visibility="gone"></android.support.v7.widget.RecyclerView>
+                    android:visibility="gone"/>
 
                 <com.example.kamal.saatzanhamrah.CustomTextView
                     android:id="@+id/problemExplain"
@@ -185,7 +186,6 @@
                     android:layout_below="@id/recyclerView_autotime_ListVisit"
                     android:layout_marginTop="32dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_gravity="end"
                     android:gravity="start"
                     android:inputType="textPersonName"

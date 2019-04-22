@@ -126,6 +126,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         chronometer = view.findViewById(R.id.chronometer);
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
+        
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -399,6 +400,12 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                     Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer");
                     calendarStart = Calendar.getInstance();
                     Long y = calendarStart.getTime().getTime() - startCh + baseCh;
+                    Long most=15552000000L;
+                    if (y>most){
+                        Share.saveSharePrefLong(getContext(), "pauseChronometer", 0L);
+                        Share.saveSharePrefLong(getContext(), "baseChronometer", 0L);
+                        chronometer.stop();
+                    }
                     chronometer.setBase(SystemClock.elapsedRealtime() - y);
                     chronometer.start();
                 }
