@@ -46,8 +46,8 @@
     <string name="aboutUs">درباره برنامه</string>
     <string name="autoDate">ثبت زمان جاری</string>
     <string name="handDate">ثبت زمان گذشته</string>
-    <string name="startDate">ثبت زمان شروع کار</string>
-    <string name="endDate">ثبت زمان پایان کار</string>
+    <string name="startDate">شروع</string>
+    <string name="endDate">پایان</string>
     <string name="resting">در حال استراحت</string>
     <string name="working">در حال انجام کار</string>
     <string name="userNameEmployer">نام کاربری کارفرما :</string>
@@ -283,6 +283,7 @@
     <string name="settings">ویرایش حساب کاربری</string>
     <string name="open_drawer">openDrawer</string>
     <string name="close_drawer">closeDrawer</string>
+
 
 
     <string-array name="nav_drawer_labels">
