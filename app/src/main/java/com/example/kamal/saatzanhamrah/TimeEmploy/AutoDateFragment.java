@@ -78,7 +78,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private NavigationView navigationView;
     private Chronometer chronometer;
     private boolean ruuning = false;
-    private PassDataToTimeService passDataToTimeService;
     private TimeService timeService;
     public static Calendar calendarStart;
     public static Date dateStart;
@@ -166,7 +165,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                     Share.saveSharePref(getContext(), "start" + user, "true");
                 }
             }
-        },0);
+        }, 0);
 
 
         buttonStart.setOnClickListener(this);
@@ -206,34 +205,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void startRegisterTime(String result) {
         switch (result) {
             case "done":
-//                calendar1=Calendar.getInstance();
-//                final Date date1=calendar1.getTime();
-//
-//                Log.i("date1",date1.toString());
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        calendar2=Calendar.getInstance();
-//                        date2=calendar2.getTime();
-//                        Log.i("date2",date2.toString());
-//                       Long x1=date2.getTime()-date1.getTime();
-//                        int x2=date1.getSeconds();
-//
-//                        Log.i("date2",String.valueOf(x));
-//
-//
-//
-//                    }
-//                },360000);
-
-
-//                long t = 36000;
-//                chronometer.setBase(SystemClock.elapsedRealtime() - t);
-//                chronometer.start();
-
-
-                PopulateDbAsync populateDbAsync = new PopulateDbAsync(chronometer, getActivity());
-                populateDbAsync.execute();
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.start();
                 linearLayoutMessageStart.setVisibility(View.VISIBLE);
                 Share.saveSharePref(getContext(), "start" + user, "false");
                 Share.saveSharePref(getContext(), "end" + user, "true");
@@ -389,43 +362,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         recyclerView.setVisibility(View.GONE);
     }
 
-    public interface PassDataToTimeService {
-        public void sendDataToService(Chronometer chronometer);
-    }
-
-
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-        private TimeService timeService;
-        private Chronometer chronometer;
-
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            chronometer.start();
-
-        }
-
-        private Activity activity;
-
-        public PopulateDbAsync(Chronometer chronometer, Activity activity) {
-            this.activity = activity;
-            this.chronometer = chronometer;
-        }
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-//
-
-//                Intent intent=new Intent(activity,TimeService.class);
-//                activity.startService(intent);
-            return null;
-        }
-    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -452,6 +388,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onStart() {
         super.onStart();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
