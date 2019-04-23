@@ -7,8 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.example.kamal.saatzanhamrah.LoginEmploy.LoginActivity;
-import com.example.kamal.saatzanhamrah.MainActivity;
+import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 
