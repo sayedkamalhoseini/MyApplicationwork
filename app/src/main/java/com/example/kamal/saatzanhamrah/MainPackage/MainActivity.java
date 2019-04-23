@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // SKUs for our products: the premium upgrade (non-consumable)
     static final String SKU_PREMIUM = "2018saatzan";
+//    static final String SKU_PREMIUM = "saat20";
 
     // Does the user have the premium upgrade?
     boolean mIsPremium = true;
@@ -327,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mIsPremium = true;
                     enableData = (EnableData) autoDateFragment;
                     enableData.sendEnable(mIsPremium);
-                    toolbar.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                    navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
                     Share.saveSharePref(MainActivity.this, "count", "1");
                     Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
                 }
