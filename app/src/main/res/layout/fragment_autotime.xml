@@ -18,6 +18,64 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView_autoTime_messageStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="2dp"
+                android:layout_margin="15dp"
+                android:visibility="invisible">
+
+                <LinearLayout
+                    android:id="@+id/linear_autoTime_messageStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:layout_margin="3dp"
+                    android:weightSum="3">
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_startMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:text="@string/start"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textDirection="rtl" />
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_startDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:textSize="16sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textDirection="rtl" />
+
+                    <com.example.kamal.saatzanhamrah.CustomTextView
+                        android:id="@+id/textView_autoTime_startTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textDirection="rtl" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
 
             <Chronometer
                 android:id="@+id/chronometer"
@@ -61,62 +119,6 @@
 
             </RelativeLayout>
             
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardView_autoTime_messageStart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="2dp"
-                app:cardCornerRadius="2dp"
-                android:layout_margin="15dp"
-                android:visibility="invisible">
-
-            <LinearLayout
-                android:id="@+id/linear_autoTime_messageStart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:layout_margin="3dp"
-                android:weightSum="3">
-
-                <com.example.kamal.saatzanhamrah.CustomTextView
-                    android:id="@+id/textView_autoTime_startMessage"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:gravity="start"
-                    android:text="@string/start"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textDirection="rtl" />
-
-                <com.example.kamal.saatzanhamrah.CustomTextView
-                    android:id="@+id/textView_autoTime_startDate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:textSize="16sp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textDirection="rtl" />
-
-                <com.example.kamal.saatzanhamrah.CustomTextView
-                    android:id="@+id/textView_autoTime_startTime"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:gravity="start"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textDirection="rtl" />
-
-            </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
 
             <RelativeLayout
                 android:layout_width="wrap_content"
