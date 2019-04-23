@@ -45,6 +45,7 @@ public class MainModel {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(mainActivity, mainActivity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
                 }
 
 
@@ -52,7 +53,7 @@ public class MainModel {
 
             @Override
             public void onError(String error) {
-
+                Toast.makeText(mainActivity, mainActivity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
             }
 
             @Override

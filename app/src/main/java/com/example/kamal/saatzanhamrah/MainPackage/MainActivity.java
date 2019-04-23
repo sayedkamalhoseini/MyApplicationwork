@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Pushe.initialize(this, true);
         setContentView(R.layout.navigation_drawer);
-        presenter = new MainPresenter();
         toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
         frameLayout = findViewById(R.id.frameLayout_main_containerFragment);
         explain = findViewById(R.id.editText_time_explain);
@@ -140,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(Share.loadPref(this, "my_key").equals("")){
             if (Share.check(this)) {
+                presenter = new MainPresenter();
                 presenter.BuyPresenter(this,urlConfirm);
             }
         }else{
