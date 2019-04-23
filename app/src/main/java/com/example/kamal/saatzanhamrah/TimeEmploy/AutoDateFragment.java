@@ -129,6 +129,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -171,6 +172,15 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
 
 
         buttonStart.setOnClickListener(this);
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if(SystemClock.elapsedRealtime()-chronometer.getBase()>=3600000-1000){
+                    chronometer.setFormat("%s");
+                }
+            }
+        });
+
         return view;
     }
 
@@ -383,8 +393,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         calendarStart = Calendar.getInstance();
         dateStart = calendarStart.getTime();
         Long pause = dateStart.getTime();//time system
-        Share.saveSharePrefLong(getContext(), "pauseChronometer"+ user, pause);
-        Share.saveSharePrefLong(getContext(), "baseChronometer"+ user, baseCh);
+        Share.saveSharePrefLong(getContext(), "pauseChronometer" + user, pause);
+        Share.saveSharePrefLong(getContext(), "baseChronometer" + user, baseCh);
     }
 
     @Override
@@ -402,17 +412,20 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                 if (loadPref(getActivity(), "end" + user).equals("false")) {
                     chronometer.stop();
                 } else {
-                    Long startCh = Share.loadPrefLong(getContext(), "pauseChronometer"+ user);
-                    Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer"+ user);
+                    Long startCh = Share.loadPrefLong(getContext(), "pauseChronometer" + user);
+                    Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer" + user);
                     calendarStart = Calendar.getInstance();
                     Long y = calendarStart.getTime().getTime() - startCh + baseCh;
                     Long most = 15552000000L;
                     if (y > most) {
-                        Share.saveSharePrefLong(getContext(), "pauseChronometer"+ user, 0L);
-                        Share.saveSharePrefLong(getContext(), "baseChronometer"+ user, 0L);
+                        Share.saveSharePrefLong(getContext(), "pauseChronometer" + user, 0L);
+                        Share.saveSharePrefLong(getContext(), "baseChronometer" + user, 0L);
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.stop();
                     } else {
+                        if (y < 3600000) {
+                            chronometer.setFormat("00:%s");
+                        }
                         chronometer.setBase(SystemClock.elapsedRealtime() - y);
                         chronometer.start();
                     }
