@@ -46,5 +46,6 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.12'
     implementation files('libs/poi-3.7.jar')
-
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 }
