@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // SKUs for our products: the premium upgrade (non-consumable)
     static final String SKU_PREMIUM = "2018saatzan";
-//    static final String SKU_PREMIUM = "saat20";
 
     // Does the user have the premium upgrade?
     boolean mIsPremium = true;
