@@ -13,15 +13,24 @@ import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.RegisterEmploy.RegisterActivity;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
+import com.example.kamal.saatzanhamrah.webService.APIClient;
+import com.example.kamal.saatzanhamrah.webService.APIInterface;
+import com.example.kamal.saatzanhamrah.webService.model.Retrofit_LoginModel;
+import com.example.kamal.saatzanhamrah.webService.model.Retrofit_LoginModel_list;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by kamal on 12/9/2017.
@@ -30,7 +39,7 @@ import java.util.Map;
 public class LoginModel {
     LoginActivity activity;
     LoginPresenter presenter;
-    String userNameMain,success;
+    String userNameMain, success;
 
     public LoginModel(LoginActivity loginActivity) {
 
@@ -45,86 +54,75 @@ public class LoginModel {
         Intent intent = new Intent(activity, RegisterActivity.class);
         activity.startActivity(intent);
     }
+    
+    public void forgotModel() {
+        Intent intent = new Intent(activity, ForgotActivity.class);
+        activity.startActivity(intent);
 
-    public void loginModel(final String user, final String pass, final String kind, String url, final ProgressBar progressBar, final Button btnLogin) {
+    }
+
+    public void loginModel(final String user, final String pass, final String kind, final ProgressBar progressBar, final Button btnLogin) {
         if (user.equals("") || pass.equals("")) {
             Toast.makeText(activity, "لطفا نام کاربری و رمز عبور را وارد کنید.", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
             btnLogin.setEnabled(true);
             return;
         }
-        Share.getStringResponse(activity, Request.Method.POST, url, null, new Share.StringVolleyCallBack() {
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<Retrofit_LoginModel_list> call = apiInterface.login(user, kind, pass, "ktaa");
+
+        call.enqueue(new Callback<Retrofit_LoginModel_list>() {
             @Override
-            public void onSuccessResponse(String result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    JSONArray jsonArray = jsonObject.getJSONArray("result1");
-                    List<VisitEmployee> list = new ArrayList<VisitEmployee>();
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(0);
-                        userNameMain = jsonObject1.getString("username");
-                        success = jsonObject1.getString("success");
+            public void onResponse(Call<Retrofit_LoginModel_list> call, Response<Retrofit_LoginModel_list> response) {
+                if (response.isSuccessful()) {
+                   List<Retrofit_LoginModel> list=response.body().getResult1();
 
-                        if (success.equals("find")) {
-                            Share.saveSharePref(activity, "userKey", userNameMain);
-                            Share.saveSharePref(activity, "userKeyUpdate", user);
-                            Share.saveSharePref(activity, "passKey", pass);
-                            Share.saveSharePref(activity, "kindKey", kind);
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            intent.putExtra("user", userNameMain);
-                            intent.putExtra("kind", kind);
-                            activity.startActivity(intent);
-                            activity.finish();
-                            progressBar.setVisibility(View.GONE);
-                            btnLogin.setEnabled(true);
-                        }else if(success.equals("noFind")){
-                            Toast.makeText(activity, "لطفا ثبت نام نمایید و نوع شغل هم درست انتخاب کرده باشید.", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            btnLogin.setEnabled(true);
-                        }else if (result.equals("noConnect")) {
-                            Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            btnLogin.setEnabled(true);
+                   for (Retrofit_LoginModel retrofit_loginModel : list){
+                       success=retrofit_loginModel.getSuccess();
+                       userNameMain=retrofit_loginModel.getUsername();
+                   }
 
-                        } else {
-                            Toast.makeText(activity, "خطا", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            btnLogin.setEnabled(true);
-                        }
+                    if (success.equals("find")) {
+                        Share.saveSharePref(activity, "userKey", userNameMain);
+                        Share.saveSharePref(activity, "userKeyUpdate", user);
+                        Share.saveSharePref(activity, "passKey", pass);
+                        Share.saveSharePref(activity, "kindKey", kind);
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        intent.putExtra("user", userNameMain);
+                        intent.putExtra("kind", kind);
+                        activity.startActivity(intent);
+                        activity.finish();
+                        progressBar.setVisibility(View.GONE);
+                        btnLogin.setEnabled(true);
+                    } else if (success.equals("noFind")) {
+                        Toast.makeText(activity, "لطفا ثبت نام نمایید و نوع شغل هم درست انتخاب کرده باشید.", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        btnLogin.setEnabled(true);
+                    } else if (success.equals("noConnect")) {
+                        Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        btnLogin.setEnabled(true);
 
-
+                    } else {
+                        Toast.makeText(activity, "خطا", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        btnLogin.setEnabled(true);
+                    }
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Retrofit_LoginModel_list> call, Throwable t) {
+                if(t instanceof IOException){
+                    Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
+                    btnLogin.setEnabled(true);
                 }
 
             }
-
-            @Override
-            public void onError(String error) {
-                Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
-                progressBar.setVisibility(View.GONE);
-                btnLogin.setEnabled(true);
-            }
-
-
-            @Override
-            public Map onMapPost() {
-                Map<String, String> loginparams = new HashMap<>();
-                loginparams.put("user", user);
-                loginparams.put("pass", pass);
-                loginparams.put("kind", kind);
-                loginparams.put("key_text_android", "ktaa");
-                return loginparams;
-            }
         });
-
-    }
-
-    public void forgotModel() {
-        Intent intent = new Intent(activity, ForgotActivity.class);
-        activity.startActivity(intent);
 
     }
 }

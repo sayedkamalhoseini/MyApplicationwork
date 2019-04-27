@@ -94,7 +94,7 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
                     }
                     btnLogin.setEnabled(false);
                     progressBar.setVisibility(View.VISIBLE);
-                    presenter.loginPresenter(txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), kind, url, progressBar, btnLogin);
+                    presenter.loginPresenter(txtEdituser.getText().toString().trim(), txtEditpassword.getText().toString().trim(), kind, progressBar, btnLogin);
                     break;
                 } else {
                     Toast.makeText(activity, getResources().getString(R.string.noInternet), Toast.LENGTH_LONG).show();

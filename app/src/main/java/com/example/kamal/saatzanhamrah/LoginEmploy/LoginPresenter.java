@@ -24,8 +24,8 @@ public class LoginPresenter {
         model.registerModel();
     }
 
-    public void loginPresenter(String user, String pass, String kind, String url, ProgressBar progressBar, Button btnLogin) {
-        model.loginModel(user,pass,kind,url,progressBar,btnLogin);
+    public void loginPresenter(String user, String pass, String kind, ProgressBar progressBar, Button btnLogin) {
+        model.loginModel(user,pass,kind,progressBar,btnLogin);
     }
 
     public void forgotPresenter() {
