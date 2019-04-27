@@ -78,14 +78,14 @@
                                 android:id="@+id/editText_login_userName"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:ems="10"
+                                android:ems="20"
                                 android:gravity="start"
                                 android:hint="@string/userName"
                                 android:imeOptions="actionNext"
                                 android:inputType="textPersonName"
                                 android:textColor="@android:color/black"
                                 android:textColorHint="@android:color/black"
-                                android:textSize="14sp" />
+                                />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -101,7 +101,7 @@
                                 android:id="@+id/editText_login_password"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:ems="10"
+                                android:ems="20"
                                 android:gravity="start"
                                 android:hint="@string/passWord"
                                 android:imeOptions="actionDone"
@@ -109,7 +109,7 @@
                                 android:padding="10dp"
                                 android:textColor="@android:color/black"
                                 android:textColorHint="@android:color/black"
-                                android:textSize="14sp" />
+                                />
                         </android.support.design.widget.TextInputLayout>
 
                     </LinearLayout>
