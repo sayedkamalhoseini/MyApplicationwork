@@ -54,7 +54,7 @@ public class LoginModel {
         Intent intent = new Intent(activity, RegisterActivity.class);
         activity.startActivity(intent);
     }
-    
+
     public void forgotModel() {
         Intent intent = new Intent(activity, ForgotActivity.class);
         activity.startActivity(intent);
