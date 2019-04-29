@@ -43,21 +43,21 @@
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <EditText
-                android:id="@+id/editText_update_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="32dp"
-                android:ems="15"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/title_email_update"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
+            <!--<EditText-->
+                <!--android:id="@+id/editText_update_user"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginBottom="32dp"-->
+                <!--android:ems="15"-->
+                <!--android:inputType="textPersonName"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/title_email_update"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="0.5"-->
+                <!--app:layout_constraintStart_toStartOf="parent" />-->
 
             <EditText
                 android:id="@+id/editText_update_email"
@@ -88,7 +88,7 @@
                 android:text="ویرایش حساب کاربری"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/title_user_update"
+                app:layout_constraintBottom_toTopOf="@+id/title_email_update"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -149,20 +149,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/title_user_update"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="نام کاربری"
-                app:layout_constraintBottom_toTopOf="@+id/editText_update_user"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
+            <!--<TextView-->
+                <!--android:id="@+id/title_user_update"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:text="نام کاربری"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/editText_update_user"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="1.0"-->
+                <!--app:layout_constraintStart_toStartOf="parent" />-->
 
             <TextView
                 android:id="@+id/title_email_update"

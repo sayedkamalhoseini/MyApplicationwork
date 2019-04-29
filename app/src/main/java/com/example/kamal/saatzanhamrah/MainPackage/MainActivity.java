@@ -137,12 +137,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        if(Share.loadPref(this, "my_key").equals("")){
+        if (Share.loadPref(this, "my_key").equals("")) {
             if (Share.check(this)) {
                 presenter = new MainPresenter();
-                presenter.BuyPresenter(this,urlConfirm);
+                presenter.BuyPresenter(this, urlConfirm);
             }
-        }else{
+        } else {
             confirm(Share.loadPref(this, "my_key"));
         }
 
@@ -219,13 +219,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         alert.show();
 
 
-                        user_update = custumView.findViewById(R.id.editText_update_user);
+//                        user_update = custumView.findViewById(R.id.editText_update_user);
                         email_update = custumView.findViewById(R.id.editText_update_email);
                         progressBar = custumView.findViewById(R.id.progressBar_settings);
                         buttonSettings = custumView.findViewById(R.id.Button_settings);
                         buttonExitUpdate = custumView.findViewById(R.id.button_exit_update);
 
-                        getInfo(user_update, email_update, progressBar, buttonSettings, alert);
+                        getInfo(user, email_update, progressBar, buttonSettings, alert);
 
                         break;
                     case R.id.item_menuItems_registerHandTime:
@@ -310,7 +310,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             };
-        } catch (Exception e) {            progressBar.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            progressBar.setVisibility(View.VISIBLE);
 
             Toast.makeText(this, "خارج شدید.", Toast.LENGTH_SHORT).show();
         }
@@ -462,7 +463,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void sendEnable(boolean mIsPremium);
     }
 
-    public void getInfo(final EditText user_update, final EditText email_update, final ProgressBar progressBar, final Button buttonSettings, final AlertDialog alert) {
+    public void getInfo(final String user_update, final EditText email_update, final ProgressBar progressBar, final Button buttonSettings, final AlertDialog alert) {
         progressBar.setVisibility(View.VISIBLE);
 
         Share.getStringResponse(this, Request.Method.POST, urlGetEmail, null, new Share.StringVolleyCallBack() {
@@ -480,7 +481,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             email_update.setText(emailInfo);
                         }
-                        user_update.setText(userNameInfo);
 
                         progressBar.setVisibility(View.GONE);
 
@@ -516,11 +516,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onClick(View v) {
-                final String user_update1 = user_update.getText().toString().trim();
+                final String user_update1 = Share.loadPref(MainActivity.this,"userKeyUpdate");
                 final String email_update1 = email_update.getText().toString().trim();
-                if (user_update1.equals("")) {
-                    Toast.makeText(MainActivity.this, "نام کاربری را وارد کنید.", Toast.LENGTH_SHORT).show();
-                } else if (email_update1.equals("")) {
+                if (email_update1.equals("")) {
                     Toast.makeText(MainActivity.this, "ایمیل را وارد کنید.", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -528,9 +526,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccessResponse(String result) {
                             if (result.equals("done")) {
-                                Share.saveSharePref(MainActivity.this, "userKeyUpdate", user_update1);
-//                            user=user_update1;
-                                userName.setText(user_update1);
+
                                 Toast.makeText(MainActivity.this, "ویرایش شد.", Toast.LENGTH_LONG).show();
 
                                 progressBar.setVisibility(View.GONE);
