@@ -167,14 +167,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
 
 
         buttonStart.setOnClickListener(this);
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if (SystemClock.elapsedRealtime() - chronometer.getBase() >= 3600000 - 1000) {
-                    chronometer.setFormat("%s");
-                }
-            }
-        });
 
         return view;
     }
@@ -218,7 +210,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         switch (result) {
             case "done":
                 chronometer.setBase(SystemClock.elapsedRealtime());
-                chronometer.setFormat("00:%s");
                 chronometer.start();
                 cardView.setVisibility(View.VISIBLE);
                 Share.saveSharePref(getContext(), "start" + user, "false");
@@ -402,8 +393,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     public void onStart() {
         super.onStart();
          if (loadPref(getActivity(), "end" + user).equals("false")) {
-                    chronometer.setFormat("00:%s");
-                    chronometer.setBase(SystemClock.elapsedRealtime());
+                 chronometer.setBase(SystemClock.elapsedRealtime());
                 } else {
                     Long startCh = Share.loadPrefLong(getContext(), "pauseChronometer" + user);
                     Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer" + user);
@@ -416,9 +406,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.stop();
                     } else {
-                        if (y < 3600000) {
-                            chronometer.setFormat("00:%s");
-                        }
                         chronometer.setBase(SystemClock.elapsedRealtime() - y);
                         chronometer.start();
                     }

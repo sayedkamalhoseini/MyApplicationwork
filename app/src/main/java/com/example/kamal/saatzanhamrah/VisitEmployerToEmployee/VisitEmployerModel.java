@@ -71,7 +71,7 @@ public class VisitEmployerModel {
             @Override
             public Map onMapPost() {
                 Map<String, String> Params = new HashMap<>();
-                Params.put("userEmployee", userUpdate);
+                Params.put("userEmployee", user);
                 Params.put("key_text_android", "ktaa");
                 return Params;
 

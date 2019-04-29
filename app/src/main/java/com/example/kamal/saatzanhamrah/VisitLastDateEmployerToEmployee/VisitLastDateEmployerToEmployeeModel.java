@@ -223,7 +223,7 @@ public class VisitLastDateEmployerToEmployeeModel {
 
     }
 
-    public void buildPdf(final String url, final String start, final String end, final String user, final String kind, final ProgressBar progressbar, final TextView textSum) {
+    public void buildPdf(final String url, final String start, final String end, final String user, final String kind, final ProgressBar progressbar, final TextView textSum, final String userUpdate) {
         if (start.equals("") || end.equals("")) {
             Toast.makeText(activity, R.string.enterStartEnd, Toast.LENGTH_SHORT).show();
             progressbar.setVisibility(View.GONE);
@@ -246,7 +246,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                         if (!dir.exists())
                             dir.mkdirs();
 
-                        File file = new File(dir, user+keyStart+"_"+keyEnd+"_time"+".pdf");
+                        File file = new File(dir, userUpdate+keyStart+"_"+keyEnd+"_time"+".pdf");
                         fOut = new FileOutputStream(file);
                         PdfWriter.getInstance(doc, fOut);
                         doc.open();
@@ -257,9 +257,10 @@ public class VisitLastDateEmployerToEmployeeModel {
                         Log.e("PDFCreator", "ioException:" + e);
                     }
                     try {
-                        Share.createandDisplayPdf("","","", "","", doc);
-                        Share.createandDisplayPdf(end,"تا تاریخ", start,"از تاریخ", "کارکرد کاربر"+user, doc);
-                        Share.createandDisplayPdf("","", "", "","", doc);
+                        Share.createandDisplayPdf("\n", "", "", "", "", doc);
+                        Share.createandDisplayPdf("\n\n", "", "ساعت زن همراه", "", "", doc);
+                        Share.createandDisplayPdfTitle("\n", "تا تاریخ" + end + "\n", "از تاریخ" + start, "کارکرد کاربر" + userUpdate, "", doc);
+                        Share.createandDisplayPdf("\n\n\n", "", "", "", "", doc);
                         JSONObject jsonObject = new JSONObject(result);
                         String _sum=jsonObject.getString("sum");
                         JSONArray jsonArray = jsonObject.getJSONArray("lastVisit");
@@ -296,7 +297,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                             lastTime.setEndWorkTime(endLastTime);
                             lastTime.setWorkTime(_workTime);
                             if (i == 0) {
-                                Share.createandDisplayPdf(activity.getResources().getString(R.string.explains),activity.getResources().getString(workTime), activity.getResources().getString(R.string.endTime), activity.getResources().getString(R.string.startTime),activity.getResources().getString(R.string.numberRow), doc);
+                                Share.createandDisplayPdf(activity.getResources().getString(R.string.explains)+ "\n",activity.getResources().getString(workTime), activity.getResources().getString(R.string.endTime), activity.getResources().getString(R.string.startTime),activity.getResources().getString(R.string.numberRow), doc);
                             }
 
                             Share.createandDisplayPdf("",_workTime, endLastDate, startLastDate,(i+1)+"", doc);
@@ -308,7 +309,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                         doc.close();
                         progressbar.setVisibility(View.GONE);
                         textSum.setVisibility(View.VISIBLE);
-                        textSum.setText("فایل" + " " + user +keyStart+"_"+keyEnd+ "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                        textSum.setText("فایل" + " " + userUpdate +keyStart+"_"+keyEnd+ "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -502,7 +503,7 @@ public class VisitLastDateEmployerToEmployeeModel {
         return success;
     }
 
-    public void buildExcel(String url, final String start, final String end, final String user, final String kind, final ProgressBar progressbar, CoordinatorLayout coordinatorLayout, final TextView textSum) {
+    public void buildExcel(String url, final String start, final String end, final String user, final String kind, final ProgressBar progressbar, CoordinatorLayout coordinatorLayout, final TextView textSum, final String userUpdate) {
         if (start.equals("") || end.equals("")) {
             Toast.makeText(activity, R.string.enterStartEnd, Toast.LENGTH_SHORT).show();
             progressbar.setVisibility(View.GONE);
@@ -637,7 +638,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                                 root.setWritable(true);
                                 root.mkdirs();
                             }
-                            File file = new File(root, user+keyStart+"_"+keyEnd + "_time" + ".xls");
+                            File file = new File(root, userUpdate+keyStart+"_"+keyEnd + "_time" + ".xls");
                             FileOutputStream os = null;
 
                             try {
@@ -655,7 +656,7 @@ public class VisitLastDateEmployerToEmployeeModel {
                             }
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل" + " " + user + keyStart+"_"+keyEnd+"_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + userUpdate + keyStart+"_"+keyEnd+"_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);

@@ -22,7 +22,7 @@ public class VisitLastDateEmployerToEmployeePresenter {
     }
 
 
-    public void getLastDatePresenter(String url, String start, String end, String user, String kind, int row_start, ProgressBar progressbar, FloatingActionButton floatingActionButton) {
+    public void getLastDatePresenter(String url, String start, String end, String user, String kind, int row_start, ProgressBar progressbar, FloatingActionButton floatingActionButton, String userUpdate) {
         model.getLastDateModel(url,start,end,user,kind,row_start,progressbar,floatingActionButton);
     }
 
@@ -48,15 +48,15 @@ public class VisitLastDateEmployerToEmployeePresenter {
     }
 
 
-    public void buildPdfPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, TextView textSum) {
-        model.buildPdf(url,start,end,user,kind,progressbar,textSum);
+    public void buildPdfPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, TextView textSum, String userUpdate) {
+        model.buildPdf(url,start,end,user,kind,progressbar,textSum,userUpdate);
     }
 
     public void sumPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar) {
         model.sumModel(url,start,end,user,kind,progressbar);
     }
-    public void buildExcelPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, CoordinatorLayout coordinatorLayout, TextView textSum) {
-        model.buildExcel(url,start,end,user,kind,progressbar,coordinatorLayout,textSum);
+    public void buildExcelPresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, CoordinatorLayout coordinatorLayout, TextView textSum, String userUpdate) {
+        model.buildExcel(url,start,end,user,kind,progressbar,coordinatorLayout,textSum,userUpdate);
 
     }
 

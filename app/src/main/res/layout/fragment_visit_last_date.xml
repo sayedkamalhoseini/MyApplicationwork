@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/linear_visitLastDate_buttonListVisit"
             android:layoutDirection="rtl"
+            android:fadeScrollbars="false"
             android:layout_margin="5dp">
 
             <LinearLayout

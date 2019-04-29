@@ -193,6 +193,53 @@ public class Share {
     }
 
 
+    public static void createandDisplayPdfTitle(String explains,String text1, String text2, String text3,String numberRow, Document doc) {
+
+        try {
+
+
+            BaseFont farsiFont = BaseFont.createFont("assets/fonts/XB Zar.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font paraFont;
+            if(text2.equals("ساعت زن همراه"))
+                 paraFont = new Font(farsiFont, 18);
+            else
+                 paraFont = new Font(farsiFont, 15);
+
+
+            Paragraph p1 = new Paragraph(text1, paraFont);
+            Paragraph p2 = new Paragraph(text2, paraFont);
+            Paragraph p3 = new Paragraph(text3, paraFont);
+
+            PdfPTable table = new PdfPTable(3);
+            PdfPCell cell1 = new PdfPCell(p1);
+            PdfPCell cell2 = new PdfPCell(p2);
+            PdfPCell cell3 = new PdfPCell(p3);
+            if (text1.equals("")) {
+                cell1.setBorder(2);
+                cell2.setBorder(2);
+                cell3.setBorder(2);
+              } else {
+                cell1.setBorder(0);
+                cell2.setBorder(0);
+                cell3.setBorder(0);
+            }
+            cell1.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+            cell2.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+            cell3.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+            table.setWidthPercentage(100);
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+
+            doc.add(table);
+        } catch (DocumentException de) {
+            Log.e("PDFCreator", "DocumentException:" + de);
+        } catch (IOException e) {
+            Log.e("PDFCreator", "ioException:" + e);
+        }
+    }
+
+
     public interface StringVolleyCallBack {
         public void onSuccessResponse(String result);
 

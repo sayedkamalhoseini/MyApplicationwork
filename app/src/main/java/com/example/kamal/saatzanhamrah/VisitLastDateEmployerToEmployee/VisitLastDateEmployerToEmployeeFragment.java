@@ -191,7 +191,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                     layoutTitle.setVisibility(View.VISIBLE);
                     progressbar.setVisibility(View.VISIBLE);
                     start_row = 0;
-                    presenter.getLastDatePresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, start_row, progressbar, floatingActionButton);
+                    presenter.getLastDatePresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, start_row, progressbar, floatingActionButton,userUpdate);
                     flagConfirm = 0;
                     break;
                 } else {
@@ -208,7 +208,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, textSum);
+                    presenter.buildPdfPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, textSum, userUpdate);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -223,7 +223,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildPdfPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, textSum);
+                    presenter.buildPdfPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, textSum,userUpdate);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -239,7 +239,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, coordinatorLayout, textSum);
+                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, coordinatorLayout, textSum, userUpdate);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -255,7 +255,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
                 layoutTitle.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildExcelPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, coordinatorLayout, textSum);
+                    presenter.buildExcelPresenter(urlConfirmJust, visitStart.getText().toString(), visitEnd.getText().toString(), userMain, kind, progressbar, coordinatorLayout, textSum,userUpdate);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();

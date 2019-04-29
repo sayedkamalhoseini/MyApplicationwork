@@ -55,11 +55,13 @@ public class VisitLastDateModel {
     FileOutputStream fOut;
     List<LastTime> lastTimeList;
     String _workTimeHour, _workTimeMinute, _workTimeSecond, user, kind, sumTime;
+    String userUpdate;
 
 
     public VisitLastDateModel(VisitLastDatePresenter visitLastDatePresenter, FragmentActivity activity) {
         this.activity = activity;
         presenter = visitLastDatePresenter;
+        userUpdate = Share.loadPref(activity, "userKeyUpdate");
     }
 
     public void getLastDateModel(final String url, final String start, final String end, final String user, final String kind, final int start_row, final ProgressBar progressbar, final FloatingActionButton floatingActionButton) {
@@ -107,11 +109,11 @@ public class VisitLastDateModel {
                             lastTime.setEndWorkTime(endLastTime);
                             lastTime.setWorkTime(_workTime);
                             lastTime.setConfirm_employer(confirm_employer);
-                            if(confirm_employer.equals("1")){
+                            if (confirm_employer.equals("1")) {
                                 lastTime.setSelected(true);
-                            }else if(confirm_employer.equals("0")){
+                            } else if (confirm_employer.equals("0")) {
                                 lastTime.setSelected(false);
-                            }else{
+                            } else {
                                 lastTime.setSelected(false);
                             }
 
@@ -186,11 +188,11 @@ public class VisitLastDateModel {
                         lastTime.setEndWorkDate(endLastDate);
                         lastTime.setEndWorkTime(endLastTime);
                         lastTime.setWorkTime(_workTime);
-                        if(confirm_employer.equals("1")){
+                        if (confirm_employer.equals("1")) {
                             lastTime.setSelected(true);
-                        }else if(confirm_employer.equals("0")){
+                        } else if (confirm_employer.equals("0")) {
                             lastTime.setSelected(false);
-                        }else{
+                        } else {
                             lastTime.setSelected(false);
                         }
 
@@ -253,7 +255,7 @@ public class VisitLastDateModel {
                         File dir = new File(path);
                         if (!dir.exists())
                             dir.mkdirs();
-                        File file = new File(dir, user + "_time"+keyStart+"_"+keyEnd + ".pdf");
+                        File file = new File(dir, userUpdate + "_time" + keyStart + "_" + keyEnd + ".pdf");
                         fOut = new FileOutputStream(file);
                         PdfWriter.getInstance(doc, fOut);
                         doc.open();
@@ -263,11 +265,10 @@ public class VisitLastDateModel {
                         Log.e("PDFCreator", "ioException:" + e);
                     }
                     try {
-                        Share.createandDisplayPdf("", "", "", "", "", doc);
-                        Share.createandDisplayPdf("", "", "ساعت زن همراه", "", "", doc);
-                        Share.createandDisplayPdf("", "", "", "", "", doc);
-                        Share.createandDisplayPdf(end, "تا تاریخ", start, "از تاریخ", "کارکرد کاربر" + user, doc);
-                        Share.createandDisplayPdf("", "", "", "", "", doc);
+                        Share.createandDisplayPdf("\n", "", "", "", "", doc);
+                        Share.createandDisplayPdf("\n\n", "", "ساعت زن همراه", "", "", doc);
+                        Share.createandDisplayPdfTitle("\n", "تا تاریخ" + end + "\n", "از تاریخ" + start, "کارکرد کاربر" + userUpdate, "", doc);
+                        Share.createandDisplayPdf("\n\n\n", "", "", "", "", doc);
                         JSONObject jsonObject = new JSONObject(result);
                         String success = jsonObject.getString("success");
                         String _sum = jsonObject.getString("sum");
@@ -304,19 +305,18 @@ public class VisitLastDateModel {
                                 lastTime.setEndWorkTime(endLastTime);
                                 lastTime.setWorkTime(_workTime);
                                 if (i == 0) {
-                                    Share.createandDisplayPdf(activity.getResources().getString(R.string.explains), activity.getResources().getString(workTime), activity.getResources().getString(R.string.endTime), activity.getResources().getString(R.string.startTime), activity.getResources().getString(R.string.numberRow), doc);
+                                    Share.createandDisplayPdf(activity.getResources().getString(R.string.explains) + "\n", activity.getResources().getString(workTime), activity.getResources().getString(R.string.endTime), activity.getResources().getString(R.string.startTime), activity.getResources().getString(R.string.numberRow), doc);
                                 }
 
                                 Share.createandDisplayPdf("", _workTime, endLastDate, startLastDate, (i + 1) + "", doc);
-                                Share.createandDisplayPdf(explains, "", endLastTime, startLastTime, "", doc);
+                                Share.createandDisplayPdf( explains , "", endLastTime, startLastTime, "", doc);
                                 lastTimeList.add(lastTime);
                             }
-                            Share.createandDisplayPdf("", "", "", "", "", doc);
                             Share.createandDisplayPdf("", "مجموع کل کارکرد" + sumTime, "", "", "", doc);
                             doc.close();
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل" + " " + user +keyStart+"_"+keyEnd+ "_time" + ".pdf" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + userUpdate + keyStart + "_" + keyEnd + "_time" + ".pdf" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);
@@ -649,7 +649,7 @@ public class VisitLastDateModel {
                                 root.setWritable(true);
                                 root.mkdirs();
                             }
-                            File file = new File(root, user + keyStart+"_"+keyEnd+"_time" + ".xls");
+                            File file = new File(root, userUpdate + keyStart + "_" + keyEnd + "_time" + ".xls");
                             FileOutputStream os = null;
 
                             try {
@@ -667,7 +667,7 @@ public class VisitLastDateModel {
                             }
                             progressbar.setVisibility(View.GONE);
                             textSum.setVisibility(View.VISIBLE);
-                            textSum.setText("فایل" + " " + user + keyStart+"_"+keyEnd+"_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
+                            textSum.setText("فایل" + " " + userUpdate + keyStart + "_" + keyEnd + "_time" + ".xls" + "در حافظه داخلی یا خارجی گوشی ذخیره شد.");
                         } else {
                             Toast.makeText(activity, activity.getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
                             progressbar.setVisibility(View.GONE);

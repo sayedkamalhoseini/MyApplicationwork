@@ -80,7 +80,7 @@ public class LoginModel {
                             Toast.makeText(activity, "لطفا ثبت نام نمایید و نوع شغل هم درست انتخاب کرده باشید.", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                             btnLogin.setEnabled(true);
-                        }else if (result.equals("noConnect")) {
+                        }else if (success.equals("noConnect")) {
                             Toast.makeText(activity, activity.getString(R.string.registerError), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                             btnLogin.setEnabled(true);
