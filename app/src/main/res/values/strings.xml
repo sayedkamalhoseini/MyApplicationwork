@@ -277,12 +277,13 @@
     <string name="enableMessage">برای ثبت زمان های بیشتر لطفا فعالسازی برنامه را انجام دهید.</string>
     <string name="register">ثبت نام</string>
     <string name="messageErrorHandDate">لطفا ابتدا کار فعلی را به پایان برسانید بعد ثبت زمان گذشته را انجام دهید</string>
-    <string name="sumTitle">مجموع</string>
+    <string name="sumTitle">مجموع:</string>
     <string name="confirm">تایید کارفرما</string>
     <string name="settings">ویرایش حساب کاربری</string>
     <string name="open_drawer">openDrawer</string>
     <string name="close_drawer">closeDrawer</string>
-
+    <string name="bigTime">فاصله بین زمان شروع و زمان پایان باید کمتر از 360 روز باشد.</string>
+    <string name="end">پایان کار :</string>
 
 
     <string-array name="nav_drawer_labels">

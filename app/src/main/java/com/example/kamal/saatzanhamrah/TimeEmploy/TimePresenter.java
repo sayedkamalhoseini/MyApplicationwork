@@ -58,8 +58,8 @@ public class TimePresenter {
 
     }
 
-    public void resultHandDate(String result) {
-        view1.resultHandDate(result);
+    public void resultHandDate(String success, String workTime) {
+        view1.resultHandDate(success,workTime);
     }
 
     public void sendProblem(String problemUrl) {

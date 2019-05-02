@@ -23,6 +23,9 @@ import com.example.kamal.saatzanhamrah.VerifyFragment;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +41,7 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     private String user, kind;
     private String mDay, mMonth, hourStart, minuteStart, hourEnd, minuteEnd, _miladiStart, _miladiEnd;
     private TimePresenter presenter;
-    private String handDateUrl = "http://kamalroid.ir/hand_date.php";
+    private String handDateUrl = "http://kamalroid.ir/hand_date_20190501.php";
     private Map<String, String> params;
     private TabLayout tabLayout;
     private TextView textTitle;
@@ -46,6 +49,7 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     private ProgressBar progressbar;
     private boolean mIsPremium;
     private VerifyFragment verifyFragment;
+    private Info_hand_date info_hand_date;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -250,10 +254,13 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     }
 
 
-    public void resultHandDate(String result) {
+    public void resultHandDate(String result, String workTime) {
+
         switch (result) {
             case "done":
                 verifyFragment = new VerifyFragment();
+                info_hand_date= (Info_hand_date) verifyFragment;
+                info_hand_date.sendInfoHand(params,workTime);
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, verifyFragment).commit();
                 buttonRegisterHandDate.setEnabled(true);
                 if (loadPref(getActivity(), "count").equals("1")) {
@@ -307,5 +314,10 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void sendEnable(boolean mIsPremium) {
         this.mIsPremium = mIsPremium;
+    }
+
+    public interface Info_hand_date{
+        public void sendInfoHand(Map<String, String> params,String workTime);
+
     }
 }

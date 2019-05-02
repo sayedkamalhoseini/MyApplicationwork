@@ -399,7 +399,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                     Long baseCh = Share.loadPrefLong(getContext(), "baseChronometer" + user);
                     calendarStart = Calendar.getInstance();
                     Long y = calendarStart.getTime().getTime() - startCh + baseCh;
-                    Long most = 15552000000L;
+                    Long most = 31104000000L;
                     if (y > most) {
                         Share.saveSharePrefLong(getContext(), "pauseChronometer" + user, 0L);
                         Share.saveSharePrefLong(getContext(), "baseChronometer" + user, 0L);
