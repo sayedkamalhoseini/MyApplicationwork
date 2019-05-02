@@ -192,19 +192,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_addEmployeeToEmployer:
-                        title.setText(getString(R.string.addEmployer));
+//                        title.setText(getString(R.string.addEmployer));
                         fragment = new AddEmployeeToEmployerFragment();
                         passData = (PassData) fragment;
                         passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_visitWorkEmployee:
-                        title.setText(getString(R.string.visitWorkEmployee));
+//                        title.setText(getString(R.string.visitWorkEmployee));
                         fragment = new VisitEmployeeToEmployerFragment();
                         passData = (PassData) fragment;
                         passData.sendData(user, kind, userUpdate);
                         break;
                     case R.id.item_menuItems_registerAutoTime:
-                        title.setText(getString(R.string.autoDate));
+//                        title.setText(getString(R.string.autoDate));
                         fragment = new AutoDateFragment();
                         passData = (PassData) fragment;
                         passData.sendData(user, kind, userUpdate);
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         break;
                     case R.id.item_menuItems_registerHandTime:
-                        title.setText(getString(R.string.handDate));
+//                        title.setText(getString(R.string.handDate));
 
                         if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
                             fragment = new HandDateFragment();
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 
                     case R.id.item_menuItems_visitEmployer:
-                        title.setText(getString(R.string.visitEmployer));
+//                        title.setText(getString(R.string.visitEmployer));
                         fragment = new VisitEmployerToEmployeeFragment();
                         passData = (PassData) fragment;
                         passData.sendData(user, kind, userUpdate);
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         finish();
                         break;
                     case R.id.item_menuItems_aboutUs:
-                        title.setText(getString(R.string.aboutUs));
+//                        title.setText(getString(R.string.aboutUs));
                         fragment = new AboutUsFragment();
                         break;
                 }
@@ -408,7 +408,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 invalidateOptionsMenu();
 
                 if (runnable != null) {
-                    new Handler().postDelayed(runnable,200);
+                    new Handler().postDelayed(runnable,0);
                     runnable = null;
                 }
 
