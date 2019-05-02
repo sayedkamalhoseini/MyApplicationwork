@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Pushe.initialize(this, true);
         setContentView(R.layout.navigation_drawer);
-        toolbar = (Toolbar) findViewById(com.example.kamal.saatzanhamrah.R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         frameLayout = findViewById(R.id.frameLayout_main_containerFragment);
         title = findViewById(R.id.textView_toolbar_title);
         relativeLayout = findViewById(R.id.main_layout);
@@ -156,14 +156,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (Share.loadPref(this, "start" + user).equals(false)) {
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, com.example.kamal.saatzanhamrah.R.color.yellow));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
         } else if (Share.loadPref(this, "end" + user).equals(false)) {
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, com.example.kamal.saatzanhamrah.R.color.green_500));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.green_500));
         }
         autoDateFragment = new AutoDateFragment();
         passData = (PassData) autoDateFragment;
         passData.sendData(user, kind, userUpdate);
-        getSupportFragmentManager().beginTransaction().replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, autoDateFragment).commit();
+        fragment=autoDateFragment;
         setupNavigationDrawer();
     }
 
@@ -270,7 +271,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (fragment != null) {
 
-                    getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frameLayout_main_containerFragment, fragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, fragment).commit();
+
                 }
             }
         };
@@ -281,83 +283,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    public void confirm(String my_buy) {
-        mHelper = new IabHelper(MainActivity.this, my_buy);
-        try {
-            mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-                public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-                    Log.d(TAG, "Query inventory finished.");
-                    if (result.isFailure()) {
-                        Log.d(TAG, "Failed to query inventory: " + result);
-                        return;
-                    } else {
-                        Log.d(TAG, "Query inventory was successful.");
-                        mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
-                        if (mIsPremium) {
-                            navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
-                            Share.saveSharePref(MainActivity.this, "count", "1");
-                            Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                            enableData = (EnableData) autoDateFragment;
-                            enableData.sendEnable(mIsPremium);
-                        } else {
-                            if (Share.loadPref(MainActivity.this, "count").equals("1")) {
-                                navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
-                                Share.saveSharePref(MainActivity.this, "count", "1");
-                                Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
-                                enableData = (EnableData) autoDateFragment;
-                                enableData.sendEnable(mIsPremium);
-                            }
-                        }
-
-                        Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
-                    }
-
-                    Log.d(TAG, "Initial inventory query finished; enabling main UI.");
-                }
-
-
-            };
-        } catch (Exception e) {
-            progressBar.setVisibility(View.VISIBLE);
-
-            Toast.makeText(this, "خارج شدید.", Toast.LENGTH_SHORT).show();
-        }
-
-        mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-            public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-                if (result.isFailure()) {
-                    Log.d(TAG, "Error purchasing: " + result);
-                    return;
-                } else if (purchase.getSku().equals(SKU_PREMIUM)) {
-                    // give user access to premium content and update the UI
-                    Toast.makeText(MainActivity.this, "خرید موفق", Toast.LENGTH_LONG).show();
-                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                    mIsPremium = true;
-                    enableData = (EnableData) autoDateFragment;
-                    enableData.sendEnable(mIsPremium);
-                    navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
-                    Share.saveSharePref(MainActivity.this, "count", "1");
-                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
-                }
-            }
-        };
-
-
-        Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
-
-                if (!result.isSuccess()) {
-                    // Oh noes, there was a problem.
-                    Log.d(TAG, "Problem setting up In-app Billing: " + result);
-                }
-                // Hooray, IAB is fully set up!
-                mHelper.queryInventoryAsync(mGotInventoryListener);
-            }
-        });
-
-    }
 
     public interface PassData {
         public void sendData(String user, String kind, String userUpdate);
@@ -404,13 +329,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
             @Override
             public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
 
                 if (runnable != null) {
-                    new Handler().postDelayed(runnable,0);
+                    new Handler().post(runnable);
                     runnable = null;
                 }
+                super.onDrawerClosed(drawerView);
+
 
             }
 
@@ -455,12 +381,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (kind.equals("employee")) {
-            MenuItem item = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitWorkEmployee);
+            MenuItem item = menuNav.findItem(R.id.item_menuItems_visitWorkEmployee);
             item.setVisible(false);
         } else if (kind.equals("employer")) {
-            MenuItem item1 = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_addEmployeeToEmployer);
+            MenuItem item1 = menuNav.findItem(R.id.item_menuItems_addEmployeeToEmployer);
             item1.setVisible(false);
-            MenuItem item2 = menuNav.findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_visitEmployer);
+            MenuItem item2 = menuNav.findItem(R.id.item_menuItems_visitEmployer);
             item2.setVisible(false);
         }
 
@@ -587,8 +513,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
             drawerLayout.closeDrawer(Gravity.START);
-        } else {
+        } else if(fragment!=autoDateFragment) {
+            fragment = new AutoDateFragment();
+            passData = (PassData) fragment;
+            passData.sendData(user, kind, userUpdate);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, fragment).commit();
+            navigationView.setCheckedItem(R.id.item_menuItems_registerAutoTime);
+            fragment=autoDateFragment;
+        }else{
             super.onBackPressed();
         }
     }
+
+    public void confirm(String my_buy) {
+        mHelper = new IabHelper(MainActivity.this, my_buy);
+        try {
+            mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+                public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                    Log.d(TAG, "Query inventory finished.");
+                    if (result.isFailure()) {
+                        Log.d(TAG, "Failed to query inventory: " + result);
+                        return;
+                    } else {
+                        Log.d(TAG, "Query inventory was successful.");
+                        mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
+                        if (mIsPremium) {
+                            navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                            Share.saveSharePref(MainActivity.this, "count", "1");
+                            Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                            enableData = (EnableData) autoDateFragment;
+                            enableData.sendEnable(mIsPremium);
+                        } else {
+                            if (Share.loadPref(MainActivity.this, "count").equals("1")) {
+                                navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
+                                Share.saveSharePref(MainActivity.this, "count", "1");
+                                Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
+                                enableData = (EnableData) autoDateFragment;
+                                enableData.sendEnable(mIsPremium);
+                            }
+                        }
+
+                        Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
+                    }
+
+                    Log.d(TAG, "Initial inventory query finished; enabling main UI.");
+                }
+
+
+            };
+        } catch (Exception e) {
+            progressBar.setVisibility(View.VISIBLE);
+
+            Toast.makeText(this, "خارج شدید.", Toast.LENGTH_SHORT).show();
+        }
+
+        mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+            public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
+                if (result.isFailure()) {
+                    Log.d(TAG, "Error purchasing: " + result);
+                    return;
+                } else if (purchase.getSku().equals(SKU_PREMIUM)) {
+                    // give user access to premium content and update the UI
+                    Toast.makeText(MainActivity.this, "خرید موفق", Toast.LENGTH_LONG).show();
+                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                    mIsPremium = true;
+                    enableData = (EnableData) autoDateFragment;
+                    enableData.sendEnable(mIsPremium);
+                    navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
+                    Share.saveSharePref(MainActivity.this, "count", "1");
+                    Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
+                }
+            }
+        };
+
+
+        Log.d(TAG, "Starting setup.");
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result) {
+                Log.d(TAG, "Setup finished.");
+
+                if (!result.isSuccess()) {
+                    // Oh noes, there was a problem.
+                    Log.d(TAG, "Problem setting up In-app Billing: " + result);
+                }
+                // Hooray, IAB is fully set up!
+                mHelper.queryInventoryAsync(mGotInventoryListener);
+            }
+        });
+
+    }
+
 }

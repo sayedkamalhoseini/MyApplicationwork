@@ -255,13 +255,12 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
 
 
     public void resultHandDate(String result, String workTime) {
-
         switch (result) {
             case "done":
                 verifyFragment = new VerifyFragment();
                 info_hand_date= (Info_hand_date) verifyFragment;
                 info_hand_date.sendInfoHand(params,workTime);
-                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(com.example.kamal.saatzanhamrah.R.id.frameLayout_main_containerFragment, verifyFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, verifyFragment).commit();
                 buttonRegisterHandDate.setEnabled(true);
                 if (loadPref(getActivity(), "count").equals("1")) {
                     Share.saveSharePref(getActivity(), "count", "2");
