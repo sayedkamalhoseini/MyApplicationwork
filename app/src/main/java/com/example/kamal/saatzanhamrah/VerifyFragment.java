@@ -19,6 +19,7 @@ public class VerifyFragment extends Fragment implements HandDateFragment.Info_ha
     private Map<String, String> params;
     private String sumTime ;
     private TextView verifyHandStart, verifyHandEnd, verifyHandSum;
+    private String mHour,mMinute,mSecond;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,8 @@ public class VerifyFragment extends Fragment implements HandDateFragment.Info_ha
         verifyHandSum = view.findViewById(R.id.verify_sumHand);
         verifyHandStart.setTextColor(Color.BLUE);
         verifyHandEnd.setTextColor(Color.RED);
-        verifyHandStart.setText(params.get("dateStart")+"\t"+params.get("timeStart"));
-        verifyHandEnd.setText(params.get("dateEnd")+"\t"+params.get("timeEnd"));
+        verifyHandStart.setText(params.get("timeStart")+"   "+params.get("dateStart"));
+        verifyHandEnd.setText(params.get("timeEnd")+"   "+params.get("dateEnd"));
         verifyHandSum.setText(sumTime);
         return view;
     }
@@ -44,9 +45,7 @@ public class VerifyFragment extends Fragment implements HandDateFragment.Info_ha
     public void sendInfoHand(Map<String, String> params, String _workTime) {
         this.params = params;
         int workTime = Integer.parseInt(_workTime);
-        String _workTimeHour = workTime / 3600 + "";
-        String _workTimeMinute = workTime % 3600 / 60 + "";
-        String _workTimeSecond = workTime % 3600 % 60 + "";
-        sumTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+        sumTime = Share.changeTime(workTime);
     }
 }

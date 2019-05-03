@@ -58,7 +58,7 @@ public class Share {
 
     public static Long loadPrefLong(Context context, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("total1", Context.MODE_PRIVATE);
-        Long value = sharedPreferences.getLong(key,0);
+        Long value = sharedPreferences.getLong(key, 0);
         return value;
     }
 
@@ -101,11 +101,42 @@ public class Share {
     }
 
 
-
     public static void spinnerAdapter(Context context, Spinner spinner, int arrayHour) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, arrayHour, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
+
+    public static String changeTime(int workTime) {
+
+        String _workTimeHour, _workTimeMinute, _workTimeSecond,
+                mHour,mMinute,mSecond,changeTime;
+
+        _workTimeHour = workTime / 3600 + "";
+        _workTimeMinute = workTime % 3600 / 60 + "";
+        _workTimeSecond = workTime % 3600 % 60 + "";
+
+        if (Integer.parseInt(_workTimeHour) < 10) {
+            mHour = "0" + _workTimeHour;
+        } else {
+            mHour = _workTimeHour + "";
+        }
+        if (Integer.parseInt(_workTimeMinute) < 10) {
+            mMinute = "0" + _workTimeMinute;
+        } else {
+            mMinute = _workTimeMinute + "";
+        }
+
+        if (Integer.parseInt(_workTimeSecond) < 10) {
+            mSecond = "0" + _workTimeSecond;
+        } else {
+            mSecond = _workTimeSecond + "";
+        }
+
+        changeTime = mHour + ":" + mMinute + ":" + mSecond;
+
+        return changeTime;
+
     }
 
 
@@ -131,19 +162,19 @@ public class Share {
         };
         stringRequest.setTag(TAG);
         MySingleton.getInstance(activity).addToRequestQueue(stringRequest);
-      }
+    }
 
-    public static void createandDisplayPdf(String explains,String text1, String text2, String text3,String numberRow, Document doc) {
+    public static void createandDisplayPdf(String explains, String text1, String text2, String text3, String numberRow, Document doc) {
 
         try {
 
 
             BaseFont farsiFont = BaseFont.createFont("assets/fonts/XB Zar.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font paraFont;
-            if(text2.equals("ساعت زن همراه"))
-                 paraFont = new Font(farsiFont, 18);
+            if (text2.equals("ساعت زن همراه"))
+                paraFont = new Font(farsiFont, 18);
             else
-                 paraFont = new Font(farsiFont, 15);
+                paraFont = new Font(farsiFont, 15);
 
 
             Paragraph p5 = new Paragraph(explains, paraFont);
@@ -164,7 +195,7 @@ public class Share {
                 cell3.setBorder(2);
                 cell4.setBorder(2);
                 cell5.setBorder(2);
-              } else {
+            } else {
                 cell1.setBorder(0);
                 cell2.setBorder(0);
                 cell3.setBorder(0);
@@ -193,17 +224,17 @@ public class Share {
     }
 
 
-    public static void createandDisplayPdfTitle(String explains,String text1, String text2, String text3,String numberRow, Document doc) {
+    public static void createandDisplayPdfTitle(String explains, String text1, String text2, String text3, String numberRow, Document doc) {
 
         try {
 
 
             BaseFont farsiFont = BaseFont.createFont("assets/fonts/XB Zar.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font paraFont;
-            if(text2.equals("ساعت زن همراه"))
-                 paraFont = new Font(farsiFont, 18);
+            if (text2.equals("ساعت زن همراه"))
+                paraFont = new Font(farsiFont, 18);
             else
-                 paraFont = new Font(farsiFont, 15);
+                paraFont = new Font(farsiFont, 15);
 
 
             Paragraph p1 = new Paragraph(text1, paraFont);
@@ -218,7 +249,7 @@ public class Share {
                 cell1.setBorder(2);
                 cell2.setBorder(2);
                 cell3.setBorder(2);
-              } else {
+            } else {
                 cell1.setBorder(0);
                 cell2.setBorder(0);
                 cell3.setBorder(0);
@@ -249,7 +280,6 @@ public class Share {
     }
 
 
-
     public static void showSnackBar(Context context, CoordinatorLayout layout, String value) {
         final Snackbar snackbar = Snackbar
                 .make(layout, value, Snackbar.LENGTH_LONG)
@@ -275,19 +305,19 @@ public class Share {
         textView.setTextColor(Color.YELLOW);
         snackbar.setDuration(10000);
         snackbar.show();
-          }
+    }
 
     private static void checkRunTimePermission(Activity activity) {
         String[] permissionArrays = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(activity,permissionArrays,1);
+            requestPermissions(activity, permissionArrays, 1);
         } else {
 
         }
     }
 
-    public static void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults,Activity activity) {
+    public static void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults, Activity activity) {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0

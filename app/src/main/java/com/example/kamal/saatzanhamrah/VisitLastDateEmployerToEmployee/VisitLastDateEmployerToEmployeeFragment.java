@@ -73,6 +73,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private int pos;
+    private String mHour,mMinute,mSecond;
 
 
     @Override
@@ -389,10 +390,9 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         textSumMessage.setVisibility(View.VISIBLE);
         textSum.setVisibility(View.VISIBLE);
         int workTime = Integer.parseInt(result);
-        String _workTimeHour = workTime / 3600 + "";
-        String _workTimeMinute = workTime % 3600 / 60 + "";
-        String _workTimeSecond = workTime % 3600 % 60 + "";
-        result = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+        result = Share.changeTime(workTime);
+
         textSum.setText(result);
 
     }

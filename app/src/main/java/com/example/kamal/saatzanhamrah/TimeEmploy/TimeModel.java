@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,10 +107,7 @@ public class TimeModel {
                             String _workTime = jsonObject1.getString("work_time");
                             if (!_workTime.equals("null")) {
                                 int workTime = Integer.parseInt(_workTime);
-                                String _workTimeHour = workTime / 3600 + "";
-                                String _workTimeMinute = workTime % 3600 / 60 + "";
-                                String _workTimeSecond = workTime % 3600 % 60 + "";
-                                _workTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+                                _workTime = Share.changeTime(workTime);
                             }
                             lastTime.setStartWorkDate(Share.loadPref(activity, "startLastDate" + user));
                             lastTime.setStartWorkTime(Share.loadPref(activity, "startLastTime" + user));

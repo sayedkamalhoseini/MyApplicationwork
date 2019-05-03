@@ -55,7 +55,7 @@ public class VisitLastDateModel {
     FileOutputStream fOut;
     List<LastTime> lastTimeList;
     String _workTimeHour, _workTimeMinute, _workTimeSecond, user, kind, sumTime;
-    String userUpdate;
+    String userUpdate,mHour,mMinute,mSecond;
 
 
     public VisitLastDateModel(VisitLastDatePresenter visitLastDatePresenter, FragmentActivity activity) {
@@ -98,10 +98,8 @@ public class VisitLastDateModel {
 
                             if (!_workTime.equals("null")) {
                                 int workTime = Integer.parseInt(_workTime);
-                                _workTimeHour = workTime / 3600 + "";
-                                _workTimeMinute = workTime % 3600 / 60 + "";
-                                _workTimeSecond = workTime % 3600 % 60 + "";
-                                _workTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+                                _workTime = Share.changeTime(workTime);
                             }
                             lastTime.setStartWorkDate(startLastDate);
                             lastTime.setStartWorkTime(startLastTime);
@@ -178,10 +176,8 @@ public class VisitLastDateModel {
 
                         if (!_workTime.equals("null")) {
                             int workTime = Integer.parseInt(_workTime);
-                            _workTimeHour = workTime / 3600 + "";
-                            _workTimeMinute = workTime % 3600 / 60 + "";
-                            _workTimeSecond = workTime % 3600 % 60 + "";
-                            _workTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+                            _workTime = Share.changeTime(workTime);
                         }
                         lastTime.setStartWorkDate(startLastDate);
                         lastTime.setStartWorkTime(startLastTime);
@@ -287,17 +283,12 @@ public class VisitLastDateModel {
                                 String explains = jsonObject1.getString("explains");
                                 if (!_workTime.equals("null")) {
                                     int workTime = Integer.parseInt(_workTime);
-                                    _workTimeHour = workTime / 3600 + "";
-                                    _workTimeMinute = workTime % 3600 / 60 + "";
-                                    _workTimeSecond = workTime % 3600 % 60 + "";
-                                    _workTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+                                    _workTime = Share.changeTime(workTime);
                                 }
                                 if (!_sum.equals("null")) {
                                     int sum = Integer.parseInt(_sum);
-                                    String sumHour = sum / 3600 + "";
-                                    String sumMinute = sum % 3600 / 60 + "";
-                                    String sumSecond = sum % 3600 % 60 + "";
-                                    sumTime = sumHour + ":" + sumMinute + ":" + sumSecond;
+                                    sumTime = Share.changeTime(sum);
                                 }
                                 lastTime.setStartWorkDate(startLastDate);
                                 lastTime.setStartWorkTime(startLastTime);
@@ -602,17 +593,12 @@ public class VisitLastDateModel {
                                 String explains = jsonObject1.getString("explains");
                                 if (!_workTime.equals("null")) {
                                     int workTime = Integer.parseInt(_workTime);
-                                    _workTimeHour = workTime / 3600 + "";
-                                    _workTimeMinute = workTime % 3600 / 60 + "";
-                                    _workTimeSecond = workTime % 3600 % 60 + "";
-                                    _workTime = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+
+                                    _workTime = Share.changeTime(workTime);
                                 }
                                 if (!_sum.equals("null")) {
                                     int sum = Integer.parseInt(_sum);
-                                    String sumHour = sum / 3600 + "";
-                                    String sumMinute = sum % 3600 / 60 + "";
-                                    String sumSecond = sum % 3600 % 60 + "";
-                                    sumTime = sumHour + ":" + sumMinute + ":" + sumSecond;
+                                    sumTime = Share.changeTime(sum);
                                 }
                                 lastTime.setStartWorkDate(startLastDate);
                                 lastTime.setStartWorkTime(startLastTime);

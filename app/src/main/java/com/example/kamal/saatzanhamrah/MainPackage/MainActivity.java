@@ -176,11 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onNavigationItemSelected(@NonNull final MenuItem menuItem) {
-
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-
                 fragment = null;
                 int id = menuItem.getItemId();
                 switch (id) {
@@ -269,16 +264,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                 }
 
-                if (fragment != null) {
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, fragment).commit();
-
-                }
-            }
-        };
-
-        drawerLayout.closeDrawer(Gravity.START);
-
+                        drawerLayout.closeDrawer(Gravity.START);
 
         return true;
     }
@@ -329,14 +316,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
             @Override
             public void onDrawerClosed(View drawerView) {
-                invalidateOptionsMenu();
 
-                if (runnable != null) {
-                    new Handler().post(runnable);
-                    runnable = null;
+                if (fragment != null) {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, fragment).commit();
+                    fragment=null;
+
                 }
-                super.onDrawerClosed(drawerView);
 
+                super.onDrawerClosed(drawerView);
+                invalidateOptionsMenu();
 
             }
 

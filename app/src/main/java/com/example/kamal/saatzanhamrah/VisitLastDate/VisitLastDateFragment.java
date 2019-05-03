@@ -374,10 +374,7 @@ public class VisitLastDateFragment extends Fragment implements View.OnClickListe
             textSumMessage.setVisibility(View.VISIBLE);
             textSum.setVisibility(View.VISIBLE);
             int workTime = Integer.parseInt(result);
-            String _workTimeHour = workTime / 3600 + "";
-            String _workTimeMinute = workTime % 3600 / 60 + "";
-            String _workTimeSecond = workTime % 3600 % 60 + "";
-            result = _workTimeHour + ":" + _workTimeMinute + ":" + _workTimeSecond;
+            result = Share.changeTime(workTime);
             textSum.setText(result);
         } else {
             Toast.makeText(getContext(), getActivity().getResources().getString(R.string.noLastDate), Toast.LENGTH_SHORT).show();
