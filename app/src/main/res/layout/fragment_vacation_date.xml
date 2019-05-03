@@ -1,0 +1,240 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinate_time_handLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kamal.saatzanhamrah.TimeEmploy.HandDateFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar_time_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/whiteTransparent"
+            android:visibility="gone"/>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:id="@+id/linear_time_handDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:layoutDirection="rtl"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:id="@+id/linear_time_handDateStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layoutDirection="rtl"
+                    android:layout_gravity="start"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imageButton_time_setDateStartVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="@color/white"
+                        android:src="@mipmap/ic_calender1" />
+
+
+                    <EditText
+                        android:id="@+id/editText_time_setDateStartVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".75"
+                        android:ems="11"
+                        android:focusableInTouchMode="false"
+                        android:hint="تاریخ شروع مرخصی ساعتی" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_time_handTimeStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <Spinner
+                        android:id="@+id/spinner_time_handTimeMinuteStartVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.25"
+                        android:focusableInTouchMode="false" />
+
+
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_time_handTimeHourStartVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.25"
+                        android:focusableInTouchMode="false" />
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_time_handDateEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_gravity="start"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imageButton_time_setDateEndVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="@color/white"
+                        android:src="@mipmap/ic_calender1" />
+
+                    <EditText
+                        android:id="@+id/editText_time_setDateEndVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".75"
+                        android:ems="11"
+                        android:focusableInTouchMode="false"
+                        android:hint="تاریخ پایان مرخصی ساعتی" />
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/linear_time_handTimeEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@id/linear_time_handDateEnd"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <Spinner
+                        android:id="@+id/spinner_time_handTimeMinuteEndVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.25"
+                        android:ems="10"
+                        android:focusableInTouchMode="false" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:text=":"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_time_handTimeHourEndVacation"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.25"
+                        android:focusableInTouchMode="false" />
+
+
+
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true">
+
+                        <EditText
+                            android:id="@+id/editText_time_explain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="end"
+                            android:lines="5"
+                            android:gravity="top|start"
+                            android:ems="200"
+                            android:hint="@string/explainTitleHand"
+                            android:inputType="textMultiLine"
+                            android:background="@drawable/border4"
+                            android:padding="5dp"
+                            android:textSize="16sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <com.example.kamal.saatzanhamrah.CustumButton
+                        android:id="@+id/button_time_registerHandDateVacation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="1dp"
+                        android:text="ثبت مرخصی ساعتی" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
+

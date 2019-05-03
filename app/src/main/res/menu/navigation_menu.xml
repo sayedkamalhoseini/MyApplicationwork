@@ -20,9 +20,31 @@
             android:icon="@drawable/ic_restore_hand"/>
     </group>
 
-
     <group
         android:id="@+id/group2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_menuItems_overTime"
+            android:title="@string/overTime"
+            android:icon="@drawable/ic_perm_identity_employer"/>
+
+        <item
+            android:id="@+id/item_menuItems_vacationDate"
+            android:title="@string/vacationDate"
+            android:icon="@drawable/ic_person_add_employer"/>
+
+        <item
+            android:id="@+id/item_menuItems_vacationHour"
+            android:title="@string/vacationHour"
+            android:icon="@drawable/ic_visibility_time"/>
+
+    </group>
+
+
+
+    <group
+        android:id="@+id/group3"
         android:checkableBehavior="single">
     <item
         android:id="@+id/item_menuItems_visitDateMyWork"
@@ -44,8 +66,9 @@
         />
     </group>
 
+
     <group
-        android:id="@+id/group3"
+        android:id="@+id/group4"
 
         android:checkableBehavior="single">
     <item

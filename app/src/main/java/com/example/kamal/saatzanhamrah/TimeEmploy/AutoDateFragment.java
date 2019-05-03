@@ -79,7 +79,6 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     private NavigationView navigationView;
     private Chronometer chronometer;
     private boolean ruuning = false;
-    private TimeService timeService;
     public static Calendar calendarStart;
     public static Date dateStart;
     private CardView cardView;

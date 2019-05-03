@@ -43,6 +43,7 @@ import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.TimeEmploy.AutoDateFragment;
 import com.example.kamal.saatzanhamrah.TimeEmploy.HandDateFragment;
+import com.example.kamal.saatzanhamrah.Vacation.VacationFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployerToEmployee.VisitEmployerToEmployeeFragment;
@@ -243,6 +244,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                         }
 
+                    case R.id.item_menuItems_vacationHour:
+                            fragment = new VacationFragment();
+                            passData = (PassData) fragment;
+                            passData.sendData(user, kind, userUpdate);
+                            enableData = (EnableData) fragment;
+                            enableData.sendEnable(mIsPremium);
+                            break;
+
                     case R.id.item_menuItems_visitEmployer:
 //                        title.setText(getString(R.string.visitEmployer));
                         fragment = new VisitEmployerToEmployeeFragment();
@@ -320,7 +329,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (fragment != null) {
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, fragment).commit();
-                    fragment=null;
 
                 }
 
