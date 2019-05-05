@@ -1,6 +1,8 @@
 package com.example.kamal.saatzanhamrah.Vacation;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -28,7 +30,7 @@ import java.util.Map;
 
 import static com.example.kamal.saatzanhamrah.Share.loadPref;
 
-public class VacationFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, MainActivity.PassData, MainActivity.EnableData {
+public class VacationFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, MainActivity.EnableData {
 
     private EditText editTextHandDateStart, editTextHandDateEnd, explains;
     private Spinner spinnerHandTimeHourStart, spinnerHandTimeMinuteStart, spinnerHandTimeHourEnd, spinnerHandTimeMinuteEnd;
@@ -38,22 +40,25 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     private String user, kind;
     private String mDay, mMonth, hourStart, minuteStart, hourEnd, minuteEnd, _miladiStart, _miladiEnd;
     private VacationPresenter presenter;
-    private String handDateUrl = "http://kamalroid.ir/hand_date_20190501.php";
+    private String handDateUrl = "http://kamalroid.ir/hour_vacation.php";
+    private String overTimeUrl = "http://kamalroid.ir/over_time.php";
     private Map<String, String> params;
     private TabLayout tabLayout;
     private TextView textTitle;
     private CoordinatorLayout coordinatorLayout;
     private ProgressBar progressbar;
     private boolean mIsPremium;
-    private VerifyFragment verifyFragment;
-    private Info_hand_date info_hand_date;
+    private HandVerifyVacationFragment handVerifyVacationFragment;
+    private Info_vacation_hour info_vacation_hour;
+    private String flag,url;
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         presenter = new VacationPresenter(this);
-
+        context=getContext();
     }
 
     @Override
@@ -70,6 +75,15 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         spinnerHandTimeMinuteStart = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteStartVacation);
         spinnerHandTimeHourEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeHourEndVacation);
         spinnerHandTimeMinuteEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteEndVacation);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                Share.spinnerAdapter(context, spinnerHandTimeHourStart, R.array.arrayStartHourVacation);
+                Share.spinnerAdapter(context, spinnerHandTimeMinuteStart, R.array.arrayStartMinuteVacation);
+                Share.spinnerAdapter(context, spinnerHandTimeHourEnd, R.array.arrayEndHourVacation);
+                Share.spinnerAdapter(context, spinnerHandTimeMinuteEnd, R.array.arrayEndMinuteVacation);
+            }
+        });
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_time_handLayout);
         progressbar = (ProgressBar) view.findViewById(R.id.progressBar_time_loading);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);
@@ -83,10 +97,6 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         spinnerHandTimeMinuteStart.setOnItemSelectedListener(this);
         spinnerHandTimeHourEnd.setOnItemSelectedListener(this);
         spinnerHandTimeMinuteEnd.setOnItemSelectedListener(this);
-        Share.spinnerAdapter(getContext(), spinnerHandTimeHourStart, R.array.arrayStartHourVacation);
-        Share.spinnerAdapter(getContext(), spinnerHandTimeMinuteStart, R.array.arrayStartMinuteVacation);
-        Share.spinnerAdapter(getContext(), spinnerHandTimeHourEnd, R.array.arrayEndHourVacation);
-        Share.spinnerAdapter(getContext(), spinnerHandTimeMinuteEnd, R.array.arrayEndMinuteVacation);
         return view;
     }
 
@@ -96,6 +106,12 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.button_time_registerHandDateVacation:
                 if (Share.check(getContext())) {
+                    if(flag.equals("vacation_hour")){
+                        url=handDateUrl;
+                    }
+                    else{
+                        url=overTimeUrl;
+                    }
                         if (loadPref(getActivity(), "count").equals("1") || loadPref(getActivity(), "count").equals("2")) {
                             buttonRegisterHandDate.setEnabled(false);
                             progressbar.setVisibility(View.VISIBLE);
@@ -112,7 +128,7 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
                                 progressbar.setVisibility(View.GONE);
 
                             }else {
-                                presenter.presenterHandDate(handDateUrl, params, progressbar, buttonRegisterHandDate);
+                                presenter.presenterHandDate(url, params, progressbar, buttonRegisterHandDate);
                             }
                             break;
                         } else {
@@ -243,21 +259,15 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
 
     }
 
-    @Override
-    public void sendData(String user, String kind,String userUpdate) {
-        this.user = user;
-        this.kind = kind;
-
-    }
 
 
     public void resultHandDate(String result, String workTime) {
         switch (result) {
             case "done":
-                verifyFragment = new VerifyFragment();
-                info_hand_date= (Info_hand_date) verifyFragment;
-                info_hand_date.sendInfoHand(params,workTime);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, verifyFragment).commit();
+                handVerifyVacationFragment = new HandVerifyVacationFragment();
+                info_vacation_hour= (Info_vacation_hour) handVerifyVacationFragment;
+                info_vacation_hour.sendInfoHand(params,workTime);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, handVerifyVacationFragment).commit();
                 buttonRegisterHandDate.setEnabled(true);
                 if (loadPref(getActivity(), "count").equals("1")) {
                     Share.saveSharePref(getActivity(), "count", "2");
@@ -308,11 +318,16 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendEnable(boolean mIsPremium) {
+    public void sendEnable(boolean mIsPremium,String user, String kind,String flag) {
         this.mIsPremium = mIsPremium;
+        this.user = user;
+        this.kind = kind;
+        this.flag=flag;
     }
 
-    public interface Info_hand_date{
+
+
+    public interface Info_vacation_hour{
         public void sendInfoHand(Map<String, String> params, String workTime);
 
     }

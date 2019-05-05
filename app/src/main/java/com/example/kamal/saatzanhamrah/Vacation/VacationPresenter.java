@@ -28,7 +28,7 @@ public class VacationPresenter {
     }
 
     public void presenterHandDate(String addEmployeeUrl, Map<String, String> params, ProgressBar progressbar, Button buttonRegisterHandDate) {
-        model.handDate(addEmployeeUrl,params,progressbar,buttonRegisterHandDate);
+        model.hourVacation(addEmployeeUrl,params,progressbar,buttonRegisterHandDate);
     }
 
 

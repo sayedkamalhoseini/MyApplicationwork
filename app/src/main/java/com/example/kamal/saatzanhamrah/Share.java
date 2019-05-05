@@ -2,6 +2,7 @@ package com.example.kamal.saatzanhamrah;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,7 +12,9 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -25,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -317,19 +321,20 @@ public class Share {
         }
     }
 
-    public static void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults, Activity activity) {
-        switch (requestCode) {
-            case 1: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    checkRunTimePermission(activity);
-                }
-                return;
-            }
-        }
-    }
-}
+//    public static void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults, Activity activity) {
+//        switch (requestCode) {
+//            case 1: {
+//                if (grantResults.length > 0
+//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                } else {
+//                    checkRunTimePermission(activity);
+//                }
+//                return;
+//            }
+//        }
+//    }
+
+  }
 
 
 

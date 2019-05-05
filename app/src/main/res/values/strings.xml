@@ -34,7 +34,7 @@
     <string name="error"> لطفا فیلترشکن را قطع کنید به اینترنت متصل باشید و دوباره تلاش کنید.</string>
     <string name="startRegister"> زمان شروع با موفقیت ثبت شد.</string>
     <string name="endRegister"> زمان پایان با موفقیت ثبت شد.</string>
-    <string name="visitDateMyWork">مشاهده کارکرد و حذف</string>
+    <string name="visitDateMyWork">مشاهده زمان های ثبت شده</string>
     <string name="addEmployer">اضافه کردن کارفرما</string>
     <string name="visitEmployer">مشاهده نام کارفرمای من</string>
     <string name="visitWorkEmployee">مشاهده کارکرد کارکنان من</string>

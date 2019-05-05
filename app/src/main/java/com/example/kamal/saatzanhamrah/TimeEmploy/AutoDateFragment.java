@@ -356,8 +356,10 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendEnable(boolean mIsPremium) {
+    public void sendEnable(boolean mIsPremium,String user, String kind,String flag) {
         this.mIsPremium = mIsPremium;
+        this.user = user;
+        this.kind = kind;
     }
 
     public void resultProblem(String result) {

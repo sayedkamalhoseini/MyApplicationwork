@@ -1,6 +1,7 @@
 package com.example.kamal.saatzanhamrah.Vacation;
 
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -37,7 +38,7 @@ public class VacationModel {
     }
 
 
-    public void handDate(String addEmployeeUrl, final Map<String, String> params1, final ProgressBar progressbar, final Button buttonRegisterHandDate) {
+    public void hourVacation(String addEmployeeUrl, final Map<String, String> params1, final ProgressBar progressbar, final Button buttonRegisterHandDate) {
         try {
 
             if (Integer.parseInt(params1.get("dateEnd").replace("/", "")) > Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
@@ -87,6 +88,7 @@ public class VacationModel {
                 });
             } else if (Integer.parseInt(params1.get("dateEnd").replace("/", "")) == Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
                 if (Integer.parseInt(params1.get("timeEnd").replace(":", "")) >= Integer.parseInt(params1.get("timeStart").replace(":", ""))) {
+                    Log.i("TagVacation", "kamal" );
                     Share.getStringResponse(activity, Request.Method.POST, addEmployeeUrl, null, new Share.StringVolleyCallBack() {
                         @Override
                         public void onSuccessResponse(String result) {
@@ -149,7 +151,11 @@ public class VacationModel {
             progressbar.setVisibility(View.GONE);
             buttonRegisterHandDate.setEnabled(true);
         }
+        Log.i("TagVacation", "kamal1" );
+
     }
+
+
 
 
 }
