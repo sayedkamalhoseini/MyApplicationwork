@@ -205,16 +205,16 @@
 
     <string-array name="nav_drawer_labels">
 
-    <item>@string/enable</item>
-    <item>@string/autoDate</item>
-    <item>@string/handDate</item>
-    <item>@string/visitDateMyWork</item>
-    <item>@string/addEmployer</item>
-    <item>@string/visitEmployer</item>
-    <item>@string/visitWorkEmployee</item>
-    <item>@string/aboutUs</item>
-    <item>@string/exit</item>
+        <item>@string/enable</item>
+        <item>@string/autoDate</item>
+        <item>@string/handDate</item>
+        <item>@string/visitDateMyWork</item>
+        <item>@string/addEmployer</item>
+        <item>@string/visitEmployer</item>
+        <item>@string/visitWorkEmployee</item>
+        <item>@string/aboutUs</item>
+        <item>@string/exit</item>
 
-</string-array>
+    </string-array>
 
-    </resources>
+</resources>
