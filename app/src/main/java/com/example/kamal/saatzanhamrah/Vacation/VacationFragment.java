@@ -1,7 +1,6 @@
 package com.example.kamal.saatzanhamrah.Vacation;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,12 +22,9 @@ import android.widget.Toast;
 import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
-import com.example.kamal.saatzanhamrah.SpinnerAdapter;
-import com.example.kamal.saatzanhamrah.VerifyFragment;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,7 +65,7 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vacation_date, container, false);
+        View view = inflater.inflate(R.layout.fragment_vacation_hour, container, false);
         buttonRegisterHandDate = (Button) view.findViewById(R.id.button_time_registerHandDateVacation);
         imageButtonHandDateStart = (ImageButton) view.findViewById(R.id.imageButton_time_setDateStartVacation);
         imageButtonHandDateEnd = (ImageButton) view.findViewById(R.id.imageButton_time_setDateEndVacation);
@@ -81,7 +76,7 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         spinnerHandTimeMinuteStart = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteStartVacation);
         spinnerHandTimeHourEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeHourEndVacation);
         spinnerHandTimeMinuteEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteEndVacation);
-        
+
 
         new Handler().post(new Runnable() {
             @Override
@@ -325,11 +320,10 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendEnable(boolean mIsPremium, String user, String kind, String flag) {
+    public void sendEnable(boolean mIsPremium, String user, String kind) {
         this.mIsPremium = mIsPremium;
         this.user = user;
         this.kind = kind;
-        this.flag = flag;
     }
 
 

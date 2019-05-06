@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (Share.loadPref(MainActivity.this, "start" + user).equals("true")) {
                             fragment = new HandDateFragment();
                             enableData = (EnableData) fragment;
-                            enableData.sendEnable(mIsPremium,user, kind,flagVacationHour);
+                            enableData.sendEnable(mIsPremium,user, kind);
                             break;
                         } else {
                             Toast.makeText(MainActivity.this, getString(R.string.messageErrorHandDate), Toast.LENGTH_LONG).show();
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.item_menuItems_vacationHour:
                             fragment = new VacationFragment();
                             enableData = (EnableData) fragment;
-                            enableData.sendEnable(mIsPremium,user,kind,flagVacationHour);
+                            enableData.sendEnable(mIsPremium,user,kind);
                             break;
 
                     case R.id.item_menuItems_visitEmployer:
@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public interface EnableData {
-        public void sendEnable(boolean mIsPremium,String user, String kind,String flag);
+        public void sendEnable(boolean mIsPremium,String user, String kind);
     }
 
     public interface PassData {
@@ -524,14 +524,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Share.saveSharePref(MainActivity.this, "count", "1");
                             Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
                             enableData = (EnableData) autoDateFragment;
-                            enableData.sendEnable(mIsPremium,user,kind,flagVacationHour);
+                            enableData.sendEnable(mIsPremium,user,kind);
                         } else {
                             if (Share.loadPref(MainActivity.this, "count").equals("1")) {
                                 navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(true);
                                 Share.saveSharePref(MainActivity.this, "count", "1");
                                 Share.saveSharePref(MainActivity.this, "mIsPremium", "false");
                                 enableData = (EnableData) autoDateFragment;
-                                enableData.sendEnable(mIsPremium,user,kind,flagVacationHour);
+                                enableData.sendEnable(mIsPremium,user,kind);
                             }
                         }
 
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Share.saveSharePref(MainActivity.this, "mIsPremium", "true");
                     mIsPremium = true;
                     enableData = (EnableData) autoDateFragment;
-                    enableData.sendEnable(mIsPremium,user,kind,flagVacationHour);
+                    enableData.sendEnable(mIsPremium,user,kind);
                     navigationView.getMenu().findItem(com.example.kamal.saatzanhamrah.R.id.item_menuItems_enable).setVisible(false);
                     Share.saveSharePref(MainActivity.this, "count", "1");
                     Share.saveSharePref(MainActivity.this, "mIsPremium", "true");

@@ -321,7 +321,7 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendEnable(boolean mIsPremium,String user, String kind,String flag) {
+    public void sendEnable(boolean mIsPremium,String user, String kind) {
         this.mIsPremium = mIsPremium;
         this.user = user;
         this.kind = kind;

@@ -50,7 +50,7 @@ public class VisitEmployeeAdapter extends RecyclerView.Adapter<VisitEmployeeAdap
                 visitLastDateFragment = new VisitLastDateEmployerToEmployeeFragment();
                 passDataEmployeeToEmployer = (PassDataEmployeeToEmployer) visitLastDateFragment;
                 passDataEmployeeToEmployer.sendDataEmployeeToEmployer(list.get(position).getUserNameEmployeeMain(),list.get(position).getUserNameEmployee(), "employee");
-                activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, visitLastDateFragment).commit();
             }
         });
 
