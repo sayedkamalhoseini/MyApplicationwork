@@ -1,15 +1,18 @@
 package com.example.kamal.saatzanhamrah.Vacation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,10 +24,12 @@ import android.widget.Toast;
 import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
+import com.example.kamal.saatzanhamrah.SpinnerAdapter;
 import com.example.kamal.saatzanhamrah.VerifyFragment;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,15 +55,16 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     private boolean mIsPremium;
     private HandVerifyVacationFragment handVerifyVacationFragment;
     private Info_vacation_hour info_vacation_hour;
-    private String flag,url;
-    private Context context;
+    private String flag, url;
+    private Activity activity;
+    private String flagTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         presenter = new VacationPresenter(this);
-        context=getContext();
+        activity = getActivity();
     }
 
     @Override
@@ -75,13 +81,19 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         spinnerHandTimeMinuteStart = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteStartVacation);
         spinnerHandTimeHourEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeHourEndVacation);
         spinnerHandTimeMinuteEnd = (Spinner) view.findViewById(R.id.spinner_time_handTimeMinuteEndVacation);
+        
+
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Share.spinnerAdapter(context, spinnerHandTimeHourStart, R.array.arrayStartHourVacation);
-                Share.spinnerAdapter(context, spinnerHandTimeMinuteStart, R.array.arrayStartMinuteVacation);
-                Share.spinnerAdapter(context, spinnerHandTimeHourEnd, R.array.arrayEndHourVacation);
-                Share.spinnerAdapter(context, spinnerHandTimeMinuteEnd, R.array.arrayEndMinuteVacation);
+                flag="ساعت شروع";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeHourStart, R.array.arrayStartHour, flag);
+                flag="دقیقه شروع";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeMinuteStart, R.array.arrayStartMinute, flag);
+                flag="ساعت پایان";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeHourEnd, R.array.arrayStartHour, flag);
+                flag="دقیقه پایان";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeMinuteEnd, R.array.arrayStartMinute, flag);
             }
         });
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_time_handLayout);
@@ -106,39 +118,31 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.button_time_registerHandDateVacation:
                 if (Share.check(getContext())) {
-                    if(flag.equals("vacation_hour")){
-                        url=handDateUrl;
-                    }
-                    else{
-                        url=overTimeUrl;
-                    }
-                        if (loadPref(getActivity(), "count").equals("1") || loadPref(getActivity(), "count").equals("2")) {
-                            buttonRegisterHandDate.setEnabled(false);
-                            progressbar.setVisibility(View.VISIBLE);
-                            JalaliCalendar.gDate shamsiStart = new JalaliCalendar.gDate(yearStart, monthStart - 1, dayStart);
-                            JalaliCalendar.gDate miladiStart = JalaliCalendar.jalaliToMiladi(shamsiStart);
-                            _miladiStart = miladiStart.getYear() + "/" + (miladiStart.getMonth() + 1) + "/" + miladiStart.getDay();
-                            JalaliCalendar.gDate shamsiEnd = new JalaliCalendar.gDate(yearEnd, monthEnd - 1, dayEnd);
-                            JalaliCalendar.gDate miladiEnd = JalaliCalendar.jalaliToMiladi(shamsiEnd);
-                            _miladiEnd = miladiEnd.getYear() + "/" + (miladiEnd.getMonth() + 1) + "/" + miladiEnd.getDay();
-                            createParams();
-                            if(hourStart.equals("ساعت شروع")|| hourEnd.equals("ساعت پایان") || minuteStart.equals("دقیقه شروع")|| minuteEnd.equals("دقیقه پایان")){
-                                Toast.makeText(getContext(), R.string.fill_field, Toast.LENGTH_LONG).show();
-                                buttonRegisterHandDate.setEnabled(true);
-                                progressbar.setVisibility(View.GONE);
+                    if (loadPref(getActivity(), "count").equals("1") || loadPref(getActivity(), "count").equals("2")) {
+                        buttonRegisterHandDate.setEnabled(false);
+                        progressbar.setVisibility(View.VISIBLE);
+                        JalaliCalendar.gDate shamsiStart = new JalaliCalendar.gDate(yearStart, monthStart - 1, dayStart);
+                        JalaliCalendar.gDate miladiStart = JalaliCalendar.jalaliToMiladi(shamsiStart);
+                        _miladiStart = miladiStart.getYear() + "/" + (miladiStart.getMonth() + 1) + "/" + miladiStart.getDay();
+                        JalaliCalendar.gDate shamsiEnd = new JalaliCalendar.gDate(yearEnd, monthEnd - 1, dayEnd);
+                        JalaliCalendar.gDate miladiEnd = JalaliCalendar.jalaliToMiladi(shamsiEnd);
+                        _miladiEnd = miladiEnd.getYear() + "/" + (miladiEnd.getMonth() + 1) + "/" + miladiEnd.getDay();
+                        createParams();
+                        if (hourStart.equals("ساعت شروع") || hourEnd.equals("ساعت پایان") || minuteStart.equals("دقیقه شروع") || minuteEnd.equals("دقیقه پایان")) {
+                            Toast.makeText(getContext(), R.string.fill_field, Toast.LENGTH_LONG).show();
+                            buttonRegisterHandDate.setEnabled(true);
+                            progressbar.setVisibility(View.GONE);
 
-                            }else {
-                                presenter.presenterHandDate(url, params, progressbar, buttonRegisterHandDate);
-                            }
-                            break;
                         } else {
-                            Share.showSnackBar(getContext(), coordinatorLayout, getResources().getString(R.string.enableMessage));
-                            break;
+                            presenter.presenterHandDate(handDateUrl, params, progressbar, buttonRegisterHandDate);
                         }
-
+                        break;
+                    } else {
+                        Share.showSnackBar(getContext(), coordinatorLayout, getResources().getString(R.string.enableMessage));
+                        break;
                     }
 
-                 else {
+                } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -241,15 +245,19 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
         switch (parent.getId()) {
             case R.id.spinner_time_handTimeHourStartVacation:
                 hourStart = parent.getItemAtPosition(position).toString();
+                Log.i("hourS",hourStart);
                 break;
             case R.id.spinner_time_handTimeMinuteStartVacation:
                 minuteStart = parent.getItemAtPosition(position).toString();
+                Log.i("minuteS",minuteStart);
                 break;
             case R.id.spinner_time_handTimeHourEndVacation:
                 hourEnd = parent.getItemAtPosition(position).toString();
+                Log.i("hourE",hourEnd);
                 break;
             case R.id.spinner_time_handTimeMinuteEndVacation:
                 minuteEnd = parent.getItemAtPosition(position).toString();
+                Log.i("minuteE",minuteEnd);
                 break;
         }
     }
@@ -260,13 +268,12 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     }
 
 
-
     public void resultHandDate(String result, String workTime) {
         switch (result) {
             case "done":
                 handVerifyVacationFragment = new HandVerifyVacationFragment();
-                info_vacation_hour= (Info_vacation_hour) handVerifyVacationFragment;
-                info_vacation_hour.sendInfoHand(params,workTime);
+                info_vacation_hour = (Info_vacation_hour) handVerifyVacationFragment;
+                info_vacation_hour.sendInfoHand(params, workTime);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_main_containerFragment, handVerifyVacationFragment).commit();
                 buttonRegisterHandDate.setEnabled(true);
                 if (loadPref(getActivity(), "count").equals("1")) {
@@ -274,7 +281,7 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
                 } else if (loadPref(getActivity(), "count").equals("2")) {
                     Share.saveSharePref(getActivity(), "count", "3");
                 }
-                if(Share.loadPref(getActivity(),"mIsPremium").equals("true"))
+                if (Share.loadPref(getActivity(), "mIsPremium").equals("true"))
                     Share.saveSharePref(getActivity(), "count", "1");
                 break;
             case "failer_interesting_database":
@@ -318,16 +325,15 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void sendEnable(boolean mIsPremium,String user, String kind,String flag) {
+    public void sendEnable(boolean mIsPremium, String user, String kind, String flag) {
         this.mIsPremium = mIsPremium;
         this.user = user;
         this.kind = kind;
-        this.flag=flag;
+        this.flag = flag;
     }
 
 
-
-    public interface Info_vacation_hour{
+    public interface Info_vacation_hour {
         public void sendInfoHand(Map<String, String> params, String workTime);
 
     }

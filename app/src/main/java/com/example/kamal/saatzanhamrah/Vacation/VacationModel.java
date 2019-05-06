@@ -88,7 +88,6 @@ public class VacationModel {
                 });
             } else if (Integer.parseInt(params1.get("dateEnd").replace("/", "")) == Integer.parseInt(params1.get("dateStart").replace("/", ""))) {
                 if (Integer.parseInt(params1.get("timeEnd").replace(":", "")) >= Integer.parseInt(params1.get("timeStart").replace(":", ""))) {
-                    Log.i("TagVacation", "kamal" );
                     Share.getStringResponse(activity, Request.Method.POST, addEmployeeUrl, null, new Share.StringVolleyCallBack() {
                         @Override
                         public void onSuccessResponse(String result) {
@@ -151,7 +150,6 @@ public class VacationModel {
             progressbar.setVisibility(View.GONE);
             buttonRegisterHandDate.setEnabled(true);
         }
-        Log.i("TagVacation", "kamal1" );
 
     }
 

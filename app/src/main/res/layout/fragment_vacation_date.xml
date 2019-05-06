@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".75"
                         android:ems="11"
+                        android:textSize="16sp"
                         android:focusableInTouchMode="false"
                         android:hint="تاریخ شروع مرخصی ساعتی" />
 
@@ -79,7 +80,7 @@
                         android:id="@+id/spinner_time_handTimeMinuteStartVacation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.25"
+                        android:layout_weight="2.35"
                         android:focusableInTouchMode="false" />
 
 
@@ -88,17 +89,17 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight=".5"
+                        android:layout_weight=".3"
                         android:gravity="center"
                         android:text=":"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorAccent"
                         android:textSize="24sp" />
 
                     <Spinner
                         android:id="@+id/spinner_time_handTimeHourStartVacation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.25"
+                        android:layout_weight="2.35"
                         android:focusableInTouchMode="false" />
 
 
@@ -131,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".75"
                         android:ems="11"
+                        android:textSize="16sp"
                         android:focusableInTouchMode="false"
                         android:hint="تاریخ پایان مرخصی ساعتی" />
 
@@ -154,7 +156,7 @@
                         android:id="@+id/spinner_time_handTimeMinuteEndVacation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.25"
+                        android:layout_weight="2.35"
                         android:ems="10"
                         android:focusableInTouchMode="false" />
 
@@ -162,17 +164,17 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight=".5"
+                        android:layout_weight=".3"
                         android:text=":"
                         android:gravity="center"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorAccent"
                         android:textSize="24sp" />
 
                     <Spinner
                         android:id="@+id/spinner_time_handTimeHourEndVacation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.25"
+                        android:layout_weight="2.35"
                         android:focusableInTouchMode="false" />
 
 

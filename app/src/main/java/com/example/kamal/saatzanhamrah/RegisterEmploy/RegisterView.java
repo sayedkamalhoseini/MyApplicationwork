@@ -57,7 +57,7 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
-        Share.spinnerAdapter(activity, spinnerEmploy, R.array.arrayemploy);
+        Share.spinnerAdapter(activity, spinnerEmploy, R.array.arrayemploy,"");
         if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
             if(Share.loadPref(activity,"userKeyUpdate")==""){
                 Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));

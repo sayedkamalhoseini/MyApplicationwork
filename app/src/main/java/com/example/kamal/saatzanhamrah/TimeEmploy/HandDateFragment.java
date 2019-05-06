@@ -1,5 +1,6 @@
 package com.example.kamal.saatzanhamrah.TimeEmploy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,14 +53,15 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
     private boolean mIsPremium;
     private VerifyFragment verifyFragment;
     private Info_hand_date info_hand_date;
-    private Context context;
+    private Activity activity;
+    private String flag;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         presenter = new TimePresenter(this);
-        context=getContext();
+        activity=getActivity();
 
     }
 
@@ -80,10 +82,15 @@ public class HandDateFragment extends Fragment implements View.OnClickListener, 
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Share.spinnerAdapter(context, spinnerHandTimeHourStart, R.array.arrayStartHour);
-                Share.spinnerAdapter(context, spinnerHandTimeMinuteStart, R.array.arrayStartMinute);
-                Share.spinnerAdapter(context, spinnerHandTimeHourEnd, R.array.arrayEndHour);
-                Share.spinnerAdapter(context, spinnerHandTimeMinuteEnd, R.array.arrayEndMinute);
+                flag="ساعت شروع کار";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeHourStart, R.array.arrayStartHour, flag);
+                flag="دقیقه شروع کار";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeMinuteStart, R.array.arrayStartMinute, flag);
+                flag="ساعت پایان کار";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeHourEnd, R.array.arrayStartHour, flag);
+                flag="دقیقه پایان کار";
+                Share.custumSpinnerAdapter(activity, spinnerHandTimeMinuteEnd, R.array.arrayStartMinute, flag);
+
             }
         });
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_time_handLayout);

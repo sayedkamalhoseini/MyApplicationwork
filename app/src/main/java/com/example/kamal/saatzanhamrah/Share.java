@@ -105,11 +105,21 @@ public class Share {
     }
 
 
-    public static void spinnerAdapter(Context context, Spinner spinner, int arrayHour) {
+    public static void spinnerAdapter(Context context, Spinner spinner, int arrayHour,String vacation) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, arrayHour, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+       }
+
+    public static void custumSpinnerAdapter(Activity activity, Spinner spinner, int arrayHour, String titleSpinner) {
+        String[] arrayListTime;
+        arrayListTime=activity.getResources().getStringArray(arrayHour);
+        arrayListTime[0]=titleSpinner;
+        SpinnerAdapter adapterHourStart=new SpinnerAdapter(arrayListTime,activity);
+        spinner.setAdapter(adapterHourStart);
     }
+
+
 
     public static String changeTime(int workTime) {
 
@@ -311,15 +321,15 @@ public class Share {
         snackbar.show();
     }
 
-    private static void checkRunTimePermission(Activity activity) {
-        String[] permissionArrays = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(activity, permissionArrays, 1);
-        } else {
-
-        }
-    }
+//    private static void checkRunTimePermission(Activity activity) {
+//        String[] permissionArrays = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            requestPermissions(activity, permissionArrays, 1);
+//        } else {
+//
+//        }
+//    }
 
 //    public static void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults, Activity activity) {
 //        switch (requestCode) {
