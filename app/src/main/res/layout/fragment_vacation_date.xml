@@ -30,7 +30,7 @@
                 android:gravity="end"
                 android:orientation="vertical"
                 android:layoutDirection="rtl"
-                android:weightSum="6">
+                android:weightSum="4">
 
 
                 <LinearLayout
@@ -61,148 +61,32 @@
                         android:ems="11"
                         android:textSize="16sp"
                         android:focusableInTouchMode="false"
-                        android:hint="تاریخ شروع مرخصی ساعتی" />
+                        android:hint="تاریخ مرخصی" />
 
 
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/linear_time_handTimeStart"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <Spinner
-                        android:id="@+id/spinner_time_handTimeMinuteStartVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.35"
-                        android:focusableInTouchMode="false" />
-
-
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".3"
-                        android:gravity="center"
-                        android:text=":"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="24sp" />
-
-                    <Spinner
-                        android:id="@+id/spinner_time_handTimeHourStartVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.35"
-                        android:focusableInTouchMode="false" />
-
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_time_handDateEnd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_gravity="start"
-                    android:weightSum="1">
-
-                    <ImageButton
-                        android:id="@+id/imageButton_time_setDateEndVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="@color/white"
-                        android:src="@mipmap/ic_calender1" />
-
-                    <EditText
-                        android:id="@+id/editText_time_setDateEndVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".75"
-                        android:ems="11"
-                        android:textSize="16sp"
-                        android:focusableInTouchMode="false"
-                        android:hint="تاریخ پایان مرخصی ساعتی" />
-
-
-                </LinearLayout>
-
-
-
-
-                <LinearLayout
-                    android:id="@+id/linear_time_handTimeEnd"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_below="@id/linear_time_handDateEnd"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <Spinner
-                        android:id="@+id/spinner_time_handTimeMinuteEndVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.35"
-                        android:ems="10"
-                        android:focusableInTouchMode="false" />
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".3"
-                        android:text=":"
-                        android:gravity="center"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="24sp" />
-
-                    <Spinner
-                        android:id="@+id/spinner_time_handTimeHourEndVacation"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.35"
-                        android:focusableInTouchMode="false" />
-
-
-
-
-
-                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_weight="1">
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="2">
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true">
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp">
 
                         <EditText
                             android:id="@+id/editText_time_explain"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
                             android:layout_gravity="end"
-                            android:lines="5"
+                            android:lines="3"
                             android:gravity="top|start"
                             android:ems="200"
                             android:hint="@string/explainTitleHand"
@@ -219,7 +103,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:layout_margin="16dp">
 
                     <com.example.kamal.saatzanhamrah.CustumButton
                         android:id="@+id/button_time_registerHandDateVacation"
@@ -230,7 +115,7 @@
                         android:layout_centerInParent="true"
                         android:layout_margin="5dp"
                         android:layout_marginTop="1dp"
-                        android:text="ثبت مرخصی ساعتی" />
+                        android:text="ثبت مرخصی روزانه" />
                 </RelativeLayout>
 
 

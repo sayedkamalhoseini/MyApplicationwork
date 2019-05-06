@@ -69,7 +69,7 @@ public class LoginView extends FrameLayout implements View.OnClickListener, Adap
             activity.startActivity(intent);
             activity.finish();
         }
-        Share.spinnerAdapter(activity, spinner, R.array.arrayemploy,"");
+        Share.spinnerAdapter(activity, spinner, R.array.arrayemploy);
         btnRegister.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
         btnForgot.setOnClickListener(this);

@@ -2,6 +2,7 @@ package com.example.kamal.saatzanhamrah.RegisterEmploy;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -40,8 +41,18 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
     private Toolbar toolbar;
     private ProgressBar progressBar;
 
-    public RegisterView(@NonNull AppCompatActivity activity) {
+    public RegisterView(@NonNull final AppCompatActivity activity) {
         super(activity);
+        if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
+            if(Share.loadPref(activity,"userKeyUpdate")==""){
+                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
+            }
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.putExtra("user", Share.loadPref(activity, "userKey"));
+            intent.putExtra("kind", Share.loadPref(activity, "kindKey"));
+            activity.startActivity(intent);
+            activity.finish();
+        }
         this.activity = activity;
         View view = inflate(activity, R.layout.activity_register, this);
         editusername = (EditText) view.findViewById(R.id.userNameEditText);
@@ -57,17 +68,12 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
-        Share.spinnerAdapter(activity, spinnerEmploy, R.array.arrayemploy,"");
-        if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
-            if(Share.loadPref(activity,"userKeyUpdate")==""){
-                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                Share.spinnerAdapter(activity, spinnerEmploy, R.array.arrayemploy);
             }
-            Intent intent = new Intent(activity, MainActivity.class);
-            intent.putExtra("user", Share.loadPref(activity, "userKey"));
-            intent.putExtra("kind", Share.loadPref(activity, "kindKey"));
-            activity.startActivity(intent);
-            activity.finish();
-        }
+        });
         spinnerEmploy.setOnItemSelectedListener(this);
         registerButton.setOnClickListener(this);
         loginPage.setOnClickListener(this);

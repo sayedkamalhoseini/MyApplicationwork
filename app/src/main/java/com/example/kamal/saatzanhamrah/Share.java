@@ -105,7 +105,7 @@ public class Share {
     }
 
 
-    public static void spinnerAdapter(Context context, Spinner spinner, int arrayHour,String vacation) {
+    public static void spinnerAdapter(Context context, Spinner spinner, int arrayHour) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, arrayHour, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
