@@ -1,11 +1,9 @@
-package com.example.kamal.saatzanhamrah.Vacation;
+package com.example.kamal.saatzanhamrah.VacationHour;
 
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,11 +11,9 @@ import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.VisitLastDate.LastTime;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.kamal.saatzanhamrah.Vacation;
+package com.example.kamal.saatzanhamrah.VacationHour;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
-import com.example.kamal.saatzanhamrah.TimeEmploy.HandDateFragment;
 
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class HandVerifyVacationFragment extends Fragment implements VacationFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_verify_vacation, container, false);
+        View view = inflater.inflate(R.layout.fragment_verify_hour_vacation, container, false);
         verifyHandStart = view.findViewById(R.id.verify_startHand);
         verifyHandEnd = view.findViewById(R.id.verify_endHand);
         verifyHandSum = view.findViewById(R.id.verify_sumHand);

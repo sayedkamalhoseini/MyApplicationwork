@@ -201,6 +201,11 @@
     <string name="sumTitleVerifyVacation">مجموع مرخصی ساعتی :</string>
     <string name="visitOverTime">مشاهده اضافه کاری ثبت شده</string>
     <string name="visit_vacationHour">مشاهده مرخصی ثبت شده</string>
+    <string name="dateVacation">تاریخ مرخصی</string>
+    <string name="registerDateVacation">مرخصی روزانه با موفقیت ثبت شد.</string>
+    <string name="insertVacation">تاریخ مرخصی را وارد کنید.</string>
+    <string name="vacationDateThereIs">این تاریخ مرخصی قبلا ثبت شده است.</string>
+    <string name="vactionHourThereIs">این زمان شروع مرخصی قبلا ثبت شده است.</string>
 
 
     <string-array name="nav_drawer_labels">

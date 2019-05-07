@@ -1,4 +1,4 @@
-package com.example.kamal.saatzanhamrah.Vacation;
+package com.example.kamal.saatzanhamrah.VacationHour;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.kamal.saatzanhamrah.MainPackage.MainActivity;
 import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
+import com.example.kamal.saatzanhamrah.TimeEmploy.JalaliCalendar;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
@@ -298,7 +299,7 @@ public class VacationFragment extends Fragment implements View.OnClickListener, 
                 buttonRegisterHandDate.setEnabled(true);
                 break;
             case "this time there is":
-                Share.showSnackBar(getContext(), coordinatorLayout, getString(R.string.timeThereIs));
+                Share.showSnackBar(getContext(), coordinatorLayout, getString(R.string.vactionHourThereIs));
                 if (loadPref(getActivity(), "count").equals("1")) {
                     Share.saveSharePref(getActivity(), "count", "1");
                 } else if (loadPref(getActivity(), "count").equals("2")) {

@@ -43,7 +43,8 @@ import com.example.kamal.saatzanhamrah.R;
 import com.example.kamal.saatzanhamrah.Share;
 import com.example.kamal.saatzanhamrah.TimeEmploy.AutoDateFragment;
 import com.example.kamal.saatzanhamrah.TimeEmploy.HandDateFragment;
-import com.example.kamal.saatzanhamrah.Vacation.VacationFragment;
+import com.example.kamal.saatzanhamrah.VacationDate.VacationDateFragment;
+import com.example.kamal.saatzanhamrah.VacationHour.VacationFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployerToEmployee.VisitEmployerToEmployeeFragment;
@@ -233,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     case R.id.item_menuItems_vacationHour:
                             fragment = new VacationFragment();
+                            enableData = (EnableData) fragment;
+                            enableData.sendEnable(mIsPremium,user,kind);
+                            break;
+
+                    case R.id.item_menuItems_vacationDate:
+                            fragment = new VacationDateFragment();
                             enableData = (EnableData) fragment;
                             enableData.sendEnable(mIsPremium,user,kind);
                             break;
