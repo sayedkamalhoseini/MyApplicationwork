@@ -102,7 +102,7 @@ public class VisitLastDateEmployerToEmployeeFragment extends Fragment implements
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_visitLastDate_ListVisit);
         progressbar = (ProgressBar) view.findViewById(R.id.progressBar_visitLastDateFragment_loading);
         textSumMessage = (TextView) view.findViewById(R.id.textView_visitLastDate_sumMessage);
-        layoutTitle = (LinearLayout) view.findViewById(R.id.linear_visitLastDate_titleListVisit);
+        layoutTitle = (LinearLayout) view.findViewById(R.id.linear_visitLastDate_titleVacHour);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinate_visitLast_layout);
         textSum = (TextView) view.findViewById(R.id.textView_visitLastDate_sum);
         textTitle = (TextView) getActivity().findViewById(R.id.textView_toolbar_title);

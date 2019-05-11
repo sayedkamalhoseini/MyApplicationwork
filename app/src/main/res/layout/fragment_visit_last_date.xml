@@ -164,7 +164,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linear_visitLastDate_titleListVisit"
+            android:id="@+id/linear_visitLastDate_titleVacHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_visitLastDate_delete"
@@ -226,7 +226,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/floating_visitListDate_loading"
-            android:layout_below="@id/linear_visitLastDate_titleListVisit"
+            android:layout_below="@id/linear_visitLastDate_titleVacHour"
             android:orientation="vertical"
             android:paddingTop="4dp"></android.support.v7.widget.RecyclerView>
 

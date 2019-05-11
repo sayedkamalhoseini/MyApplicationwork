@@ -84,69 +84,71 @@
                 android:layoutDirection="ltr"
                 android:weightSum="5">
                 <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_confirm_pdf"
+                    android:id="@+id/button_visitLastVacation_buildExcelVacDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:text="'گزارش pdf تایید شده ها"
+                    android:text="'گزارش اکسل مرخصی روزانه"
                     android:textColor="@color/white" />
                 <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_confirm_excel"
+                    android:id="@+id/button_visitLastVacation_buildExcelVacHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:text="'گزارش اکسل تایید شده ها"
+                    android:text="'گزارش اکسل مرخصی ساعتی"
                     android:textColor="@color/white" />
                 <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_buildPdf"
+                    android:id="@+id/button_visitLastVacation_buildPdfVacDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:text=" گزارش pdf"
+                    android:text="  گزارش pdf مرخصی روزانه"
                     android:textColor="@color/white" />
-                <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_buildExcel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:text=" گزارش اکسل"
-                    android:textColor="@color/white" />
-                <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_sum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:text="مجموع کارکرد"
-                    android:textColor="@color/white" />
-
-
-
-
-
 
                 <com.example.kamal.saatzanhamrah.CustumButton
-                    android:id="@+id/button_visitLastDate_showListVisit"
+                    android:id="@+id/button_visitLastVacation_buildPdfVacHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:text="نمایش کارکرد"
+                    android:text="  گزارش pdf مرخصی ساعتی"
+                    android:textColor="@color/white" />
+                <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/button_visitLastVacation_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text=" مجموع مرخصی ها"
+                    android:textColor="@color/white" />
+                <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/button_visitLastVacation_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text="نمایش مرخصی های روزانه"
                     android:textColor="@color/white" />
 
 
-
-
+                <com.example.kamal.saatzanhamrah.CustumButton
+                    android:id="@+id/button_visitLastVacation_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text="نمایش مرخصی های ساعتی"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </HorizontalScrollView>
@@ -164,22 +166,22 @@
 
 
         <LinearLayout
-            android:id="@+id/linear_visitLastDate_titleListVisit"
+            android:id="@+id/linear_visitLastDate_titleVacHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_visitLastDate_delete"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:weightSum="4.5">
+            android:weightSum="3.5">
+
 
 
             <com.example.kamal.saatzanhamrah.CustomTextView
-                android:id="@+id/confirm_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.25"
                 android:gravity="center"
-                android:text="@string/confirm"
+                android:text="شروع مرخصی"
                 android:textSize="16sp" />
 
             <com.example.kamal.saatzanhamrah.CustomTextView
@@ -187,15 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.25"
                 android:gravity="center"
-                android:text="شروع"
-                android:textSize="16sp" />
-
-            <com.example.kamal.saatzanhamrah.CustomTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.25"
-                android:gravity="center"
-                android:text="پایان"
+                android:text="پایان مرخصی"
                 android:textSize="16sp" />
 
             <com.example.kamal.saatzanhamrah.CustomTextView
@@ -204,6 +198,27 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/sumTitle"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_visitLastDate_titleVacDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_visitLastDate_delete"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="1">
+
+
+
+            <com.example.kamal.saatzanhamrah.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="مرخصی های روزانه"
+                android:layout_margin="8dp"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -226,7 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/floating_visitListDate_loading"
-            android:layout_below="@id/linear_visitLastDate_titleListVisit"
+            android:layout_below="@id/linear_visitLastDate_titleVacHour"
             android:orientation="vertical"
             android:paddingTop="4dp"></android.support.v7.widget.RecyclerView>
 
@@ -241,25 +256,48 @@
 
 
         <com.example.kamal.saatzanhamrah.CustomTextView
-            android:id="@+id/textView_visitLastDate_sumMessage"
+            android:id="@+id/textView_visitLastDate_sumVacHourMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/sumMessage"
+            android:text="@string/sumVacHourMessage"
             android:textSize="18sp"
             android:visibility="gone" />
 
+
         <com.example.kamal.saatzanhamrah.CustomTextView
-            android:id="@+id/textView_visitLastDate_sum"
+            android:id="@+id/textView_visitLastDate_sumVacHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView_visitLastDate_sumMessage"
+            android:layout_below="@id/textView_visitLastDate_sumVacHourMessage"
             android:layout_centerInParent="true"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:visibility="gone" />
 
+        <com.example.kamal.saatzanhamrah.CustomTextView
+            android:id="@+id/textView_visitLastDate_sumVacDateMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_visitLastDate_sumVacHour"
+            android:layout_centerInParent="true"
+            android:text="@string/sumVacDateMessage"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <com.example.kamal.saatzanhamrah.CustomTextView
+            android:id="@+id/textView_visitLastDate_sumVacDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_visitLastDate_sumVacDateMessage"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
+
+
 </android.support.design.widget.CoordinatorLayout>
 

@@ -49,6 +49,7 @@ import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployee;
 import com.example.kamal.saatzanhamrah.VisitEmployeeToEmployer.VisitEmployeeToEmployerFragment;
 import com.example.kamal.saatzanhamrah.VisitEmployerToEmployee.VisitEmployerToEmployeeFragment;
 import com.example.kamal.saatzanhamrah.VisitLastDate.VisitLastDateFragment;
+import com.example.kamal.saatzanhamrah.VisitLastVacation.VisitLastVacationFragment;
 import com.example.kamal.saatzanhamrah.util.IabHelper;
 import com.example.kamal.saatzanhamrah.util.IabResult;
 import com.example.kamal.saatzanhamrah.util.Inventory;
@@ -187,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.item_menuItems_visitDateMyWork:
                         fragment = new VisitLastDateFragment();
+                        passData = (PassData) fragment;
+                        passData.sendData(user, kind, userUpdate);
+                        break;
+                    case R.id.item_menuItems_visit_vacation:
+                        fragment = new VisitLastVacationFragment();
                         passData = (PassData) fragment;
                         passData.sendData(user, kind, userUpdate);
                         break;

@@ -30,6 +30,7 @@
     <string name="noInternet">لطفا به اینترنت متصل شوید.</string>
     <string name="noDelete">زمان تایید شده است نمی توانید حذف کنید.</string>
     <string name="noLastDate">کارکردی در این تاریخ موجود نیست.</string>
+    <string name="noLastVacHour">مرخصی در این تاریخ موجود نیست.</string>
     <string name="errorInternet">فیلترشکن را قطع کنید. اگر سرعت اینترنت پایین است می توانید بعدا از طریق ثبت زمان گذشته اقدام نمایید.</string>
     <string name="error"> لطفا فیلترشکن را قطع کنید به اینترنت متصل باشید و دوباره تلاش کنید.</string>
     <string name="startRegister"> زمان شروع با موفقیت ثبت شد.</string>
@@ -174,6 +175,8 @@
     <string name="tryAgain">دوباره تلاش نمایید.</string>
     <string name="enterStartEnd">لطفا زمان شروع و پایان را وارد کنید.</string>
     <string name="sumMessage">ساعت کار انجام شده در این بازه زمانی</string>
+    <string name="sumVacHourMessage">مجموع مرخصی های ساعتی در این بازه زمانی</string>
+    <string name="sumVacDateMessage">مجموع مرخصی های روزانه در این بازه زمانی</string>
     <string name="explainTitle">توضیحات در گزارش pdf و اکسل قابل مشاهده است.</string>
     <string name="explainTitleHand">توضیحات در گزارش pdf و اکسل قابل مشاهده است.</string>
     <string name="explains">توضیحات</string>
