@@ -43,16 +43,6 @@ public class RegisterView extends FrameLayout implements View.OnClickListener, A
 
     public RegisterView(@NonNull final AppCompatActivity activity) {
         super(activity);
-        if (Share.loadPref(activity, "userKey") != "" && Share.loadPref(activity, "passKey") != "" && Share.loadPref(activity, "kindKey") != "") {
-            if(Share.loadPref(activity,"userKeyUpdate")==""){
-                Share.saveSharePref(activity,"userKeyUpdate",Share.loadPref(activity, "userKey"));
-            }
-            Intent intent = new Intent(activity, MainActivity.class);
-            intent.putExtra("user", Share.loadPref(activity, "userKey"));
-            intent.putExtra("kind", Share.loadPref(activity, "kindKey"));
-            activity.startActivity(intent);
-            activity.finish();
-        }
         this.activity = activity;
         View view = inflate(activity, R.layout.activity_register, this);
         editusername = (EditText) view.findViewById(R.id.userNameEditText);

@@ -127,6 +127,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         chronometer = view.findViewById(R.id.chronometer);
         textTitle.setText(getString(R.string.autoDate));
         presenter.sendProblem(problemUrl);
+        editText.setText(Share.loadPref(getContext(),"explainKey"));
 
 
         if (loadPref(getActivity(), "start" + user).equals("false")) {
@@ -301,6 +302,8 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                         navigationView.getHeaderView(0).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_500));
                         Share.saveSharePref(getActivity(), "startLastDate", "");
                         Share.saveSharePref(getActivity(), "startLastTime", "");
+                        Share.saveSharePref(getActivity(), "explainKey", "");
+                        editText.setText("");
                     }
                 }, 300);
                 break;
@@ -383,6 +386,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
         Long pause = dateStart.getTime();//time system
         Share.saveSharePrefLong(getContext(), "pauseChronometer" + user, pause);
         Share.saveSharePrefLong(getContext(), "baseChronometer" + user, baseCh);
+        Share.saveSharePref(getContext(),"explainKey",editText.getText().toString());
     }
 
     @Override
@@ -411,6 +415,7 @@ public class AutoDateFragment extends Fragment implements View.OnClickListener, 
                         chronometer.start();
                     }
                 }
+
 
     }
 }
