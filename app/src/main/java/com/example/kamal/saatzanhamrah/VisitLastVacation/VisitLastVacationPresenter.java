@@ -82,4 +82,17 @@ public class VisitLastVacationPresenter {
         model.dataDeleteVacDateModel(url,adapter,startDateDelete,visitLastDateFragment,progressbar);
     }
 
+    public void buildExcelVacDatePresenter(String url, String start, String end, String user, String kind, ProgressBar progressbar, CoordinatorLayout coordinatorLayout, TextView textSum) {
+        model.buildExcelVacDate(url,start,end,user,kind,progressbar,coordinatorLayout,textSum);
+
+    }
+
+    public void passListVacDatePresenterMore(List<LastVacation> lastTimeList) {
+        view.passListVacDateViewMore(lastTimeList);
+    }
+
+    public void getLastVacDatePresenterMore(String url, String start, String end, String user, String kind, int start_row, ProgressBar progressbar, FloatingActionButton floatingActionButton) {
+        model.getLastVacDateModelMore(url,start,end,start_row,progressbar,floatingActionButton);
+
+    }
 }

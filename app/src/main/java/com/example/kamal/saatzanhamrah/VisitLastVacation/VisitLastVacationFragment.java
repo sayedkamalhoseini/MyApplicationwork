@@ -64,7 +64,7 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
     private Toolbar toolbar;
     private TextView view_confirm;
     private TextView textViewExplain1;
-    private String userUpdate;
+    private String userUpdate, flagVacDate = "";
     private LinearLayout linearLayoutAdapter;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -154,7 +154,10 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
                             public void onClick(View v) {
                                 progressbar.setVisibility(View.VISIBLE);
                                 start_row += 20;
-                                presenter.getLastDatePresenterMore(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
+                                if (flagVacDate.equals(""))
+                                    presenter.getLastDatePresenterMore(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
+                                else
+                                    presenter.getLastVacDatePresenterMore(urlVacationDate, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
 
                             }
                         });
@@ -200,6 +203,7 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
                     textSumVacHourMessage.setVisibility(View.GONE);
                     textSumVacDateMessage.setVisibility(View.GONE);
                     textSumVacDate.setVisibility(View.GONE);
+                    flagVacDate="";
                     start_row = 0;
                     presenter.getLastVacHourPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
                     break;
@@ -221,6 +225,7 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
                     textSumVacHourMessage.setVisibility(View.GONE);
                     textSumVacDateMessage.setVisibility(View.GONE);
                     textSumVacDate.setVisibility(View.GONE);
+                    flagVacDate="vac_Date";
                     start_row = 0;
                     presenter.getLastVacDatePresenter(urlVacationDate, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, start_row, progressbar, floatingActionButton);
                     break;
@@ -306,7 +311,7 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
                 textSumVacDate.setVisibility(View.GONE);
                 if (Share.check(getContext())) {
                     progressbar.setVisibility(View.VISIBLE);
-                    presenter.buildExcelPresenter(url, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSumVacHour);
+                    presenter.buildExcelVacDatePresenter(urlVacationDate, visitStart.getText().toString(), visitEnd.getText().toString(), user, kind, progressbar, coordinatorLayout, textSumVacHour);
                     break;
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
@@ -364,7 +369,7 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
         if (vac_date.equals(""))
             adapter = new LastVacationAdapter(VisitLastVacationFragment.this, lastTimeList, user, kind);
         else
-            adapter = new LastVacationAdapter(VisitLastVacationFragment.this, lastTimeList, user, kind,vac_date);
+            adapter = new LastVacationAdapter(VisitLastVacationFragment.this, lastTimeList, user, kind, vac_date);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -372,6 +377,11 @@ public class VisitLastVacationFragment extends Fragment implements View.OnClickL
     }
 
     public void passListViewMore(List<LastVacation> lastTimeList) {
+        this.lastTimeList = lastTimeList;
+        adapter.notifyDataSetChanged();
+    }
+
+    public void passListVacDateViewMore(List<LastVacation> lastTimeList) {
         this.lastTimeList = lastTimeList;
         adapter.notifyDataSetChanged();
     }
