@@ -32,12 +32,12 @@
 
         <item
             android:id="@+id/item_menuItems_vacationDate"
-            android:icon="@drawable/ic_person_add_employer"
+            android:icon="@drawable/ic_vacation"
             android:title="@string/vacationDate" />
 
         <item
             android:id="@+id/item_menuItems_vacationHour"
-            android:icon="@drawable/ic_visibility_time"
+            android:icon="@drawable/ic_vacation"
             android:title="@string/vacationHour" />
 
         <item

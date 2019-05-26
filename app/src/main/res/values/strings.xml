@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ساعت زن همراه</string>
-    <string name="version">نسخه 2.9.2 </string>
+    <string name="version">نسخه 2.9.3 </string>
     <string name="codeBazar">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCeUibvsFfja0PU0iGrbvlZ3CixYSGBj2qW/kJ/hI6qlWJdfQ4Z2VSUidtEmGJ5iD5lS7zTAeE1cGv8McYkchtatU6+IHRP/r94nEivYeKEwewv9eWTbCLFiV6DjQZ11rU3h57yKPKqtzCOiI9ZfnL5JL+PEeeaV+d/G+yBLZaNdwIDAQAB</string>
     <string name="producer">تهیه کننده و برنامه نویس : سید کمال حسینی</string>
     <string name="emailProducer">ایمیل : sayedkamalhoseini@gmail.com</string>

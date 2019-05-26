@@ -26,13 +26,12 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterEmploy.RegisterActivity"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".WellcomeActivity">
+        <activity android:name=".RegisterEmploy.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
